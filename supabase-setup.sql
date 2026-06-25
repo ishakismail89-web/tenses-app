@@ -40,3 +40,28 @@ create policy "admin can write videos"
 
 -- Selesai. Untuk menambah admin lain nanti, ubah kedua policy di atas
 -- menjadi: (auth.jwt() ->> 'email') in ('email1@x.com','email2@x.com')
+
+
+-- =====================================================================
+--  PROGRESS HAFALAN IRREGULAR VERBS — satu baris per user.
+--  Menyimpan urutan kata (order_keys) + berapa kata yang sudah ditampilkan
+--  (shown), supaya saat user buka lagi / dari HP lain, lanjut dari posisi
+--  terakhir. Tiap user hanya bisa baca/tulis miliknya sendiri (RLS).
+-- =====================================================================
+
+create table if not exists public.irregular_progress (
+  user_id    uuid primary key references auth.users(id) on delete cascade,
+  order_keys jsonb not null default '[]'::jsonb,   -- daftar v1 sesuai urutan tampil
+  shown      int   not null default 5,             -- jumlah kata yang sudah ditampilkan
+  updated_at timestamptz not null default now()
+);
+
+alter table public.irregular_progress enable row level security;
+
+drop policy if exists "own irregular progress" on public.irregular_progress;
+create policy "own irregular progress"
+  on public.irregular_progress
+  for all
+  to authenticated
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);

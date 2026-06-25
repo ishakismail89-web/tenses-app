@@ -105,7 +105,7 @@
 <div class="page">
   <div class="eyebrow">English Grammar · Bahan Belajar</div>
   <h1>300+ <em>Irregular</em><br>Verbs</h1>
-  <p class="lead"><b style="color:var(--teal)">V1</b> (dasar), <b style="color:var(--amber)">V2</b> (lampau), <b style="color:var(--purple)">V3</b> (past participle). <b>Mode Menghafal</b>: tampil 5 verb, arti tersembunyi (tap mata untuk cek), tekan "Tampilkan 5 lagi" untuk menambah — bisa diacak. <b>Tampilkan Semua</b>: daftar lengkap + pencarian.</p>
+  <p class="lead"><b style="color:var(--teal)">V1</b> (dasar), <b style="color:var(--amber)">V2</b> (lampau), <b style="color:var(--purple)">V3</b> (past participle). <b>Mode Menghafal</b>: tampil 5 verb, arti tersembunyi (tap mata untuk cek), tekan "Tampilkan 5 lagi" untuk menambah. Tombol <b>Acak</b> hanya mengacak kata yang sedang tampil. Posisimu tersimpan otomatis di akun. <b>Tampilkan Semua</b>: daftar lengkap + pencarian.</p>
 
   <div class="mode-toggle">
     <button class="mode-btn active" id="modeHafal" type="button">📖 Mode Menghafal</button>
@@ -162,8 +162,9 @@
   const STEP = 5;
   let mode = 'hafal';
   let order = VERBS.slice();   // urutan aktif (bisa diacak)
-  let shown = 0;
+  let shown = STEP;            // jumlah kata yang sudah ditampilkan
   let masterShown = false;     // arti default tersembunyi (untuk latihan ingat)
+  let userId = null;           // id user login (diisi setelah loadProgress)
 
   function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
@@ -190,11 +191,11 @@
   }
 
   // ---- Mode Menghafal (load-more +5) ----
-  function renderHafalFresh(){
+  // Render ulang seluruh baris yang sedang tampil (1..shown), sesuai urutan aktif.
+  function renderHafalShown(){
     tbody.innerHTML=''; noResult.style.display='none';
-    const first = order.slice(0, STEP);
-    appendRows(first, 1);
-    shown = first.length;
+    if(shown < STEP) shown = Math.min(STEP, order.length);
+    appendRows(order.slice(0, shown), 1);
     updateHafalUI();
   }
   function loadMoreRows(){
@@ -202,6 +203,7 @@
     appendRows(next, shown+1);
     shown += next.length;
     updateHafalUI();
+    saveProgress();
   }
   function updateHafalUI(){
     countEl.innerHTML = 'Mode menghafal · <b>' + shown + '</b> dari ' + order.length + ' kata kerja';
@@ -245,12 +247,15 @@
     updateMasterBtn();
   });
 
-  // ---- acak (Fisher-Yates) ----
+  // ---- acak (Fisher-Yates) — HANYA kata yang sedang tampil ----
+  // Kata yang belum ditampilkan (order[shown..]) tidak diutak-atik, jadi
+  // jumlah tetap dan tidak ada kata baru yang ditarik masuk.
   shuffleBtn.addEventListener('click', () => {
-    order = VERBS.slice();
-    for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const tmp=order[i]; order[i]=order[j]; order[j]=tmp; }
+    const n = Math.min(shown, order.length);
+    for(let i=n-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const tmp=order[i]; order[i]=order[j]; order[j]=tmp; }
     masterShown = false; updateMasterBtn();
-    renderHafalFresh();
+    renderHafalShown();
+    saveProgress();
   });
 
   // ---- pindah mode ----
@@ -262,7 +267,7 @@
     shuffleBtn.style.display = (m==='hafal') ? 'inline-flex' : 'none';
     if(m==='hafal'){
       masterShown = false; updateMasterBtn();
-      renderHafalFresh();
+      renderHafalShown();
     } else {
       renderSemua();
     }
@@ -271,9 +276,58 @@
   modeSemua.addEventListener('click', () => setMode('semua'));
   searchInput.addEventListener('input', renderSemua);
 
+  // ---- Progress per akun (Supabase) ----
+  // Susun ulang `order` dari daftar v1 yang tersimpan; verb baru yang belum
+  // ada di progress (mis. data bertambah) ditempel di akhir. `shown` di-clamp.
+  function applyOrderKeys(keys, savedShown){
+    const byKey = new Map(VERBS.map(v => [v.v1, v]));
+    const seen = new Set(), rebuilt = [];
+    (keys || []).forEach(k => {
+      const v = byKey.get(k);
+      if(v && !seen.has(k)){ rebuilt.push(v); seen.add(k); }
+    });
+    VERBS.forEach(v => { if(!seen.has(v.v1)) rebuilt.push(v); });
+    order = rebuilt.length ? rebuilt : VERBS.slice();
+    shown = Math.max(STEP, Math.min(savedShown || STEP, order.length));
+  }
+
+  let saveTimer = null;
+  function saveProgress(){
+    const supa = window.__supa;
+    if(!supa || !userId) return;            // belum login / client belum siap
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      supa.from('irregular_progress').upsert({
+        user_id: userId,
+        order_keys: order.map(v => v.v1),
+        shown: shown,
+        updated_at: new Date().toISOString()
+      }).then(res => { if(res && res.error) console.warn('Gagal simpan progress:', res.error.message); });
+    }, 600);
+  }
+
+  async function loadProgress(){
+    const supa = window.__supa;
+    if(!supa) return;
+    try {
+      const u = await supa.auth.getUser();
+      const user = u && u.data && u.data.user;
+      if(!user) return;
+      userId = user.id;
+      const res = await supa.from('irregular_progress')
+        .select('order_keys,shown').eq('user_id', userId).maybeSingle();
+      if(res && res.data && Array.isArray(res.data.order_keys) && res.data.order_keys.length){
+        applyOrderKeys(res.data.order_keys, res.data.shown);
+      }
+    } catch(e){ /* offline / belum ada tabel — pakai default */ }
+  }
+
   // init
   updateMasterBtn();
-  setMode('hafal');
+  setMode('hafal');                 // tampil cepat dengan default (5 kata)
+  loadProgress().then(() => {       // lalu pulihkan posisi terakhir dari akun
+    if(mode === 'hafal') renderHafalShown();
+  });
 </script>
 </body>
 </html>
