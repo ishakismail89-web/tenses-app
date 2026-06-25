@@ -633,17 +633,30 @@
     // Pakai scroll-listener + getBoundingClientRect (jalan di semua browser HP).
     // Termasuk accordion pronoun (Positif · Negatif · Tanya).
     var foldables = collapses.concat([].slice.call(document.querySelectorAll('.pron-item')));
+    function fold(c){
+      c.classList.remove('open');
+      var b = c.querySelector('.ex-toggle');
+      if (b) setLabel(b, false);   // reset label (khusus tombol contoh); pronoun cukup hapus 'open'
+    }
     function autoFold(){
       var vh = window.innerHeight || document.documentElement.clientHeight;
-      foldables.forEach(function(c){
-        if (!c.classList.contains('open')) return;
+      var compensate = 0;
+      for (var i=0;i<foldables.length;i++){
+        var c = foldables[i];
+        if (!c.classList.contains('open')) continue;
         var r = c.getBoundingClientRect();
-        if (r.bottom <= 0 || r.top >= vh){   // benar-benar di luar layar (atas / bawah)
-          c.classList.remove('open');
-          var b = c.querySelector('.ex-toggle');
-          if (b) setLabel(b, false);   // reset label (khusus tombol contoh); pronoun cukup hapus 'open'
+        if (r.bottom <= 0){
+          // di ATAS viewport: menutup mengurangi tinggi di atas -> catat selisih utk kompensasi
+          var before = r.height;
+          fold(c);
+          compensate += (before - c.getBoundingClientRect().height);
+        } else if (r.top >= vh){
+          // di BAWAH viewport: tidak memengaruhi posisi pandang -> tutup biasa
+          fold(c);
         }
-      });
+      }
+      // Geser balik scroll sebanyak tinggi yang hilang di atas -> tampilan tidak "melompat".
+      if (compensate > 0) window.scrollBy(0, -compensate);
     }
     var ticking = false;
     function onScroll(){
