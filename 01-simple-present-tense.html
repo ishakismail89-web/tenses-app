@@ -620,28 +620,37 @@
       var show = btn.getAttribute('data-show') || 'Tampilkan Contoh';
       lbl.textContent = open ? show.replace('Tampilkan', 'Sembunyikan') : show;
     }
-    var collapses = document.querySelectorAll('.ex-collapse');
-    for (var i=0;i<collapses.length;i++){
-      var btn = collapses[i].querySelector('.ex-toggle');
-      if (!btn) continue;
+    var collapses = [].slice.call(document.querySelectorAll('.ex-collapse'));
+    collapses.forEach(function(c){
+      var btn = c.querySelector('.ex-toggle');
+      if (!btn) return;
       btn.addEventListener('click', function(){
-        var c = this.parentNode;
         setLabel(this, c.classList.toggle('open'));
       });
+    });
+
+    // Auto-fold: tutup otomatis begitu blok yang terbuka sudah keluar layar.
+    // Pakai scroll-listener + getBoundingClientRect (jalan di semua browser HP).
+    function autoFold(){
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      collapses.forEach(function(c){
+        if (!c.classList.contains('open')) return;
+        var r = c.getBoundingClientRect();
+        if (r.bottom <= 0 || r.top >= vh){   // benar-benar di luar layar (atas / bawah)
+          c.classList.remove('open');
+          var b = c.querySelector('.ex-toggle');
+          if (b) setLabel(b, false);
+        }
+      });
     }
-    // Auto-fold: tutup otomatis begitu blok yang terbuka tergulir keluar layar.
-    if ('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(en){
-          if (!en.isIntersecting && en.target.classList.contains('open')){
-            en.target.classList.remove('open');
-            var b = en.target.querySelector('.ex-toggle');
-            if (b) setLabel(b, false);
-          }
-        });
-      }, { threshold: 0 });
-      for (var j=0;j<collapses.length;j++){ io.observe(collapses[j]); }
+    var ticking = false;
+    function onScroll(){
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function(){ autoFold(); ticking = false; });
     }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
   })();
 </script>
 </body>
