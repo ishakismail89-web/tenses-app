@@ -89,7 +89,7 @@
   .err-text { font-size: 14px; line-height: 1.5; }
   .err-sentence { font-weight: 600; margin-bottom: 4px; }
   .err-explain { font-size: 12px; color: var(--muted); }
-  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-bad { color: var(--red); opacity: 0.8; }
   .err-good { color: var(--green); }
   .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
   .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
@@ -546,7 +546,9 @@
         <div class="section-subtitle">Penanda waktu + deteksi Simple Present dalam satu langkah</div>
       </div>
     </div>
-    <div class="detect-box">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan Time Signal"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan Time Signal</span></button>
+      <div class="ex-body"><div class="detect-box">
       <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
       <div class="signal-grid" style="margin-bottom:16px;">
         <div class="signal-chip" style="font-size:12px; padding:6px 12px;">every day</div>
@@ -571,6 +573,7 @@
       <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
         💡 Adverb frekuensi seperti <strong style="color:var(--teal)">always</strong>, <strong style="color:var(--teal)">usually</strong>, dan <strong style="color:var(--teal)">never</strong> adalah penanda khas tense ini. Untuk subjek he/she/it, jangan lupa menambahkan <strong style="color:var(--teal)">-s/es</strong> pada verb di kalimat positif.
       </div>
+    </div></div>
     </div>
   </div>
 
@@ -607,7 +610,7 @@
   .ex-toggle:hover{ border-color:var(--teal2); background:var(--navy3); }
   .ex-tg-ic{ display:inline-block; transition:transform .25s ease; }
   .ex-collapse.open .ex-tg-ic{ transform:rotate(90deg); }
-  .ex-body{ display:none !important; margin-top:12px; }
+  .ex-body{ display:none !important; flex-direction:column; margin-top:12px; }
   .ex-collapse.open .ex-body{ display:flex !important; }
 </style>
 <script>
