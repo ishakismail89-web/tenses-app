@@ -615,14 +615,32 @@
 </style>
 <script>
   (function(){
-    var ts = document.querySelectorAll('.ex-toggle');
-    for (var i=0;i<ts.length;i++){
-      ts[i].addEventListener('click', function(){
+    function setLabel(btn, open){
+      var lbl = btn.querySelector('.ex-tg-label');
+      var show = btn.getAttribute('data-show') || 'Tampilkan Contoh';
+      lbl.textContent = open ? show.replace('Tampilkan', 'Sembunyikan') : show;
+    }
+    var collapses = document.querySelectorAll('.ex-collapse');
+    for (var i=0;i<collapses.length;i++){
+      var btn = collapses[i].querySelector('.ex-toggle');
+      if (!btn) continue;
+      btn.addEventListener('click', function(){
         var c = this.parentNode;
-        var open = c.classList.toggle('open');
-        var lbl = this.querySelector('.ex-tg-label');
-        lbl.textContent = open ? 'Sembunyikan Contoh' : (this.getAttribute('data-show') || 'Tampilkan Contoh');
+        setLabel(this, c.classList.toggle('open'));
       });
+    }
+    // Auto-fold: tutup otomatis begitu blok yang terbuka tergulir keluar layar.
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting && en.target.classList.contains('open')){
+            en.target.classList.remove('open');
+            var b = en.target.querySelector('.ex-toggle');
+            if (b) setLabel(b, false);
+          }
+        });
+      }, { threshold: 0 });
+      for (var j=0;j<collapses.length;j++){ io.observe(collapses[j]); }
     }
   })();
 </script>
