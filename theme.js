@@ -28,8 +28,13 @@
     'html[data-theme="light"] body{ background:var(--navy) !important; }' +
     'html[data-theme="light"] nav{ background:rgba(255,255,255,0.85) !important; }' +
     'html[data-theme="light"] .nav-badge{ color:#FFFFFF !important; }' +
-    // bar mengambang dari guard.js (inline style gelap) -> samarkan ke terang
-    'html[data-theme="light"] #__bar a{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; box-shadow:0 2px 8px rgba(15,23,41,.08); }' +
+    // tombol Menu + dropdown dari guard.js (inline style gelap) -> mode terang
+    'html[data-theme="light"] #__menuBtn{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; color:#0D9488 !important; box-shadow:0 2px 10px rgba(15,23,41,.10); }' +
+    'html[data-theme="light"] #__menuDrop{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; box-shadow:0 14px 36px rgba(15,23,41,.16) !important; }' +
+    'html[data-theme="light"] #__menuDrop a,html[data-theme="light"] #__menuDrop button{ color:#15233D !important; }' +
+    'html[data-theme="light"] #__menuDrop a:hover,html[data-theme="light"] #__menuDrop button:hover{ background:#EEF2F9 !important; }' +
+    'html[data-theme="light"] #__menuDrop #__logoutBtn{ color:#D64545 !important; }' +
+    'html[data-theme="light"] #__menuDrop .__sep{ background:rgba(15,23,41,0.10) !important; }' +
     // shadow kartu lebih halus di mode terang
     'html[data-theme="light"] .card,html[data-theme="light"] .qcard,html[data-theme="light"] .panel,html[data-theme="light"] .row,html[data-theme="light"] .use-card,html[data-theme="light"] .key-box,html[data-theme="light"] .detect-box{ box-shadow:0 1px 3px rgba(15,23,41,.06); }' +
     // tombol toggle

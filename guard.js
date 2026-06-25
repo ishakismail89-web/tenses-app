@@ -42,24 +42,46 @@
     return m ? m[1] : null;
   }
 
-  // ---------- Bar atas (Menu / Latihan / Admin / Keluar) ----------
+  // ---------- Tombol Menu (dropdown) — berisi navigasi + Keluar ----------
   function addBar() {
     if (document.getElementById('__bar')) return;
+
+    if (!document.getElementById('__barStyle')) {
+      var st = document.createElement('style');
+      st.id = '__barStyle';
+      st.textContent =
+        '#__bar{position:fixed;top:10px;right:12px;z-index:9999;}' +
+        '#__menuBtn{font:600 12px/1 -apple-system,sans-serif;background:#1A2540;border:1px solid #26324d;padding:10px 15px;border-radius:20px;color:#2DD4BF;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}' +
+        '#__menuBtn:hover{filter:brightness(1.12);}' +
+        '#__menuDrop{position:absolute;top:46px;right:0;min-width:194px;background:#1A2540;border:1px solid #26324d;border-radius:14px;padding:6px;box-shadow:0 14px 36px rgba(0,0,0,.45);display:none;flex-direction:column;}' +
+        '#__menuDrop.open{display:flex;}' +
+        '#__menuDrop a,#__menuDrop button{font:600 13px/1 -apple-system,sans-serif;text-align:left;width:100%;background:none;border:0;padding:11px 13px;border-radius:9px;color:#eef1f8;text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:10px;}' +
+        '#__menuDrop a:hover,#__menuDrop button:hover{background:#243356;}' +
+        '#__menuDrop .__sep{height:1px;background:#26324d;margin:5px 4px;}' +
+        '#__menuDrop #__logoutBtn{color:#ff8a8a;}';
+      document.head.appendChild(st);
+    }
+
     var bar = document.createElement('div');
     bar.id = '__bar';
-    bar.style.cssText = 'position:fixed;top:10px;right:12px;z-index:9999;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;';
-    var s = 'font:600 12px/1 -apple-system,sans-serif;background:#1A2540;border:1px solid #26324d;padding:9px 13px;border-radius:20px;text-decoration:none;';
 
     var id = tenseIdFromPath();
-    var quizLink = id ? '<a href="quiz.html?tense=' + id + '" style="' + s + 'color:#F59E0B">&#9998; Latihan</a>' : '';
-    var adminLink = isAdmin() ? '<a href="admin.html" style="' + s + 'color:#A78BFA">&#9881; Admin</a>' : '';
+    var items = '<a href="home.html">&#9776; Menu Utama</a>';
+    if (id) items += '<a href="quiz.html?tense=' + id + '">&#9998; Latihan Soal</a>';
+    if (isAdmin()) items += '<a href="admin.html">&#9881; Admin</a>';
+    items += '<div class="__sep"></div>';
+    items += '<button type="button" id="__logoutBtn">&#9211; Keluar</button>';
 
     bar.innerHTML =
-      quizLink +
-      adminLink +
-      '<a href="home.html" style="' + s + 'color:#2DD4BF">&#9776; Menu</a>' +
-      '<a href="#" id="__logoutBtn" style="' + s + 'color:#8A97B0">Keluar</a>';
+      '<button type="button" id="__menuBtn">&#9776; Menu</button>' +
+      '<div id="__menuDrop">' + items + '</div>';
     document.body.appendChild(bar);
+
+    var btn = document.getElementById('__menuBtn');
+    var drop = document.getElementById('__menuDrop');
+    btn.onclick = function (e) { e.stopPropagation(); drop.classList.toggle('open'); };
+    document.addEventListener('click', function (e) { if (!bar.contains(e.target)) drop.classList.remove('open'); });
+
     document.getElementById('__logoutBtn').onclick = async function (e) {
       e.preventDefault();
       await client.auth.signOut();
