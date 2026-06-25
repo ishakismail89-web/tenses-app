@@ -631,15 +631,17 @@
 
     // Auto-fold: tutup otomatis begitu blok yang terbuka sudah keluar layar.
     // Pakai scroll-listener + getBoundingClientRect (jalan di semua browser HP).
+    // Termasuk accordion pronoun (Positif · Negatif · Tanya).
+    var foldables = collapses.concat([].slice.call(document.querySelectorAll('.pron-item')));
     function autoFold(){
       var vh = window.innerHeight || document.documentElement.clientHeight;
-      collapses.forEach(function(c){
+      foldables.forEach(function(c){
         if (!c.classList.contains('open')) return;
         var r = c.getBoundingClientRect();
         if (r.bottom <= 0 || r.top >= vh){   // benar-benar di luar layar (atas / bawah)
           c.classList.remove('open');
           var b = c.querySelector('.ex-toggle');
-          if (b) setLabel(b, false);
+          if (b) setLabel(b, false);   // reset label (khusus tombol contoh); pronoun cukup hapus 'open'
         }
       });
     }
