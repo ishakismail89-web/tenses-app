@@ -49,7 +49,8 @@
   .use-card-icon { font-size: 24px; margin-bottom: 10px; }
   .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
   .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 12px; padding: 4px 0 4px 10px; border-left: 2px solid var(--teal2); line-height: 1.5; }
+  .use-card-ex::before { content: "Contoh: "; font-style: normal; font-weight: 700; color: var(--muted); }
   .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
   .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
   .formula-row:last-child { border-bottom: none; }
@@ -89,7 +90,7 @@
   .err-text { font-size: 14px; line-height: 1.5; }
   .err-sentence { font-weight: 600; margin-bottom: 4px; }
   .err-explain { font-size: 12px; color: var(--muted); }
-  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-bad { color: var(--red); opacity: 0.8; }
   .err-good { color: var(--green); }
   .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
   .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
@@ -113,6 +114,47 @@
 <script src="config.js"></script>
 <script src="guard.js"></script>
 <script src="theme.js"></script>
+
+<style>
+  .pron-acc{ display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+  .pron-item{ background:var(--navy2); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+  .pron-header{ width:100%; display:flex; align-items:center; gap:14px; padding:14px 18px; background:none; border:0; cursor:pointer; text-align:left; font-family:inherit; color:inherit; }
+  .pron-header:hover{ background:var(--navy3); }
+  .pron-letter{ flex-shrink:0; min-width:56px; height:38px; padding:0 12px; display:flex; align-items:center; justify-content:center; background:var(--navy3); border:1px solid var(--border); border-radius:9px; font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--amber); font-size:15px; transition:color .2s, border-color .2s; }
+  .pron-meta{ flex:1; font-size:13px; color:var(--muted); font-family:'Space Grotesk',sans-serif; }
+  .pron-chevron{ flex-shrink:0; color:var(--muted); transition:transform .25s ease; font-size:13px; }
+  .pron-item.open .pron-chevron{ transform:rotate(180deg); }
+  .pron-item.open .pron-letter{ color:var(--teal); border-color:var(--teal2); }
+  .pron-panel{ display:none; flex-direction:column; gap:10px; padding:2px 16px 16px; }
+  .pron-item.open .pron-panel{ display:flex; }
+  .pron-line{ background:var(--navy3); border-left:3px solid var(--teal); border-radius:0 10px 10px 0; padding:12px 14px; font-size:14px; line-height:1.5; }
+  .pron-line.neg{ border-left-color:var(--red); }
+  .pron-line.que{ border-left-color:var(--amber); }
+  .pron-badge{ display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; padding:2px 7px; border-radius:6px; margin-right:8px; }
+  .pron-badge.pos{ background:rgba(74,222,128,0.15); color:var(--green); }
+  .pron-badge.neg{ background:rgba(248,113,113,0.15); color:var(--red); }
+  .pron-badge.que{ background:rgba(245,158,11,0.15); color:var(--amber); }
+  .ex-collapse{ margin-top:4px; }
+  .ex-toggle{ width:100%; display:flex; align-items:center; justify-content:center; gap:10px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:13px 16px; color:var(--teal); font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s,border-color .15s; }
+  .ex-toggle:hover{ border-color:var(--teal2); background:var(--navy3); }
+  .ex-tg-ic{ display:inline-block; transition:transform .25s ease; }
+  .ex-collapse.open .ex-tg-ic{ transform:rotate(90deg); }
+  .ex-body{ display:none !important; flex-direction:column; margin-top:12px; }
+  .ex-collapse.open .ex-body{ display:flex !important; }
+  .tense-nav{ margin-top:48px; display:flex; flex-direction:column; gap:14px; }
+  .tn-row{ display:flex; gap:10px; }
+  .tn-btn{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; text-decoration:none; border-radius:11px; padding:9px 12px; font-family:'Space Grotesk',sans-serif; transition:transform .08s, filter .15s; }
+  .tn-btn:active{ transform:scale(.99); }
+  .tn-dir{ font-size:9.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:.85; margin-bottom:2px; }
+  .tn-name{ font-size:13px; font-weight:700; }
+  .tn-back, .tn-next{ background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); border:1px solid transparent; }
+  .tn-back:hover, .tn-next:hover{ filter:brightness(1.08); }
+  .tn-back .tn-dir, .tn-next .tn-dir{ color:rgba(15,23,41,.7); }
+  .tn-quiz{ align-items:center; text-align:center; background:linear-gradient(135deg,var(--amber),#D97706); color:var(--navy); font-size:14px; font-weight:700; padding:12px 16px; border-radius:11px; text-decoration:none; font-family:'Space Grotesk',sans-serif; transition:filter .15s, transform .08s; }
+  .tn-quiz:hover{ filter:brightness(1.08); }
+  .tn-quiz:active{ transform:scale(.99); }
+  .tn-quiz-note{ text-align:center; font-size:13px; color:var(--muted); margin-top:-4px; }
+</style>
 </head>
 <body>
 <div id="progress-bar"></div>
@@ -147,25 +189,21 @@
     </div>
     <div class="use-grid">
       <div class="use-card">
-        <div class="use-card-icon">⏳</div>
         <div class="use-card-title">Durasi aksi hingga titik masa depan (dilihat dari masa lalu)</div>
         <div class="use-card-desc">Menggambarkan aksi yang akan telah berlangsung selama suatu durasi hingga sebuah titik di masa depan, namun dipandang dari sudut masa lalu.</div>
         <div class="use-card-ex">"By June, she would have been teaching for ten years."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">🗣️</div>
         <div class="use-card-title">Reported speech dari future perfect continuous</div>
         <div class="use-card-desc">Mengubah kalimat "will have been V-ing" menjadi bentuk lampau ketika dilaporkan kembali.</div>
         <div class="use-card-ex">"He said they would have been driving for hours."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">🔮</div>
         <div class="use-card-title">Pengandaian durasi yang berkelanjutan (conditional)</div>
         <div class="use-card-desc">Menyatakan seberapa lama suatu proses akan telah berlangsung seandainya suatu syarat terpenuhi.</div>
         <div class="use-card-ex">"By then, I would have been saving money for a year."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">📐</div>
         <div class="use-card-title">Penekanan lamanya proses sebelum momen masa depan</div>
         <div class="use-card-desc">Menonjolkan durasi sebuah aktivitas yang berkesinambungan sebelum momen tertentu, dari perspektif lampau.</div>
         <div class="use-card-ex">"We would have been rehearsing for weeks before the show."</div>
@@ -222,7 +260,9 @@
         <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
       </div>
     </div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 5 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 5 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">She promised that by Friday she <span class="ex-hl">would have been painting</span> the mural <span class="ex-hl">for</span> three weeks.<span class="ex-translate">Dia berjanji bahwa pada hari Jumat dia sudah melukis mural itu selama tiga minggu.</span></span>
         <span class="ex-note">Durasi aksi yang akan telah berlangsung hingga titik masa depan, dipandang dari masa lalu</span>
@@ -244,6 +284,7 @@
         <span class="ex-note">Pertanyaan tentang durasi aksi sebelum suatu momen, dari perspektif lampau</span>
       </div>
     </div>
+    </div>
   </div>
 
   <div class="divider"></div>
@@ -263,103 +304,91 @@
     <div style="margin-bottom:12px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:12px 18px; border:1px solid var(--border);">
       💡 <strong style="color:var(--white)">Aturan auxiliary:</strong> <strong style="color:var(--teal)">would have been</strong> dipakai untuk <strong style="color:var(--teal)">semua subjek</strong> + <strong style="color:var(--teal)">V-ing</strong> — tidak ada perbedaan bentuk antara I, he, she, it, you, we, they.
     </div>
-    <div class="table-wrap" style="margin-bottom:20px;">
-    <table class="sentence-table">
-      <thead><tr><th style="width:60px;">Pronoun</th><th style="width:30px;">Tipe</th><th>Kalimat</th></tr></thead>
-      <tbody>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">I</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--teal);">would have been studying</strong> medicine for six years by graduation.<span class="ex-translate">Saya sudah belajar kedokteran selama enam tahun pada saat kelulusan.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--red);">would not have been studying</strong> medicine for six years by graduation.<span class="ex-translate">Saya belum belajar kedokteran selama enam tahun pada saat kelulusan.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> I have been studying medicine for six years by graduation?<span class="ex-translate">Apakah saya sudah belajar kedokteran selama enam tahun pada saat kelulusan?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">He</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--teal);">would have been coaching</strong> the youth team for a decade by that season.<span class="ex-translate">Dia sudah melatih tim junior selama satu dekade pada musim itu.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--red);">would not have been coaching</strong> the youth team for a decade by that season.<span class="ex-translate">Dia belum melatih tim junior selama satu dekade pada musim itu.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> he have been coaching the youth team for a decade by that season?<span class="ex-translate">Apakah dia sudah melatih tim junior selama satu dekade pada musim itu?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">She</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--teal);">would have been writing</strong> her novel for two years before the launch.<span class="ex-translate">Dia sudah menulis novelnya selama dua tahun sebelum peluncuran.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--red);">would not have been writing</strong> her novel for two years before the launch.<span class="ex-translate">Dia belum menulis novelnya selama dua tahun sebelum peluncuran.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> she have been writing her novel for two years before the launch?<span class="ex-translate">Apakah dia sudah menulis novelnya selama dua tahun sebelum peluncuran?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">It</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--teal);">would have been running</strong> the simulation for hours by midnight.<span class="ex-translate">Komputer itu sudah menjalankan simulasi selama berjam-jam pada tengah malam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--red);">would not have been running</strong> the simulation for hours by midnight.<span class="ex-translate">Komputer itu belum menjalankan simulasi selama berjam-jam pada tengah malam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> it have been running the simulation for hours by midnight?<span class="ex-translate">Apakah komputer itu sudah menjalankan simulasi selama berjam-jam pada tengah malam?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">You</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--teal);">would have been managing</strong> the warehouse for five years by then.<span class="ex-translate">Kamu sudah mengelola gudang itu selama lima tahun pada saat itu.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--red);">would not have been managing</strong> the warehouse for five years by then.<span class="ex-translate">Kamu belum mengelola gudang itu selama lima tahun pada saat itu.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> you have been managing the warehouse for five years by then?<span class="ex-translate">Apakah kamu sudah mengelola gudang itu selama lima tahun pada saat itu?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">We</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--teal);">would have been hiking</strong> the mountain trail for days before the rescue.<span class="ex-translate">Kami sudah mendaki jalur gunung selama berhari-hari sebelum penyelamatan.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--red);">would not have been hiking</strong> the mountain trail for days before the rescue.<span class="ex-translate">Kami belum mendaki jalur gunung selama berhari-hari sebelum penyelamatan.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> we have been hiking the mountain trail for days before the rescue?<span class="ex-translate">Apakah kami sudah mendaki jalur gunung selama berhari-hari sebelum penyelamatan?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">They</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--teal);">would have been negotiating</strong> the treaty for months by the summit.<span class="ex-translate">Mereka sudah merundingkan perjanjian itu selama berbulan-bulan pada saat KTT.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--red);">would not have been negotiating</strong> the treaty for months by the summit.<span class="ex-translate">Mereka belum merundingkan perjanjian itu selama berbulan-bulan pada saat KTT.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> they have been negotiating the treaty for months by the summit?<span class="ex-translate">Apakah mereka sudah merundingkan perjanjian itu selama berbulan-bulan pada saat KTT?</span></span></td>
-        </tr>
-      </tbody>
-    </table>
+        <div class="pron-acc">
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">I</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>I <strong style="color:var(--teal);">would have been studying</strong> medicine for six years by graduation.<span class="ex-translate">Saya sudah belajar kedokteran selama enam tahun pada saat kelulusan.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>I <strong style="color:var(--red);">would not have been studying</strong> medicine for six years by graduation.<span class="ex-translate">Saya belum belajar kedokteran selama enam tahun pada saat kelulusan.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Would</strong> I have been studying medicine for six years by graduation?<span class="ex-translate">Apakah saya sudah belajar kedokteran selama enam tahun pada saat kelulusan?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">He</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>He <strong style="color:var(--teal);">would have been coaching</strong> the youth team for a decade by that season.<span class="ex-translate">Dia sudah melatih tim junior selama satu dekade pada musim itu.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>He <strong style="color:var(--red);">would not have been coaching</strong> the youth team for a decade by that season.<span class="ex-translate">Dia belum melatih tim junior selama satu dekade pada musim itu.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Would</strong> he have been coaching the youth team for a decade by that season?<span class="ex-translate">Apakah dia sudah melatih tim junior selama satu dekade pada musim itu?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">She</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>She <strong style="color:var(--teal);">would have been writing</strong> her novel for two years before the launch.<span class="ex-translate">Dia sudah menulis novelnya selama dua tahun sebelum peluncuran.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>She <strong style="color:var(--red);">would not have been writing</strong> her novel for two years before the launch.<span class="ex-translate">Dia belum menulis novelnya selama dua tahun sebelum peluncuran.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Would</strong> she have been writing her novel for two years before the launch?<span class="ex-translate">Apakah dia sudah menulis novelnya selama dua tahun sebelum peluncuran?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">It</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>It <strong style="color:var(--teal);">would have been running</strong> the simulation for hours by midnight.<span class="ex-translate">Komputer itu sudah menjalankan simulasi selama berjam-jam pada tengah malam.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>It <strong style="color:var(--red);">would not have been running</strong> the simulation for hours by midnight.<span class="ex-translate">Komputer itu belum menjalankan simulasi selama berjam-jam pada tengah malam.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Would</strong> it have been running the simulation for hours by midnight?<span class="ex-translate">Apakah komputer itu sudah menjalankan simulasi selama berjam-jam pada tengah malam?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">You</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>You <strong style="color:var(--teal);">would have been managing</strong> the warehouse for five years by then.<span class="ex-translate">Kamu sudah mengelola gudang itu selama lima tahun pada saat itu.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>You <strong style="color:var(--red);">would not have been managing</strong> the warehouse for five years by then.<span class="ex-translate">Kamu belum mengelola gudang itu selama lima tahun pada saat itu.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Would</strong> you have been managing the warehouse for five years by then?<span class="ex-translate">Apakah kamu sudah mengelola gudang itu selama lima tahun pada saat itu?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">We</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>We <strong style="color:var(--teal);">would have been hiking</strong> the mountain trail for days before the rescue.<span class="ex-translate">Kami sudah mendaki jalur gunung selama berhari-hari sebelum penyelamatan.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>We <strong style="color:var(--red);">would not have been hiking</strong> the mountain trail for days before the rescue.<span class="ex-translate">Kami belum mendaki jalur gunung selama berhari-hari sebelum penyelamatan.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Would</strong> we have been hiking the mountain trail for days before the rescue?<span class="ex-translate">Apakah kami sudah mendaki jalur gunung selama berhari-hari sebelum penyelamatan?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">They</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>They <strong style="color:var(--teal);">would have been negotiating</strong> the treaty for months by the summit.<span class="ex-translate">Mereka sudah merundingkan perjanjian itu selama berbulan-bulan pada saat KTT.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>They <strong style="color:var(--red);">would not have been negotiating</strong> the treaty for months by the summit.<span class="ex-translate">Mereka belum merundingkan perjanjian itu selama berbulan-bulan pada saat KTT.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Would</strong> they have been negotiating the treaty for months by the summit?<span class="ex-translate">Apakah mereka sudah merundingkan perjanjian itu selama berbulan-bulan pada saat KTT?</span></div>
+        </div>
+      </div>
     </div>
     <div style="margin-top:16px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:16px 20px; font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
       <div><span style="color:var(--teal); font-weight:700;">WOULD HAVE BEEN</span> &nbsp;→&nbsp; I, He, She, It, You, We, They (semua subjek) + V-ing</div>
@@ -404,7 +433,9 @@
       </tbody>
     </table>
     <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 7 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 7 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">She told me that by spring <span class="ex-hl">I'd have been</span> volunteering at the shelter for a year.<span class="ex-translate">Dia memberitahuku bahwa pada musim semi saya sudah menjadi relawan di penampungan selama setahun.</span></span>
         <span class="ex-note">= I would have been volunteering at the shelter for a year.</span>
@@ -434,9 +465,12 @@
         <span class="ex-note">= it would have been charging the batteries all night by sunrise.</span>
       </div>
     </div>
+    </div>
 
     <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 5 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 5 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">The firefighters <span class="ex-hl">would have been battling</span> the wildfire for ten hours by dawn.<span class="ex-translate">Para petugas pemadam kebakaran sudah memerangi kebakaran hutan selama sepuluh jam pada saat fajar.</span></span>
         <span class="ex-note">Subject: the firefighters — bukan pronoun</span>
@@ -457,6 +491,7 @@
         <span class="ex-sentence">The night guards <span class="ex-hl">would have been patrolling</span> the museum corridors for hours before the alarm.<span class="ex-translate">Para penjaga malam sudah berpatroli di koridor museum selama berjam-jam sebelum alarm berbunyi.</span></span>
         <span class="ex-note">Subject: the night guards — bukan pronoun</span>
       </div>
+    </div>
     </div>
 
     <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
@@ -536,7 +571,9 @@
         <div class="section-subtitle">Penanda waktu + deteksi Past Future Perfect Continuous dalam satu langkah</div>
       </div>
     </div>
-    <div class="detect-box">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan Time Signal"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan Time Signal</span></button>
+      <div class="ex-body"><div class="detect-box">
       <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
       <div class="signal-grid" style="margin-bottom:16px;">
         <div class="signal-chip" style="font-size:12px; padding:6px 12px;">for</div>
@@ -559,6 +596,7 @@
       <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
         💡 Penanda durasi seperti <strong style="color:var(--teal)">for</strong> dan <strong style="color:var(--teal)">since</strong> ditambah frasa <strong style="color:var(--teal)">by then</strong> / <strong style="color:var(--teal)">by that time</strong> adalah ciri khas tense ini. Karena bersifat lampau-masa-depan, kalimatnya hampir selalu muncul dalam <strong style="color:var(--teal)">reported speech</strong> atau <strong style="color:var(--teal)">pengandaian (conditional)</strong>.
       </div>
+    </div></div>
     </div>
   </div>
 
@@ -575,6 +613,15 @@
     </div>
   </div>
 
+  <div class="tense-nav">
+    <a class="tn-quiz" href="quiz.html?tense=16">Kerjakan Kuis Past Future Perfect Continuous</a>
+    <div class="tn-quiz-note">Selesaikan kuis agar kamu makin paham.</div>
+    <div class="tn-row">
+      <a class="tn-btn tn-back" href="15-past-future-perfect-tense.html"><span class="tn-dir">‹ Kembali</span><span class="tn-name">Past Future Perfect</span></a>
+      <a class="tn-btn tn-next" href="home.html"><span class="tn-dir">Selanjutnya ›</span><span class="tn-name">Menu Tenses</span></a>
+    </div>
+  </div>
+
 </div><!-- /.page -->
 
 <footer>
@@ -588,6 +635,24 @@
     const pct = total > 0 ? (scrolled / total) * 100 : 0;
     document.getElementById('progress-bar').style.width = pct + '%';
   });
+</script>
+
+<script>
+  (function(){
+    function setLabel(btn, open){ var lbl=btn.querySelector('.ex-tg-label'); var show=btn.getAttribute('data-show')||'Tampilkan Contoh'; lbl.textContent = open ? show.replace('Tampilkan','Sembunyikan') : show; }
+    var collapses = [].slice.call(document.querySelectorAll('.ex-collapse'));
+    collapses.forEach(function(c){ var b=c.querySelector('.ex-toggle'); if(b) b.addEventListener('click', function(){ setLabel(this, c.classList.toggle('open')); }); });
+    var ph = document.querySelectorAll('.pron-header');
+    for(var i=0;i<ph.length;i++){ ph[i].addEventListener('click', function(){ this.parentNode.classList.toggle('open'); }); }
+    var foldables = collapses.concat([].slice.call(document.querySelectorAll('.pron-item')));
+    function fold(c){ c.classList.remove('open'); var b=c.querySelector('.ex-toggle'); if(b) setLabel(b,false); }
+    function foldBelowViewport(){ var vh=window.innerHeight||document.documentElement.clientHeight; for(var i=0;i<foldables.length;i++){ var c=foldables[i]; if(c.classList.contains('open') && c.getBoundingClientRect().top>=vh) fold(c); } }
+    function foldAboveViewportIdle(){ var comp=0; for(var i=0;i<foldables.length;i++){ var c=foldables[i]; if(!c.classList.contains('open')) continue; var r=c.getBoundingClientRect(); if(r.bottom<=0){ var before=r.height; fold(c); comp+=(before-c.getBoundingClientRect().height); } } if(comp>0) window.scrollBy(0,-comp); }
+    var ticking=false, idleTimer=null;
+    function onScroll(){ if(!ticking){ ticking=true; window.requestAnimationFrame(function(){ foldBelowViewport(); ticking=false; }); } if(idleTimer) clearTimeout(idleTimer); idleTimer=setTimeout(foldAboveViewportIdle,160); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+  })();
 </script>
 </body>
 </html>

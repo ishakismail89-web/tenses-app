@@ -49,7 +49,8 @@
   .use-card-icon { font-size: 24px; margin-bottom: 10px; }
   .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
   .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 12px; padding: 4px 0 4px 10px; border-left: 2px solid var(--teal2); line-height: 1.5; }
+  .use-card-ex::before { content: "Contoh: "; font-style: normal; font-weight: 700; color: var(--muted); }
   .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
   .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
   .formula-row:last-child { border-bottom: none; }
@@ -89,7 +90,7 @@
   .err-text { font-size: 14px; line-height: 1.5; }
   .err-sentence { font-weight: 600; margin-bottom: 4px; }
   .err-explain { font-size: 12px; color: var(--muted); }
-  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-bad { color: var(--red); opacity: 0.8; }
   .err-good { color: var(--green); }
   .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
   .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
@@ -113,6 +114,47 @@
 <script src="config.js"></script>
 <script src="guard.js"></script>
 <script src="theme.js"></script>
+
+<style>
+  .pron-acc{ display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+  .pron-item{ background:var(--navy2); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+  .pron-header{ width:100%; display:flex; align-items:center; gap:14px; padding:14px 18px; background:none; border:0; cursor:pointer; text-align:left; font-family:inherit; color:inherit; }
+  .pron-header:hover{ background:var(--navy3); }
+  .pron-letter{ flex-shrink:0; min-width:56px; height:38px; padding:0 12px; display:flex; align-items:center; justify-content:center; background:var(--navy3); border:1px solid var(--border); border-radius:9px; font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--amber); font-size:15px; transition:color .2s, border-color .2s; }
+  .pron-meta{ flex:1; font-size:13px; color:var(--muted); font-family:'Space Grotesk',sans-serif; }
+  .pron-chevron{ flex-shrink:0; color:var(--muted); transition:transform .25s ease; font-size:13px; }
+  .pron-item.open .pron-chevron{ transform:rotate(180deg); }
+  .pron-item.open .pron-letter{ color:var(--teal); border-color:var(--teal2); }
+  .pron-panel{ display:none; flex-direction:column; gap:10px; padding:2px 16px 16px; }
+  .pron-item.open .pron-panel{ display:flex; }
+  .pron-line{ background:var(--navy3); border-left:3px solid var(--teal); border-radius:0 10px 10px 0; padding:12px 14px; font-size:14px; line-height:1.5; }
+  .pron-line.neg{ border-left-color:var(--red); }
+  .pron-line.que{ border-left-color:var(--amber); }
+  .pron-badge{ display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; padding:2px 7px; border-radius:6px; margin-right:8px; }
+  .pron-badge.pos{ background:rgba(74,222,128,0.15); color:var(--green); }
+  .pron-badge.neg{ background:rgba(248,113,113,0.15); color:var(--red); }
+  .pron-badge.que{ background:rgba(245,158,11,0.15); color:var(--amber); }
+  .ex-collapse{ margin-top:4px; }
+  .ex-toggle{ width:100%; display:flex; align-items:center; justify-content:center; gap:10px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:13px 16px; color:var(--teal); font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s,border-color .15s; }
+  .ex-toggle:hover{ border-color:var(--teal2); background:var(--navy3); }
+  .ex-tg-ic{ display:inline-block; transition:transform .25s ease; }
+  .ex-collapse.open .ex-tg-ic{ transform:rotate(90deg); }
+  .ex-body{ display:none !important; flex-direction:column; margin-top:12px; }
+  .ex-collapse.open .ex-body{ display:flex !important; }
+  .tense-nav{ margin-top:48px; display:flex; flex-direction:column; gap:14px; }
+  .tn-row{ display:flex; gap:10px; }
+  .tn-btn{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; text-decoration:none; border-radius:11px; padding:9px 12px; font-family:'Space Grotesk',sans-serif; transition:transform .08s, filter .15s; }
+  .tn-btn:active{ transform:scale(.99); }
+  .tn-dir{ font-size:9.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:.85; margin-bottom:2px; }
+  .tn-name{ font-size:13px; font-weight:700; }
+  .tn-back, .tn-next{ background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); border:1px solid transparent; }
+  .tn-back:hover, .tn-next:hover{ filter:brightness(1.08); }
+  .tn-back .tn-dir, .tn-next .tn-dir{ color:rgba(15,23,41,.7); }
+  .tn-quiz{ align-items:center; text-align:center; background:linear-gradient(135deg,var(--amber),#D97706); color:var(--navy); font-size:14px; font-weight:700; padding:12px 16px; border-radius:11px; text-decoration:none; font-family:'Space Grotesk',sans-serif; transition:filter .15s, transform .08s; }
+  .tn-quiz:hover{ filter:brightness(1.08); }
+  .tn-quiz:active{ transform:scale(.99); }
+  .tn-quiz-note{ text-align:center; font-size:13px; color:var(--muted); margin-top:-4px; }
+</style>
 </head>
 <body>
 <div id="progress-bar"></div>
@@ -147,25 +189,21 @@
     </div>
     <div class="use-grid">
       <div class="use-card">
-        <div class="use-card-icon">⏳</div>
         <div class="use-card-title">Aksi mulai di lampau & masih berlangsung kini</div>
         <div class="use-card-desc">Menggambarkan tindakan yang dimulai di masa lalu dan masih terus berjalan sampai sekarang.</div>
         <div class="use-card-ex">"They have been waiting for the bus for twenty minutes."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">🌿</div>
         <div class="use-card-title">Aktivitas baru-baru ini dengan hasil sekarang</div>
         <div class="use-card-desc">Aktivitas yang berlangsung belakangan ini dan meninggalkan bukti atau hasil yang terlihat sekarang.</div>
         <div class="use-card-ex">"Her eyes are red because she has been crying."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">📏</div>
         <div class="use-card-title">Penekanan durasi (since/for)</div>
         <div class="use-card-desc">Menegaskan berapa lama sebuah aktivitas sudah berlangsung dengan "since" atau "for".</div>
         <div class="use-card-ex">"We have been living in Jakarta since 2015."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">❓</div>
         <div class="use-card-title">Menanyakan berapa lama (how long)</div>
         <div class="use-card-desc">Menanyakan durasi sebuah aktivitas yang masih berlangsung dengan "how long".</div>
         <div class="use-card-ex">"How long have you been studying French?"</div>
@@ -222,7 +260,9 @@
         <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
       </div>
     </div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 5 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 5 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">My brother <span class="ex-hl">has been repairing</span> the old motorcycle <span class="ex-hl">all morning</span>.<span class="ex-translate">Kakak laki-laki saya sudah memperbaiki motor tua itu sepanjang pagi.</span></span>
         <span class="ex-note">Aksi yang berlangsung terus-menerus sejak tadi pagi hingga sekarang</span>
@@ -244,6 +284,7 @@
         <span class="ex-note">Pertanyaan tentang aktivitas yang berlangsung selama suatu periode</span>
       </div>
     </div>
+    </div>
   </div>
 
   <div class="divider"></div>
@@ -263,103 +304,91 @@
     <div style="margin-bottom:12px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:12px 18px; border:1px solid var(--border);">
       💡 <strong style="color:var(--white)">Aturan auxiliary:</strong> Gunakan <strong style="color:var(--teal)">has been</strong> untuk subjek tunggal orang ketiga (<strong style="color:var(--teal)">he, she, it</strong>), dan <strong style="color:var(--teal)">have been</strong> untuk <strong style="color:var(--teal)">I, you, we, they</strong>. Setelah "been", kata kerja selalu memakai akhiran <strong style="color:#A78BFA">-ing</strong>.
     </div>
-    <div class="table-wrap" style="margin-bottom:20px;">
-    <table class="sentence-table">
-      <thead><tr><th style="width:60px;">Pronoun</th><th style="width:30px;">Tipe</th><th>Kalimat</th></tr></thead>
-      <tbody>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">I</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--teal);">have been cooking</strong> dinner for the guests for an hour.<span class="ex-translate">Saya sudah memasak makan malam untuk para tamu selama satu jam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--red);">have not been cooking</strong> dinner for the guests for an hour.<span class="ex-translate">Saya belum memasak makan malam untuk para tamu selama satu jam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Have</strong> I been cooking dinner for the guests for an hour?<span class="ex-translate">Apakah saya sudah memasak makan malam untuk para tamu selama satu jam?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">He</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--teal);">has been writing</strong> letters to his pen pal all evening.<span class="ex-translate">Dia sudah menulis surat untuk sahabat penanya sepanjang malam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--red);">has not been writing</strong> letters to his pen pal all evening.<span class="ex-translate">Dia belum menulis surat untuk sahabat penanya sepanjang malam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Has</strong> he been writing letters to his pen pal all evening?<span class="ex-translate">Apakah dia sudah menulis surat untuk sahabat penanya sepanjang malam?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">She</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--teal);">has been practicing</strong> the piano since this morning.<span class="ex-translate">Dia sudah berlatih piano sejak pagi ini.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--red);">has not been practicing</strong> the piano since this morning.<span class="ex-translate">Dia belum berlatih piano sejak pagi ini.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Has</strong> she been practicing the piano since this morning?<span class="ex-translate">Apakah dia sudah berlatih piano sejak pagi ini?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">It</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--teal);">has been raining</strong> heavily all afternoon.<span class="ex-translate">Hujan sudah turun dengan deras sepanjang sore.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--red);">has not been raining</strong> heavily all afternoon.<span class="ex-translate">Hujan belum turun dengan deras sepanjang sore.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Has</strong> it been raining heavily all afternoon?<span class="ex-translate">Apakah hujan sudah turun dengan deras sepanjang sore?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">You</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--teal);">have been learning</strong> Spanish for two years.<span class="ex-translate">Kamu sudah belajar bahasa Spanyol selama dua tahun.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--red);">have not been learning</strong> Spanish for two years.<span class="ex-translate">Kamu belum belajar bahasa Spanyol selama dua tahun.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Have</strong> you been learning Spanish for two years?<span class="ex-translate">Apakah kamu sudah belajar bahasa Spanyol selama dua tahun?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">We</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--teal);">have been building</strong> a treehouse in the backyard since dawn.<span class="ex-translate">Kami sudah membangun rumah pohon di halaman belakang sejak fajar.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--red);">have not been building</strong> a treehouse in the backyard since dawn.<span class="ex-translate">Kami belum membangun rumah pohon di halaman belakang sejak fajar.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Have</strong> we been building a treehouse in the backyard since dawn?<span class="ex-translate">Apakah kami sudah membangun rumah pohon di halaman belakang sejak fajar?</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">They</td>
-          <td class="td-type pos">(+)</td>
-          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--teal);">have been cleaning</strong> the old warehouse for hours.<span class="ex-translate">Mereka sudah membersihkan gudang tua itu selama berjam-jam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type neg">(−)</td>
-          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--red);">have not been cleaning</strong> the old warehouse for hours.<span class="ex-translate">Mereka belum membersihkan gudang tua itu selama berjam-jam.</span></span></td>
-        </tr>
-        <tr>
-          <td class="td-type que">(?)</td>
-          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Have</strong> they been cleaning the old warehouse for hours?<span class="ex-translate">Apakah mereka sudah membersihkan gudang tua itu selama berjam-jam?</span></span></td>
-        </tr>
-      </tbody>
-    </table>
+        <div class="pron-acc">
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">I</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>I <strong style="color:var(--teal);">have been cooking</strong> dinner for the guests for an hour.<span class="ex-translate">Saya sudah memasak makan malam untuk para tamu selama satu jam.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>I <strong style="color:var(--red);">have not been cooking</strong> dinner for the guests for an hour.<span class="ex-translate">Saya belum memasak makan malam untuk para tamu selama satu jam.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Have</strong> I been cooking dinner for the guests for an hour?<span class="ex-translate">Apakah saya sudah memasak makan malam untuk para tamu selama satu jam?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">He</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>He <strong style="color:var(--teal);">has been writing</strong> letters to his pen pal all evening.<span class="ex-translate">Dia sudah menulis surat untuk sahabat penanya sepanjang malam.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>He <strong style="color:var(--red);">has not been writing</strong> letters to his pen pal all evening.<span class="ex-translate">Dia belum menulis surat untuk sahabat penanya sepanjang malam.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Has</strong> he been writing letters to his pen pal all evening?<span class="ex-translate">Apakah dia sudah menulis surat untuk sahabat penanya sepanjang malam?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">She</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>She <strong style="color:var(--teal);">has been practicing</strong> the piano since this morning.<span class="ex-translate">Dia sudah berlatih piano sejak pagi ini.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>She <strong style="color:var(--red);">has not been practicing</strong> the piano since this morning.<span class="ex-translate">Dia belum berlatih piano sejak pagi ini.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Has</strong> she been practicing the piano since this morning?<span class="ex-translate">Apakah dia sudah berlatih piano sejak pagi ini?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">It</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>It <strong style="color:var(--teal);">has been raining</strong> heavily all afternoon.<span class="ex-translate">Hujan sudah turun dengan deras sepanjang sore.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>It <strong style="color:var(--red);">has not been raining</strong> heavily all afternoon.<span class="ex-translate">Hujan belum turun dengan deras sepanjang sore.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Has</strong> it been raining heavily all afternoon?<span class="ex-translate">Apakah hujan sudah turun dengan deras sepanjang sore?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">You</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>You <strong style="color:var(--teal);">have been learning</strong> Spanish for two years.<span class="ex-translate">Kamu sudah belajar bahasa Spanyol selama dua tahun.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>You <strong style="color:var(--red);">have not been learning</strong> Spanish for two years.<span class="ex-translate">Kamu belum belajar bahasa Spanyol selama dua tahun.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Have</strong> you been learning Spanish for two years?<span class="ex-translate">Apakah kamu sudah belajar bahasa Spanyol selama dua tahun?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">We</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>We <strong style="color:var(--teal);">have been building</strong> a treehouse in the backyard since dawn.<span class="ex-translate">Kami sudah membangun rumah pohon di halaman belakang sejak fajar.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>We <strong style="color:var(--red);">have not been building</strong> a treehouse in the backyard since dawn.<span class="ex-translate">Kami belum membangun rumah pohon di halaman belakang sejak fajar.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Have</strong> we been building a treehouse in the backyard since dawn?<span class="ex-translate">Apakah kami sudah membangun rumah pohon di halaman belakang sejak fajar?</span></div>
+        </div>
+      </div>
+      <div class="pron-item">
+        <button type="button" class="pron-header">
+          <span class="pron-letter">They</span>
+          <span class="pron-meta">Positif · Negatif · Tanya</span>
+          <span class="pron-chevron">▾</span>
+        </button>
+        <div class="pron-panel">
+          <div class="pron-line pos"><span class="pron-badge pos">(+)</span>They <strong style="color:var(--teal);">have been cleaning</strong> the old warehouse for hours.<span class="ex-translate">Mereka sudah membersihkan gudang tua itu selama berjam-jam.</span></div>
+          <div class="pron-line neg"><span class="pron-badge neg">(−)</span>They <strong style="color:var(--red);">have not been cleaning</strong> the old warehouse for hours.<span class="ex-translate">Mereka belum membersihkan gudang tua itu selama berjam-jam.</span></div>
+          <div class="pron-line que"><span class="pron-badge que">(?)</span><strong style="color:var(--teal);">Have</strong> they been cleaning the old warehouse for hours?<span class="ex-translate">Apakah mereka sudah membersihkan gudang tua itu selama berjam-jam?</span></div>
+        </div>
+      </div>
     </div>
     <div style="margin-top:16px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:16px 20px; font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
       <div><span style="color:var(--teal); font-weight:700;">HAVE BEEN</span> &nbsp;→&nbsp; I, You, We, They</div>
@@ -405,7 +434,9 @@
       </tbody>
     </table>
     <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 7 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 7 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence"><span class="ex-hl">I've been</span> jogging around the park every evening.<span class="ex-translate">Saya sudah berlari mengelilingi taman setiap sore.</span></span>
         <span class="ex-note">= I have been jogging around the park every evening.</span>
@@ -435,9 +466,12 @@
         <span class="ex-note">= They have been arguing about politics lately.</span>
       </div>
     </div>
+    </div>
 
     <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 5 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 5 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">The mechanics <span class="ex-hl">have been inspecting</span> the engine since early morning.<span class="ex-translate">Para montir sudah memeriksa mesin itu sejak pagi-pagi sekali.</span></span>
         <span class="ex-note">Subject: the mechanics (jamak) → have been</span>
@@ -458,6 +492,7 @@
         <span class="ex-sentence">The journalist <span class="ex-hl">has been investigating</span> the corruption scandal for months.<span class="ex-translate">Wartawan itu sudah menyelidiki skandal korupsi selama berbulan-bulan.</span></span>
         <span class="ex-note">Subject: the journalist (tunggal) → has been</span>
       </div>
+    </div>
     </div>
 
     <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
@@ -537,7 +572,9 @@
         <div class="section-subtitle">Penanda waktu + deteksi Present Perfect Continuous dalam satu langkah</div>
       </div>
     </div>
-    <div class="detect-box">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan Time Signal"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan Time Signal</span></button>
+      <div class="ex-body"><div class="detect-box">
       <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
       <div class="signal-grid" style="margin-bottom:16px;">
         <div class="signal-chip" style="font-size:12px; padding:6px 12px;">since</div>
@@ -560,6 +597,7 @@
       <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
         💡 Kata <strong style="color:var(--teal)">since</strong> (titik mula waktu) dan <strong style="color:var(--teal)">for</strong> (lama durasi) adalah penanda paling khas tense ini. Pertanyaan <strong style="color:var(--teal)">how long</strong> hampir selalu menuntut jawaban dalam Present Perfect Continuous.
       </div>
+    </div></div>
     </div>
   </div>
 
@@ -576,6 +614,15 @@
     </div>
   </div>
 
+  <div class="tense-nav">
+    <a class="tn-quiz" href="quiz.html?tense=04">Kerjakan Kuis Present Perfect Continuous</a>
+    <div class="tn-quiz-note">Selesaikan kuis agar kamu makin paham.</div>
+    <div class="tn-row">
+      <a class="tn-btn tn-back" href="03-present-perfect-tense.html"><span class="tn-dir">‹ Kembali</span><span class="tn-name">Present Perfect</span></a>
+      <a class="tn-btn tn-next" href="05-simple-past-tense.html"><span class="tn-dir">Selanjutnya ›</span><span class="tn-name">Simple Past</span></a>
+    </div>
+  </div>
+
 </div><!-- /.page -->
 
 <footer>
@@ -589,6 +636,24 @@
     const pct = total > 0 ? (scrolled / total) * 100 : 0;
     document.getElementById('progress-bar').style.width = pct + '%';
   });
+</script>
+
+<script>
+  (function(){
+    function setLabel(btn, open){ var lbl=btn.querySelector('.ex-tg-label'); var show=btn.getAttribute('data-show')||'Tampilkan Contoh'; lbl.textContent = open ? show.replace('Tampilkan','Sembunyikan') : show; }
+    var collapses = [].slice.call(document.querySelectorAll('.ex-collapse'));
+    collapses.forEach(function(c){ var b=c.querySelector('.ex-toggle'); if(b) b.addEventListener('click', function(){ setLabel(this, c.classList.toggle('open')); }); });
+    var ph = document.querySelectorAll('.pron-header');
+    for(var i=0;i<ph.length;i++){ ph[i].addEventListener('click', function(){ this.parentNode.classList.toggle('open'); }); }
+    var foldables = collapses.concat([].slice.call(document.querySelectorAll('.pron-item')));
+    function fold(c){ c.classList.remove('open'); var b=c.querySelector('.ex-toggle'); if(b) setLabel(b,false); }
+    function foldBelowViewport(){ var vh=window.innerHeight||document.documentElement.clientHeight; for(var i=0;i<foldables.length;i++){ var c=foldables[i]; if(c.classList.contains('open') && c.getBoundingClientRect().top>=vh) fold(c); } }
+    function foldAboveViewportIdle(){ var comp=0; for(var i=0;i<foldables.length;i++){ var c=foldables[i]; if(!c.classList.contains('open')) continue; var r=c.getBoundingClientRect(); if(r.bottom<=0){ var before=r.height; fold(c); comp+=(before-c.getBoundingClientRect().height); } } if(comp>0) window.scrollBy(0,-comp); }
+    var ticking=false, idleTimer=null;
+    function onScroll(){ if(!ticking){ ticking=true; window.requestAnimationFrame(function(){ foldBelowViewport(); ticking=false; }); } if(idleTimer) clearTimeout(idleTimer); idleTimer=setTimeout(foldAboveViewportIdle,160); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+  })();
 </script>
 </body>
 </html>
