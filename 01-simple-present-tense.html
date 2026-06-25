@@ -49,7 +49,8 @@
   .use-card-icon { font-size: 24px; margin-bottom: 10px; }
   .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
   .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 12px; padding: 4px 0 4px 10px; border-left: 2px solid var(--teal2); line-height: 1.5; }
+  .use-card-ex::before { content: "Contoh: "; font-style: normal; font-weight: 700; color: var(--muted); }
   .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
   .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
   .formula-row:last-child { border-bottom: none; }
@@ -147,25 +148,21 @@
     </div>
     <div class="use-grid">
       <div class="use-card">
-        <div class="use-card-icon">🔁</div>
         <div class="use-card-title">Kebiasaan & rutinitas</div>
         <div class="use-card-desc">Menggambarkan tindakan yang dilakukan secara berulang atau menjadi kebiasaan sehari-hari.</div>
         <div class="use-card-ex">"Maria waters her garden every morning."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">🌍</div>
         <div class="use-card-title">Fakta umum & kebenaran ilmiah</div>
         <div class="use-card-desc">Menyatakan fakta yang selalu benar, hukum alam, atau kebenaran ilmiah.</div>
         <div class="use-card-ex">"Water boils at one hundred degrees Celsius."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">🕒</div>
         <div class="use-card-title">Jadwal tetap</div>
         <div class="use-card-desc">Menunjukkan jadwal resmi seperti keberangkatan kereta, jam buka toko, atau acara terjadwal.</div>
         <div class="use-card-ex">"The museum opens at nine o'clock."</div>
       </div>
       <div class="use-card">
-        <div class="use-card-icon">💙</div>
         <div class="use-card-title">Keadaan & perasaan permanen</div>
         <div class="use-card-desc">Menggambarkan kondisi, perasaan, atau situasi yang bersifat tetap dan tidak berubah-ubah.</div>
         <div class="use-card-ex">"My grandfather loves classical music."</div>
