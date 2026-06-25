@@ -35,6 +35,12 @@
     'html[data-theme="light"] #__menuDrop a:hover,html[data-theme="light"] #__menuDrop button:hover{ background:#EEF2F9 !important; }' +
     'html[data-theme="light"] #__menuDrop #__logoutBtn{ color:#D64545 !important; }' +
     'html[data-theme="light"] #__menuDrop .__sep{ background:rgba(15,23,41,0.10) !important; }' +
+    // bottom navigation (mode terang)
+    'html[data-theme="light"] #__bnav{ background:rgba(255,255,255,0.92) !important; border-top-color:rgba(15,23,41,0.12) !important; }' +
+    'html[data-theme="light"] #__bnav a{ color:#5A647D !important; }' +
+    'html[data-theme="light"] #__bnav a.active{ color:#0D9488 !important; background:rgba(13,148,136,0.10) !important; }' +
+    // angkat tombol toggle agar tidak tertutup bottom nav
+    'html.__hasbnav #__themeBtn{ bottom:86px; }' +
     // shadow kartu lebih halus di mode terang
     'html[data-theme="light"] .card,html[data-theme="light"] .qcard,html[data-theme="light"] .panel,html[data-theme="light"] .row,html[data-theme="light"] .use-card,html[data-theme="light"] .key-box,html[data-theme="light"] .detect-box{ box-shadow:0 1px 3px rgba(15,23,41,.06); }' +
     // ---- Tombol toggle (elegan) ----

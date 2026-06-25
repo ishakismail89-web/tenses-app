@@ -19,7 +19,7 @@
     var session = res.data.session;
     if (!session) { location.replace('index.html'); return; }
     currentEmail = ((session.user && session.user.email) || '').trim().toLowerCase();
-    onReady(function () { addBar(); embedVideo(); revealAdminOnly(); });
+    onReady(function () { addBar(); addBottomNav(); embedVideo(); revealAdminOnly(); });
   });
 
   function onReady(fn) {
@@ -65,11 +65,8 @@
     var bar = document.createElement('div');
     bar.id = '__bar';
 
-    var id = tenseIdFromPath();
-    var items = '<a href="home.html">&#9776; Menu Utama</a>';
-    if (id) items += '<a href="quiz.html?tense=' + id + '">&#9998; Latihan Soal</a>';
-    if (isAdmin()) items += '<a href="admin.html">&#9881; Admin</a>';
-    items += '<div class="__sep"></div>';
+    var items = '';
+    if (isAdmin()) items += '<a href="admin.html">&#9881; Admin</a><div class="__sep"></div>';
     items += '<button type="button" id="__logoutBtn">&#9211; Keluar</button>';
 
     bar.innerHTML =
@@ -87,6 +84,50 @@
       await client.auth.signOut();
       location.replace('index.html');
     };
+  }
+
+  // ---------- Bottom navigation (Tenses / Irregular / Latihan) ----------
+  function activeSection() {
+    var f = (location.pathname.split('/').pop() || '').toLowerCase();
+    if (f === 'irregular-verbs.html') return 'verb';
+    if (f === 'quiz.html') return 'latihan';
+    if (f === 'home.html' || f === '' || /^\d{2}-.*tense\.html$/.test(f)) return 'tenses';
+    return '';
+  }
+
+  function addBottomNav() {
+    if (document.getElementById('__bnav')) return;
+
+    if (!document.getElementById('__bnavStyle')) {
+      var st = document.createElement('style');
+      st.id = '__bnavStyle';
+      st.textContent =
+        'html.__hasbnav body{ padding-bottom:calc(76px + env(safe-area-inset-bottom,0px)); }' +
+        '#__bnav{ position:fixed; left:0; right:0; bottom:0; z-index:9998; display:flex; justify-content:space-around; align-items:stretch;' +
+          ' background:rgba(18,26,46,0.92); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-top:1px solid #26324d;' +
+          ' padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px)); }' +
+        '#__bnav a{ flex:1; max-width:160px; display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 4px; text-decoration:none;' +
+          ' color:#8A97B0; font:600 11px/1 -apple-system,sans-serif; border-radius:13px; transition:color .15s, background .15s; }' +
+        '#__bnav a:hover{ color:#C7D0E0; }' +
+        '#__bnav a.active{ color:#2DD4BF; background:rgba(45,212,191,0.10); }' +
+        '#__bnav svg{ width:23px; height:23px; }';
+      document.head.appendChild(st);
+    }
+
+    var ICON = {
+      tenses: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+      verb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+      latihan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>'
+    };
+    var act = activeSection();
+    var nav = document.createElement('nav');
+    nav.id = '__bnav';
+    nav.innerHTML =
+      '<a href="home.html" class="' + (act === 'tenses' ? 'active' : '') + '">' + ICON.tenses + '<span>Tenses</span></a>' +
+      '<a href="irregular-verbs.html" class="' + (act === 'verb' ? 'active' : '') + '">' + ICON.verb + '<span>Irregular</span></a>' +
+      '<a href="quiz.html" class="' + (act === 'latihan' ? 'active' : '') + '">' + ICON.latihan + '<span>Latihan</span></a>';
+    document.body.appendChild(nav);
+    document.documentElement.classList.add('__hasbnav');
   }
 
   // ---------- Embed video di halaman tense ----------
