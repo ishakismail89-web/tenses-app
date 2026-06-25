@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Continuous Tense – Bahan Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:    #0F1729;
+    --navy2:   #1A2540;
+    --navy3:   #243356;
+    --teal:    #2DD4BF;
+    --teal2:   #0F9688;
+    --amber:   #F59E0B;
+    --red:     #F87171;
+    --green:   #4ADE80;
+    --white:   #F0EDE6;
+    --muted:   #8A97B0;
+    --border:  rgba(255,255,255,0.07);
+  }
+  html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+  body { background: var(--navy); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; min-height: 100vh; position: relative; }
+  #progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--teal), var(--amber)); z-index: 999; }
+  nav { position: sticky; top: 0; background: rgba(15,23,41,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .nav-badge { background: var(--teal); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+  nav span { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .hero { margin-bottom: 56px; }
+  .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 7vw, 56px); font-weight: 700; line-height: 1.1; color: var(--teal); margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-desc { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+  .hero-formula-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: var(--navy2); border: 1px solid var(--teal); border-radius: 12px; padding: 12px 20px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; }
+  .pill-s { color: var(--amber); }
+  .pill-op { color: var(--muted); font-size: 13px; }
+  .pill-hv { color: var(--teal); }
+  .pill-v3 { color: #A78BFA; }
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .section-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: var(--navy2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; color: var(--teal); margin-top: 4px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--teal); line-height: 1.3; }
+  .section-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .use-grid { grid-template-columns: 1fr; } }
+  .use-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .use-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
+  .formula-row:last-child { border-bottom: none; }
+  .formula-type { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; text-align: center; }
+  .type-pos { background: rgba(74,222,128,0.15); color: var(--green); }
+  .type-neg { background: rgba(248,113,113,0.15); color: var(--red); }
+  .type-que { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .formula-text { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ft-s { color: var(--amber); }
+  .ft-hv { color: var(--teal); }
+  .ft-not { color: var(--red); }
+  .ft-v3 { color: #A78BFA; }
+  .ft-qm { color: var(--muted); }
+  .signal-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .signal-chip { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; background: var(--navy2); border: 1px solid var(--teal2); color: var(--teal); padding: 8px 16px; border-radius: 40px; }
+  .examples-list { display: flex; flex-direction: column; gap: 12px; }
+  .example-item { background: var(--navy2); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 0 12px 12px 0; padding: 16px 20px; font-size: 15px; line-height: 1.5; }
+  .ex-hl { color: var(--teal); font-weight: 600; }
+  .ex-note { display: block; font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic; }
+  .ex-sentence { display: block; }
+  .ex-translate { display: block; font-size: 13px; color: #7FE3D6; margin-top: 4px; font-style: italic; }
+  .table-wrap { border-radius: 16px; overflow: hidden; }
+  .sentence-table { width: 100%; border-collapse: collapse; }
+  .sentence-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .sentence-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); position: relative; }
+  .td-type { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .que { color: var(--amber); }
+  .td-sen { color: var(--white); line-height: 1.5; }
+  .error-pair { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+  .error-row { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .error-row:last-child { border-bottom: none; }
+  .err-icon { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+  .err-icon.bad { background: rgba(248,113,113,0.15); color: var(--red); }
+  .err-icon.good { background: rgba(74,222,128,0.15); color: var(--green); }
+  .err-text { font-size: 14px; line-height: 1.5; }
+  .err-sentence { font-weight: 600; margin-bottom: 4px; }
+  .err-explain { font-size: 12px; color: var(--muted); }
+  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-good { color: var(--green); }
+  .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
+  .key-points { display: flex; flex-direction: column; gap: 12px; }
+  .key-point { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; color: var(--white); }
+  .key-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 8px; }
+  .detect-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .detect-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .detect-examples { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .detect-ex { font-size: 13px; color: var(--muted); padding-left: 16px; border-left: 2px solid var(--navy3); line-height: 1.6; }
+  .detect-ex strong { color: var(--teal); font-weight: 600; }
+  .contraction-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
+  .contraction-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .contraction-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); color: var(--white); }
+  .contraction-full { color: var(--muted); }
+  .contraction-arrow { color: var(--muted); font-size: 12px; padding: 0 6px; }
+  .contraction-short { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--teal); }
+  footer { text-align: center; padding: 32px 24px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="guard.js"></script>
+<script src="theme.js"></script>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-badge">Grammar</div>
+  <span>Present Continuous Tense</span>
+</nav>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Tenses · English Grammar</div>
+    <h1>Present <em>Continuous</em><br>Tense</h1>
+    <p class="hero-desc">Pelajari kapan, bagaimana, dan mengapa tense ini digunakan — lengkap dengan rumus, sinyal waktu, contraction, dan kesalahan yang harus dihindari.</p>
+    <div class="hero-formula-pill">
+      <span class="pill-s">S</span>
+      <span class="pill-op">+</span>
+      <span class="pill-hv">am/is/are</span>
+      <span class="pill-op">+</span>
+      <span class="pill-v3">V-ing</span>
+    </div>
+  </div>
+
+  <!-- 1. KEGUNAAN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Kegunaan</div>
+        <div class="section-subtitle">Kapan tense ini dipakai?</div>
+      </div>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-card-icon">⏳</div>
+        <div class="use-card-title">Aksi sedang berlangsung sekarang</div>
+        <div class="use-card-desc">Menggambarkan tindakan yang benar-benar terjadi pada saat berbicara, tepat di momen ini.</div>
+        <div class="use-card-ex">"The children are painting a giant mural right now."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">📆</div>
+        <div class="use-card-title">Aksi sementara di periode ini</div>
+        <div class="use-card-desc">Tindakan yang berlangsung di sekitar masa kini namun bersifat sementara, belum tentu sedang terjadi detik ini.</div>
+        <div class="use-card-ex">"My sister is studying marine biology this semester."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">🗓️</div>
+        <div class="use-card-title">Rencana masa depan yang sudah diatur</div>
+        <div class="use-card-desc">Menyatakan janji atau jadwal masa depan yang sudah direncanakan dan disepakati.</div>
+        <div class="use-card-ex">"We are hosting a charity dinner next Friday."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">📈</div>
+        <div class="use-card-title">Tren atau perubahan yang terjadi</div>
+        <div class="use-card-desc">Menggambarkan kecenderungan atau perubahan bertahap yang sedang berkembang akhir-akhir ini.</div>
+        <div class="use-card-ex">"Electric cars are becoming cheaper these days."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. RUMUS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Rumus Kalimat</div>
+        <div class="section-subtitle">Pola untuk semua jenis kalimat</div>
+      </div>
+    </div>
+    <div class="formula-block">
+      <div class="formula-row">
+        <div class="formula-type type-pos">(+) Positif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">am/is/are</span><span class="ft-qm">+</span><span class="ft-v3">V-ing</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-neg">(−) Negatif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">am/is/are</span><span class="ft-not">not</span><span class="ft-qm">+</span><span class="ft-v3">V-ing</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-que">(?) Tanya</div>
+        <div class="formula-text">
+          <span class="ft-hv">Am/Is/Are</span><span class="ft-qm">+</span><span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-v3">V-ing</span><span class="ft-qm">?</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px; font-size:13px; color:var(--muted); padding:0 4px;">
+      <span style="color:var(--amber);">■</span> S = Subjek &nbsp;|&nbsp;
+      <span style="color:var(--teal);">■</span> am/is/are = to be (menyesuaikan subjek) &nbsp;|&nbsp;
+      <span style="color:#A78BFA;">■</span> V-ing = kata kerja + akhiran -ing (present participle)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. CONTOH KALIMAT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Contoh Kalimat</div>
+        <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
+      </div>
+    </div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">Listen! The neighbors <span class="ex-hl">are rehearsing</span> a jazz song upstairs.<span class="ex-translate">Dengar! Para tetangga sedang melatih sebuah lagu jazz di lantai atas.</span></span>
+        <span class="ex-note">Aksi yang sedang berlangsung tepat saat ini (ditandai "Listen!")</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">My brother <span class="ex-hl">is training</span> for a marathon these days.<span class="ex-translate">Saudara laki-lakiku sedang berlatih untuk maraton akhir-akhir ini.</span></span>
+        <span class="ex-note">Aktivitas sementara di periode sekarang, belum tentu detik ini</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The committee <span class="ex-hl">is opening</span> a new library next month.<span class="ex-translate">Panitia akan membuka sebuah perpustakaan baru bulan depan.</span></span>
+        <span class="ex-note">Rencana masa depan yang sudah diatur dan dijadwalkan</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">More tourists <span class="ex-hl">are visiting</span> the old castle every year.<span class="ex-translate">Semakin banyak wisatawan mengunjungi kastil tua itu setiap tahun.</span></span>
+        <span class="ex-note">Tren atau perubahan yang sedang berkembang</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">Why <span class="ex-hl">is</span> that machine <span class="ex-hl">making</span> such a loud noise right now?<span class="ex-translate">Mengapa mesin itu mengeluarkan suara sekeras itu sekarang?</span></span>
+        <span class="ex-note">Pertanyaan tentang aksi yang sedang terjadi di momen ini</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. POLA LENGKAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Positif · Negatif · Tanya</div>
+        <div class="section-subtitle">Semua pronoun — dari I sampai They</div>
+      </div>
+    </div>
+    <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; padding-left:4px;">
+      ✅ AM / IS / ARE — Semua Subjek (I · He · She · It · You · We · They)
+    </div>
+    <div style="margin-bottom:12px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:12px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Aturan to be:</strong> gunakan <strong style="color:var(--teal)">am</strong> untuk <strong style="color:var(--teal)">I</strong>; <strong style="color:var(--teal)">is</strong> untuk <strong style="color:var(--teal)">he / she / it</strong>; dan <strong style="color:var(--teal)">are</strong> untuk <strong style="color:var(--teal)">you / we / they</strong>. Setelah to be, kata kerja selalu ditambah <strong style="color:#A78BFA">-ing</strong>.
+    </div>
+    <div class="table-wrap" style="margin-bottom:20px;">
+    <table class="sentence-table">
+      <thead><tr><th style="width:60px;">Pronoun</th><th style="width:30px;">Tipe</th><th>Kalimat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">I</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--teal);">am writing</strong> a letter to my grandmother.<span class="ex-translate">Saya sedang menulis surat untuk nenek saya.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--red);">am not writing</strong> a letter to my grandmother.<span class="ex-translate">Saya tidak sedang menulis surat untuk nenek saya.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Am</strong> I writing a letter to my grandmother?<span class="ex-translate">Apakah saya sedang menulis surat untuk nenek saya?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">He</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--teal);">is repairing</strong> the broken bicycle.<span class="ex-translate">Dia sedang memperbaiki sepeda yang rusak.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--red);">is not repairing</strong> the broken bicycle.<span class="ex-translate">Dia tidak sedang memperbaiki sepeda yang rusak.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Is</strong> he repairing the broken bicycle?<span class="ex-translate">Apakah dia sedang memperbaiki sepeda yang rusak?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">She</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--teal);">is baking</strong> a chocolate cake for the party.<span class="ex-translate">Dia sedang memanggang kue cokelat untuk pesta.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--red);">is not baking</strong> a chocolate cake for the party.<span class="ex-translate">Dia tidak sedang memanggang kue cokelat untuk pesta.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Is</strong> she baking a chocolate cake for the party?<span class="ex-translate">Apakah dia sedang memanggang kue cokelat untuk pesta?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">It</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--teal);">is raining</strong> heavily outside.<span class="ex-translate">Hujan sedang turun deras di luar.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--red);">is not raining</strong> heavily outside.<span class="ex-translate">Hujan tidak sedang turun deras di luar.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Is</strong> it raining heavily outside?<span class="ex-translate">Apakah hujan sedang turun deras di luar?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">You</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--teal);">are wearing</strong> a beautiful silk scarf.<span class="ex-translate">Kamu sedang memakai syal sutra yang indah.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--red);">are not wearing</strong> a beautiful silk scarf.<span class="ex-translate">Kamu tidak sedang memakai syal sutra yang indah.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Are</strong> you wearing a beautiful silk scarf?<span class="ex-translate">Apakah kamu sedang memakai syal sutra yang indah?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">We</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--teal);">are planting</strong> young mango trees in the garden.<span class="ex-translate">Kami sedang menanam pohon mangga muda di kebun.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--red);">are not planting</strong> young mango trees in the garden.<span class="ex-translate">Kami tidak sedang menanam pohon mangga muda di kebun.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Are</strong> we planting young mango trees in the garden?<span class="ex-translate">Apakah kami sedang menanam pohon mangga muda di kebun?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">They</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--teal);">are filming</strong> a documentary about coral reefs.<span class="ex-translate">Mereka sedang merekam film dokumenter tentang terumbu karang.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--red);">are not filming</strong> a documentary about coral reefs.<span class="ex-translate">Mereka tidak sedang merekam film dokumenter tentang terumbu karang.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Are</strong> they filming a documentary about coral reefs?<span class="ex-translate">Apakah mereka sedang merekam film dokumenter tentang terumbu karang?</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:16px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:16px 20px; font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
+      <div><span style="color:var(--teal); font-weight:700;">AM</span> → I</div>
+      <div><span style="color:var(--teal); font-weight:700;">IS</span> → He · She · It</div>
+      <div><span style="color:var(--teal); font-weight:700;">ARE</span> → You · We · They</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. CONTRACTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Contraction (Bentuk Singkat)</div>
+        <div class="section-subtitle">Versi singkat yang sering dipakai dalam percakapan sehari-hari</div>
+      </div>
+    </div>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); padding-left:4px;">Positif — 'm / 's / 're</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I am</td><td class="contraction-arrow">→</td><td class="contraction-short">I'm</td></tr>
+        <tr><td class="contraction-full">he is</td><td class="contraction-arrow">→</td><td class="contraction-short">he's</td></tr>
+        <tr><td class="contraction-full">she is</td><td class="contraction-arrow">→</td><td class="contraction-short">she's</td></tr>
+        <tr><td class="contraction-full">it is</td><td class="contraction-arrow">→</td><td class="contraction-short">it's</td></tr>
+        <tr><td class="contraction-full">you are</td><td class="contraction-arrow">→</td><td class="contraction-short">you're</td></tr>
+        <tr><td class="contraction-full">we are</td><td class="contraction-arrow">→</td><td class="contraction-short">we're</td></tr>
+        <tr><td class="contraction-full">they are</td><td class="contraction-arrow">→</td><td class="contraction-short">they're</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); padding-left:4px;">Negatif — isn't / aren't</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">he is not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">he isn't</td></tr>
+        <tr><td class="contraction-full">she is not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">she isn't</td></tr>
+        <tr><td class="contraction-full">it is not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">it isn't</td></tr>
+        <tr><td class="contraction-full">you are not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">you aren't</td></tr>
+        <tr><td class="contraction-full">we are not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">we aren't</td></tr>
+        <tr><td class="contraction-full">they are not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">they aren't</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">I'm</span> cooking a spicy curry for dinner tonight.<span class="ex-translate">Saya sedang memasak kari pedas untuk makan malam ini.</span></span>
+        <span class="ex-note">= I am cooking a spicy curry for dinner tonight.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">He's</span> fixing the leaking kitchen tap at the moment.<span class="ex-translate">Dia sedang memperbaiki keran dapur yang bocor saat ini.</span></span>
+        <span class="ex-note">= He is fixing the leaking kitchen tap at the moment.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">She's</span> sketching a portrait of her favorite singer.<span class="ex-translate">Dia sedang menggambar potret penyanyi favoritnya.</span></span>
+        <span class="ex-note">= She is sketching a portrait of her favorite singer.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">It's</span> charging the spare battery in the corner.<span class="ex-translate">Perangkat itu sedang mengisi daya baterai cadangan di sudut.</span></span>
+        <span class="ex-note">= It is charging the spare battery in the corner.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">You're</span> carrying far too many shopping bags.<span class="ex-translate">Kamu sedang membawa terlalu banyak kantong belanja.</span></span>
+        <span class="ex-note">= You are carrying far too many shopping bags.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">We're</span> decorating the hall for the graduation ceremony.<span class="ex-translate">Kami sedang menghias aula untuk upacara kelulusan.</span></span>
+        <span class="ex-note">= We are decorating the hall for the graduation ceremony.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">They aren't</span> following the original travel itinerary.<span class="ex-translate">Mereka tidak sedang mengikuti jadwal perjalanan yang semula.</span></span>
+        <span class="ex-note">= They are not following the original travel itinerary.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">The volunteers <span class="ex-hl">are cleaning</span> the riverbank this weekend.<span class="ex-translate">Para relawan sedang membersihkan tepi sungai akhir pekan ini.</span></span>
+        <span class="ex-note">Subject: the volunteers — bukan pronoun (pakai are)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The old printer <span class="ex-hl">is jamming</span> again during the report.<span class="ex-translate">Printer tua itu sedang macet lagi saat mencetak laporan.</span></span>
+        <span class="ex-note">Subject: the old printer — tunggal (pakai is)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The orchestra <span class="ex-hl">is tuning</span> their instruments before the show.<span class="ex-translate">Orkestra itu sedang menyetel alat musik mereka sebelum pertunjukan.</span></span>
+        <span class="ex-note">Subject: the orchestra — tunggal (pakai is)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The students <span class="ex-hl">are debating</span> a controversial topic in class.<span class="ex-translate">Para siswa sedang memperdebatkan topik kontroversial di kelas.</span></span>
+        <span class="ex-note">Subject: the students — jamak (pakai are)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">My neighbor's dog <span class="ex-hl">is digging</span> a hole near the fence.<span class="ex-translate">Anjing tetanggaku sedang menggali lubang di dekat pagar.</span></span>
+        <span class="ex-note">Subject: my neighbor's dog — tunggal (pakai is)</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Tips:</strong> Contraction seperti <strong style="color:var(--teal)">I'm</strong>, <strong style="color:var(--teal)">she's</strong>, dan <strong style="color:var(--red)">aren't</strong> sangat umum dalam <strong style="color:var(--teal)">percakapan sehari-hari</strong>. Untuk tulisan formal, gunakan bentuk lengkap (<strong style="color:var(--teal)">am / is / are not</strong>). Ingat: setelah to be, kata kerja selalu berakhiran <strong style="color:#A78BFA">-ing</strong>.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. KESALAHAN UMUM -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">Kesalahan Umum</div>
+        <div class="section-subtitle">Error yang sering terjadi dan cara menghindarinya</div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">He reading a book in the library.</div>
+          <div class="err-explain">Salah: lupa memakai to be — Present Continuous wajib ada am/is/are sebelum V-ing</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">He is reading a book in the library.</div>
+          <div class="err-explain">Benar: is + reading (to be tidak boleh hilang)</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">I am knowing the answer to this riddle.</div>
+          <div class="err-explain">Salah: "know" adalah stative verb (kata kerja keadaan) yang tidak dipakai dalam bentuk continuous</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">I know the answer to this riddle.</div>
+          <div class="err-explain">Benar: stative verb seperti know, like, want, believe memakai Simple Present</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">They is playing football in the field.</div>
+          <div class="err-explain">Salah: subjek jamak "they" memakai "are", bukan "is"</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">They are playing football in the field.</div>
+          <div class="err-explain">Benar: they + are + playing (sesuaikan to be dengan subjek)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. TIME SIGNAL & CARA CEPAT MENGENALI -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">Time Signal & Cara Cepat Mengenali</div>
+        <div class="section-subtitle">Penanda waktu + deteksi Present Continuous dalam satu langkah</div>
+      </div>
+    </div>
+    <div class="detect-box">
+      <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
+      <div class="signal-grid" style="margin-bottom:16px;">
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">now</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">right now</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">at the moment</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">currently</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">Look!</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">Listen!</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">these days</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">at present</div>
+      </div>
+      <div style="font-size:13px; color:var(--muted); margin-bottom:16px;">Jika salah satu muncul + ada <strong style="color:var(--teal)">am/is/are</strong> + <strong style="color:var(--teal)">V-ing</strong> → Present Continuous Tense</div>
+      <div class="detect-examples">
+        <div class="detect-ex"><strong>Right now</strong>, the chef is grilling fresh salmon for the guests.</div>
+        <div class="detect-ex"><strong>Look!</strong> A hot air balloon is drifting over the valley.</div>
+        <div class="detect-ex">The interns are organizing the archive <strong>at the moment</strong>.</div>
+        <div class="detect-ex"><strong>These days</strong>, fewer people are buying printed newspapers.</div>
+        <div class="detect-ex">The mechanic is inspecting my engine <strong>currently</strong>.</div>
+      </div>
+      <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
+        💡 Seruan <strong style="color:var(--teal)">Look!</strong> dan <strong style="color:var(--teal)">Listen!</strong> hampir selalu menandai aksi yang sedang berlangsung saat itu juga. Sementara <strong style="color:var(--teal)">these days</strong> dan <strong style="color:var(--teal)">at present</strong> menandai situasi sementara atau tren yang sedang berkembang.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- KEY CONCEPT -->
+  <div class="key-box">
+    <h3>👉 Kunci Utama</h3>
+    <div class="key-points">
+      <div class="key-point"><div class="key-dot"></div><div>Selalu gunakan pola <strong>am/is/are + V-ing</strong> — to be tidak boleh hilang dan kata kerja wajib berakhiran -ing.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Cocokkan to be dengan subjek: <strong>am</strong> untuk I, <strong>is</strong> untuk he/she/it, dan <strong>are</strong> untuk you/we/they.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Present Continuous menekankan aksi yang <strong>sedang berlangsung sekarang</strong>, bersifat sementara, atau rencana masa depan yang sudah diatur.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Hindari stative verb (know, like, want, believe) dalam bentuk continuous. Contraction umum: <strong>I'm, she's, they're, isn't, aren't</strong>.</div></div>
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<footer>
+  Present Continuous Tense · English Grammar · Bahan Belajar
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

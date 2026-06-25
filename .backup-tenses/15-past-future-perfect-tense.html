@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Future Perfect Tense – Bahan Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:    #0F1729;
+    --navy2:   #1A2540;
+    --navy3:   #243356;
+    --teal:    #2DD4BF;
+    --teal2:   #0F9688;
+    --amber:   #F59E0B;
+    --red:     #F87171;
+    --green:   #4ADE80;
+    --white:   #F0EDE6;
+    --muted:   #8A97B0;
+    --border:  rgba(255,255,255,0.07);
+  }
+  html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+  body { background: var(--navy); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; min-height: 100vh; position: relative; }
+  #progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--teal), var(--amber)); z-index: 999; }
+  nav { position: sticky; top: 0; background: rgba(15,23,41,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .nav-badge { background: var(--teal); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+  nav span { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .hero { margin-bottom: 56px; }
+  .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 7vw, 56px); font-weight: 700; line-height: 1.1; color: var(--teal); margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-desc { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+  .hero-formula-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: var(--navy2); border: 1px solid var(--teal); border-radius: 12px; padding: 12px 20px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; }
+  .pill-s { color: var(--amber); }
+  .pill-op { color: var(--muted); font-size: 13px; }
+  .pill-hv { color: var(--teal); }
+  .pill-v3 { color: #A78BFA; }
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .section-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: var(--navy2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; color: var(--teal); margin-top: 4px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--teal); line-height: 1.3; }
+  .section-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .use-grid { grid-template-columns: 1fr; } }
+  .use-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .use-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
+  .formula-row:last-child { border-bottom: none; }
+  .formula-type { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; text-align: center; }
+  .type-pos { background: rgba(74,222,128,0.15); color: var(--green); }
+  .type-neg { background: rgba(248,113,113,0.15); color: var(--red); }
+  .type-que { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .formula-text { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ft-s { color: var(--amber); }
+  .ft-hv { color: var(--teal); }
+  .ft-not { color: var(--red); }
+  .ft-v3 { color: #A78BFA; }
+  .ft-qm { color: var(--muted); }
+  .signal-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .signal-chip { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; background: var(--navy2); border: 1px solid var(--teal2); color: var(--teal); padding: 8px 16px; border-radius: 40px; }
+  .examples-list { display: flex; flex-direction: column; gap: 12px; }
+  .example-item { background: var(--navy2); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 0 12px 12px 0; padding: 16px 20px; font-size: 15px; line-height: 1.5; }
+  .ex-hl { color: var(--teal); font-weight: 600; }
+  .ex-note { display: block; font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic; }
+  .ex-sentence { display: block; }
+  .ex-translate { display: block; font-size: 13px; color: #7FE3D6; margin-top: 4px; font-style: italic; }
+  .table-wrap { border-radius: 16px; overflow: hidden; }
+  .sentence-table { width: 100%; border-collapse: collapse; }
+  .sentence-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .sentence-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); position: relative; }
+  .td-type { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .que { color: var(--amber); }
+  .td-sen { color: var(--white); line-height: 1.5; }
+  .error-pair { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+  .error-row { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .error-row:last-child { border-bottom: none; }
+  .err-icon { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+  .err-icon.bad { background: rgba(248,113,113,0.15); color: var(--red); }
+  .err-icon.good { background: rgba(74,222,128,0.15); color: var(--green); }
+  .err-text { font-size: 14px; line-height: 1.5; }
+  .err-sentence { font-weight: 600; margin-bottom: 4px; }
+  .err-explain { font-size: 12px; color: var(--muted); }
+  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-good { color: var(--green); }
+  .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
+  .key-points { display: flex; flex-direction: column; gap: 12px; }
+  .key-point { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; color: var(--white); }
+  .key-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 8px; }
+  .detect-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .detect-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .detect-examples { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .detect-ex { font-size: 13px; color: var(--muted); padding-left: 16px; border-left: 2px solid var(--navy3); line-height: 1.6; }
+  .detect-ex strong { color: var(--teal); font-weight: 600; }
+  .contraction-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
+  .contraction-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .contraction-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); color: var(--white); }
+  .contraction-full { color: var(--muted); }
+  .contraction-arrow { color: var(--muted); font-size: 12px; padding: 0 6px; }
+  .contraction-short { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--teal); }
+  footer { text-align: center; padding: 32px 24px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="guard.js"></script>
+<script src="theme.js"></script>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-badge">Grammar</div>
+  <span>Past Future Perfect Tense</span>
+</nav>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Tenses · English Grammar</div>
+    <h1>Past Future <em>Perfect</em><br>Tense</h1>
+    <p class="hero-desc">Pelajari kapan, bagaimana, dan mengapa tense ini digunakan — lengkap dengan rumus, sinyal waktu, contraction, dan kesalahan yang harus dihindari.</p>
+    <div class="hero-formula-pill">
+      <span class="pill-s">S</span>
+      <span class="pill-op">+</span>
+      <span class="pill-hv">would have</span>
+      <span class="pill-op">+</span>
+      <span class="pill-v3">V3 (Past Participle)</span>
+    </div>
+  </div>
+
+  <!-- 1. KEGUNAAN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Kegunaan</div>
+        <div class="section-subtitle">Kapan tense ini dipakai?</div>
+      </div>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-card-icon">⏳</div>
+        <div class="use-card-title">Aksi yang akan sudah selesai sebelum titik masa depan — dilihat dari masa lalu</div>
+        <div class="use-card-desc">Menggambarkan tindakan yang (saat itu) diperkirakan akan sudah tuntas sebelum suatu titik waktu, dilihat dari sudut pandang masa lalu.</div>
+        <div class="use-card-ex">"She knew she would have repaired the engine by dawn."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">🔀</div>
+        <div class="use-card-title">Hasil pada conditional type 3</div>
+        <div class="use-card-desc">Menyatakan hasil pengandaian yang tidak terjadi: if + had + V3, ... would have + V3.</div>
+        <div class="use-card-ex">"If they had left earlier, they would have caught the train."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">🗣️</div>
+        <div class="use-card-title">Reported speech dari Future Perfect</div>
+        <div class="use-card-desc">Saat kalimat "will have + V3" diceritakan kembali, "will" berubah menjadi "would".</div>
+        <div class="use-card-ex">"He said he would have painted the fence by Sunday."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">💭</div>
+        <div class="use-card-title">Penyesalan / pengandaian tentang masa lalu</div>
+        <div class="use-card-desc">Mengungkapkan sesuatu yang seharusnya terjadi tetapi tidak, sebagai penyesalan atas masa lalu.</div>
+        <div class="use-card-ex">"I would have forgiven the mistake under different circumstances."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. RUMUS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Rumus Kalimat</div>
+        <div class="section-subtitle">Pola untuk semua jenis kalimat</div>
+      </div>
+    </div>
+    <div class="formula-block">
+      <div class="formula-row">
+        <div class="formula-type type-pos">(+) Positif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">would have</span><span class="ft-qm">+</span><span class="ft-v3">V3</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-neg">(−) Negatif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">would</span><span class="ft-not">not</span><span class="ft-hv">have</span><span class="ft-qm">+</span><span class="ft-v3">V3</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-que">(?) Tanya</div>
+        <div class="formula-text">
+          <span class="ft-hv">Would</span><span class="ft-qm">+</span><span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">have</span><span class="ft-qm">+</span><span class="ft-v3">V3</span><span class="ft-qm">?</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px; font-size:13px; color:var(--muted); padding:0 4px;">
+      <span style="color:var(--amber);">■</span> S = Subjek &nbsp;|&nbsp;
+      <span style="color:var(--teal);">■</span> would have = auxiliary verb (sama untuk semua subjek) &nbsp;|&nbsp;
+      <span style="color:#A78BFA;">■</span> V3 = past participle (bentuk ketiga kata kerja)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. CONTOH KALIMAT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Contoh Kalimat</div>
+        <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
+      </div>
+    </div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">She was certain that by midnight she <span class="ex-hl">would have memorized</span> the entire speech.<span class="ex-translate">Dia yakin bahwa pada tengah malam dia sudah menghafal seluruh pidato itu.</span></span>
+        <span class="ex-note">Aksi yang akan sudah selesai sebelum titik masa depan, dilihat dari masa lalu</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">If the rescuers had arrived sooner, they <span class="ex-hl">would have saved</span> the stranded climbers.<span class="ex-translate">Seandainya para penyelamat tiba lebih cepat, mereka pasti sudah menyelamatkan para pendaki yang terjebak.</span></span>
+        <span class="ex-note">Hasil pada conditional type 3 (if + had + V3)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The manager promised that the warehouse <span class="ex-hl">would have shipped</span> every order <span class="ex-hl">by then</span>.<span class="ex-translate">Manajer berjanji bahwa gudang itu sudah mengirimkan setiap pesanan pada saat itu.</span></span>
+        <span class="ex-note">Reported speech dari Future Perfect (will have → would have)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">With a little more patience, he <span class="ex-hl">would have understood</span> her decision completely.<span class="ex-translate">Dengan sedikit lebih sabar, dia pasti sudah memahami keputusannya sepenuhnya.</span></span>
+        <span class="ex-note">Penyesalan / pengandaian tentang masa lalu</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">Would</span> the volunteers <span class="ex-hl">have planted</span> all the trees by the next day?<span class="ex-translate">Apakah para relawan sudah menanam semua pohon pada keesokan harinya?</span></span>
+        <span class="ex-note">Bentuk pertanyaan: Would + S + have + V3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. POLA LENGKAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Positif · Negatif · Tanya</div>
+        <div class="section-subtitle">Semua pronoun — dari I sampai They</div>
+      </div>
+    </div>
+    <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; padding-left:4px;">
+      ✅ WOULD HAVE — Semua Subjek (I · He · She · It · You · We · They)
+    </div>
+    <div style="margin-bottom:12px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:12px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Aturan auxiliary:</strong> Past Future Perfect memakai <strong style="color:var(--teal)">would have</strong> untuk <strong style="color:var(--teal)">semua subjek</strong> — tidak ada perbedaan bentuk antara I, he, she, it, you, we, they. Kata kerja selalu dalam bentuk <strong style="color:#A78BFA">V3 (past participle)</strong>.
+    </div>
+    <div class="table-wrap" style="margin-bottom:20px;">
+    <table class="sentence-table">
+      <thead><tr><th style="width:60px;">Pronoun</th><th style="width:30px;">Tipe</th><th>Kalimat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">I</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--teal);">would have repaired</strong> the leaking roof before the storm hit.<span class="ex-translate">Saya pasti sudah memperbaiki atap yang bocor sebelum badai datang.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--red);">would not have repaired</strong> the leaking roof before the storm hit.<span class="ex-translate">Saya tidak akan memperbaiki atap yang bocor sebelum badai datang.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> I have repaired the leaking roof before the storm hit?<span class="ex-translate">Apakah saya sudah memperbaiki atap yang bocor sebelum badai datang?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">He</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--teal);">would have memorized</strong> the poem by the rehearsal.<span class="ex-translate">Dia pasti sudah menghafal puisi itu pada saat gladi resik.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--red);">would not have memorized</strong> the poem by the rehearsal.<span class="ex-translate">Dia tidak akan menghafal puisi itu pada saat gladi resik.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> he have memorized the poem by the rehearsal?<span class="ex-translate">Apakah dia sudah menghafal puisi itu pada saat gladi resik?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">She</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--teal);">would have harvested</strong> the rice field before the flood.<span class="ex-translate">Dia pasti sudah memanen sawah itu sebelum banjir.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--red);">would not have harvested</strong> the rice field before the flood.<span class="ex-translate">Dia tidak akan memanen sawah itu sebelum banjir.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> she have harvested the rice field before the flood?<span class="ex-translate">Apakah dia sudah memanen sawah itu sebelum banjir?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">It</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--teal);">would have charged</strong> the battery fully by morning.<span class="ex-translate">Alat itu pasti sudah mengisi baterai penuh pada pagi hari.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--red);">would not have charged</strong> the battery fully by morning.<span class="ex-translate">Alat itu tidak akan mengisi baterai penuh pada pagi hari.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> it have charged the battery fully by morning?<span class="ex-translate">Apakah alat itu sudah mengisi baterai penuh pada pagi hari?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">You</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--teal);">would have translated</strong> the document before the client called.<span class="ex-translate">Kamu pasti sudah menerjemahkan dokumen itu sebelum klien menelepon.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--red);">would not have translated</strong> the document before the client called.<span class="ex-translate">Kamu tidak akan menerjemahkan dokumen itu sebelum klien menelepon.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> you have translated the document before the client called?<span class="ex-translate">Apakah kamu sudah menerjemahkan dokumen itu sebelum klien menelepon?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">We</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--teal);">would have rehearsed</strong> the whole play by that time.<span class="ex-translate">Kami pasti sudah berlatih seluruh drama itu pada saat itu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--red);">would not have rehearsed</strong> the whole play by that time.<span class="ex-translate">Kami tidak akan berlatih seluruh drama itu pada saat itu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> we have rehearsed the whole play by that time?<span class="ex-translate">Apakah kami sudah berlatih seluruh drama itu pada saat itu?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">They</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--teal);">would have restored</strong> the old temple before the festival.<span class="ex-translate">Mereka pasti sudah memugar candi tua itu sebelum festival.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--red);">would not have restored</strong> the old temple before the festival.<span class="ex-translate">Mereka tidak akan memugar candi tua itu sebelum festival.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Would</strong> they have restored the old temple before the festival?<span class="ex-translate">Apakah mereka sudah memugar candi tua itu sebelum festival?</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:16px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:16px 20px; font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
+      <div><span style="color:var(--teal); font-weight:700;">WOULD HAVE</span> &nbsp;→&nbsp; I, He, She, It, You, We, They (semua subjek)</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. CONTRACTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Contraction (Bentuk Singkat)</div>
+        <div class="section-subtitle">Versi singkat yang sering dipakai dalam percakapan sehari-hari</div>
+      </div>
+    </div>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); padding-left:4px;">Positif — 'd have</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I would have</td><td class="contraction-arrow">→</td><td class="contraction-short">I'd have</td></tr>
+        <tr><td class="contraction-full">you would have</td><td class="contraction-arrow">→</td><td class="contraction-short">you'd have</td></tr>
+        <tr><td class="contraction-full">he would have</td><td class="contraction-arrow">→</td><td class="contraction-short">he'd have</td></tr>
+        <tr><td class="contraction-full">she would have</td><td class="contraction-arrow">→</td><td class="contraction-short">she'd have</td></tr>
+        <tr><td class="contraction-full">it would have</td><td class="contraction-arrow">→</td><td class="contraction-short">it'd have</td></tr>
+        <tr><td class="contraction-full">we would have</td><td class="contraction-arrow">→</td><td class="contraction-short">we'd have</td></tr>
+        <tr><td class="contraction-full">they would have</td><td class="contraction-arrow">→</td><td class="contraction-short">they'd have</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); padding-left:4px;">Negatif — wouldn't have</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I would not have</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">I wouldn't have</td></tr>
+        <tr><td class="contraction-full">you would not have</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">you wouldn't have</td></tr>
+        <tr><td class="contraction-full">he would not have</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">he wouldn't have</td></tr>
+        <tr><td class="contraction-full">she would not have</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">she wouldn't have</td></tr>
+        <tr><td class="contraction-full">it would not have</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">it wouldn't have</td></tr>
+        <tr><td class="contraction-full">we would not have</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">we wouldn't have</td></tr>
+        <tr><td class="contraction-full">they would not have</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">they wouldn't have</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">With one extra hour, <span class="ex-hl">I'd have</span> assembled the entire bookshelf myself.<span class="ex-translate">Dengan satu jam tambahan, saya pasti sudah merakit sendiri seluruh rak buku itu.</span></span>
+        <span class="ex-note">= With one extra hour, I would have assembled the entire bookshelf myself.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">If you had warned us, <span class="ex-hl">you'd have</span> avoided the traffic jam easily.<span class="ex-translate">Seandainya kamu memperingatkan kami, kamu pasti sudah menghindari kemacetan itu dengan mudah.</span></span>
+        <span class="ex-note">= If you had warned us, you would have avoided the traffic jam easily.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">He told me that <span class="ex-hl">he'd have</span> mailed the invitation by Friday.<span class="ex-translate">Dia memberi tahu saya bahwa dia sudah mengirimkan undangan itu pada hari Jumat.</span></span>
+        <span class="ex-note">= He told me that he would have mailed the invitation by Friday.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">Given more funding, <span class="ex-hl">she'd have</span> expanded the orphanage that year.<span class="ex-translate">Dengan dana lebih, dia pasti sudah memperluas panti asuhan itu pada tahun tersebut.</span></span>
+        <span class="ex-note">= Given more funding, she would have expanded the orphanage that year.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">Honestly, <span class="ex-hl">I wouldn't have</span> ignored such an obvious warning sign.<span class="ex-translate">Sejujurnya, saya tidak akan mengabaikan tanda peringatan yang begitu jelas.</span></span>
+        <span class="ex-note">= Honestly, I would not have ignored such an obvious warning sign.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">Without the storm, <span class="ex-hl">we'd have</span> reached the summit before sunset.<span class="ex-translate">Tanpa badai itu, kami pasti sudah mencapai puncak sebelum matahari terbenam.</span></span>
+        <span class="ex-note">= Without the storm, we would have reached the summit before sunset.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">With a clearer map, <span class="ex-hl">they'd have</span> located the hidden cave faster.<span class="ex-translate">Dengan peta yang lebih jelas, mereka pasti sudah menemukan gua tersembunyi itu lebih cepat.</span></span>
+        <span class="ex-note">= With a clearer map, they would have located the hidden cave faster.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">The orchestra <span class="ex-hl">would have tuned</span> every instrument before the concert began.<span class="ex-translate">Orkestra itu pasti sudah menyetel setiap alat musik sebelum konser dimulai.</span></span>
+        <span class="ex-note">Subject: the orchestra — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The young apprentice <span class="ex-hl">would have forged</span> the iron gate by spring.<span class="ex-translate">Si pemagang muda pasti sudah menempa gerbang besi itu pada musim semi.</span></span>
+        <span class="ex-note">Subject: the young apprentice — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The negotiation team <span class="ex-hl">would have settled</span> the dispute peacefully that week.<span class="ex-translate">Tim negosiasi itu pasti sudah menyelesaikan perselisihan itu secara damai pada minggu tersebut.</span></span>
+        <span class="ex-note">Subject: the negotiation team — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The village baker <span class="ex-hl">would have baked</span> a hundred loaves before dawn.<span class="ex-translate">Tukang roti desa itu pasti sudah memanggang seratus roti sebelum fajar.</span></span>
+        <span class="ex-note">Subject: the village baker — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The cleaning staff <span class="ex-hl">would have polished</span> the marble floor by opening time.<span class="ex-translate">Petugas kebersihan itu pasti sudah memoles lantai marmer pada jam buka.</span></span>
+        <span class="ex-note">Subject: the cleaning staff — bukan pronoun</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Tips:</strong> Contraction <strong style="color:var(--teal)">wouldn't have</strong> umum dipakai dalam <strong style="color:var(--teal)">percakapan sehari-hari</strong> dan tulisan informal. Untuk tulisan formal, gunakan bentuk lengkap (<strong style="color:var(--teal)">would not have</strong>). Ingat: contraction <strong style="color:var(--amber)">'d</strong> di sini berarti <strong style="color:var(--teal)">would</strong> dan selalu diikuti <strong style="color:var(--teal)">have</strong> sebelum V3.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. KESALAHAN UMUM -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">Kesalahan Umum</div>
+        <div class="section-subtitle">Error yang sering terjadi dan cara menghindarinya</div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">She would have went home before the rain started.</div>
+          <div class="err-explain">Salah: setelah "would have" wajib memakai V3 (past participle), bukan bentuk past simple (went)</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">She would have gone home before the rain started.</div>
+          <div class="err-explain">Benar: would have + V3 (gone)</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">They would of finished the marathon by noon.</div>
+          <div class="err-explain">Salah: bentuknya adalah "would HAVE", bukan "would of" — kesalahan ini muncul karena pelafalan yang mirip</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">They would have finished the marathon by noon.</div>
+          <div class="err-explain">Benar: gunakan would have, bukan "would of"</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">He would have repair the broken bridge by then.</div>
+          <div class="err-explain">Salah: setelah "would have" tidak boleh memakai base verb (repair) — harus V3</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">He would have repaired the broken bridge by then.</div>
+          <div class="err-explain">Benar: would have + V3 (repaired)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. TIME SIGNAL & CARA CEPAT MENGENALI -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">Time Signal & Cara Cepat Mengenali</div>
+        <div class="section-subtitle">Penanda waktu + deteksi Past Future Perfect dalam satu langkah</div>
+      </div>
+    </div>
+    <div class="detect-box">
+      <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
+      <div class="signal-grid" style="margin-bottom:16px;">
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">by then</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">by that time</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">by the next day</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">before</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">if + had + V3</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">he said (that)</div>
+      </div>
+      <div style="font-size:13px; color:var(--muted); margin-bottom:16px;">Jika muncul dalam konteks reported speech atau conditional type 3 + ada <strong style="color:var(--teal)">would have</strong> + <strong style="color:var(--teal)">V3</strong> → Past Future Perfect Tense</div>
+      <div class="detect-examples">
+        <div class="detect-ex"><strong>By then</strong>, the firefighters would have extinguished the entire blaze.</div>
+        <div class="detect-ex"><strong>By that time</strong>, the tailor would have stitched every costume.</div>
+        <div class="detect-ex">The captain assured us the cargo would have departed <strong>by the next day</strong>.</div>
+        <div class="detect-ex">If she had studied harder, she would have passed the bar exam <strong>before</strong> summer.</div>
+        <div class="detect-ex">He claimed that the gardeners would have trimmed every hedge <strong>by then</strong>.</div>
+      </div>
+      <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
+        💡 Tense ini hampir selalu muncul dalam <strong style="color:var(--teal)">reported speech</strong> (will have → would have) atau sebagai hasil <strong style="color:var(--teal)">conditional type 3</strong> (if + had + V3, ... would have + V3). Kata <strong style="color:var(--teal)">before</strong> dan <strong style="color:var(--teal)">by then</strong> menjadi penanda khas penyelesaian aksi dilihat dari masa lalu.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- KEY CONCEPT -->
+  <div class="key-box">
+    <h3>👉 Kunci Utama</h3>
+    <div class="key-points">
+      <div class="key-point"><div class="key-dot"></div><div>Selalu gunakan pola <strong>would have + V3</strong> — jangan lupa memakai bentuk ketiga (past participle), bukan past simple atau base verb.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Gunakan <strong>would have</strong> untuk semua subjek — tidak ada perbedaan antara I, he, she, it, you, we, they.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Tense ini sering muncul pada <strong>reported speech</strong> (will have → would have) dan hasil <strong>conditional type 3</strong> (if + had + V3).</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Hindari kesalahan klasik <strong>"would of"</strong> — yang benar selalu <strong>would have</strong>. Contraction: <strong>'d have</strong> dan <strong>wouldn't have</strong>.</div></div>
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<footer>
+  Past Future Perfect Tense · English Grammar · Bahan Belajar
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+</script>
+</body>
+</html>
