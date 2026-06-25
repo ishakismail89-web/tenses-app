@@ -103,7 +103,7 @@
       st.id = '__bnavStyle';
       st.textContent =
         'html.__hasbnav body{ padding-bottom:calc(76px + env(safe-area-inset-bottom,0px)); }' +
-        '#__bnav{ position:fixed; left:0; right:0; bottom:0; z-index:9998; display:flex; justify-content:space-around; align-items:stretch;' +
+        '#__bnav{ position:fixed; left:0; right:0; bottom:0; top:auto; height:auto; z-index:9998; display:flex; justify-content:space-around; align-items:stretch;' +
           ' background:rgba(18,26,46,0.92); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-top:1px solid #26324d;' +
           ' padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px)); }' +
         '#__bnav a{ flex:1; max-width:160px; display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 4px; text-decoration:none;' +
@@ -120,8 +120,9 @@
       latihan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>'
     };
     var act = activeSection();
-    var nav = document.createElement('nav');
+    var nav = document.createElement('div');   // pakai <div>, bukan <nav>, agar tak kena aturan CSS "nav{}" tiap halaman
     nav.id = '__bnav';
+    nav.setAttribute('role', 'navigation');
     nav.innerHTML =
       '<a href="home.html" class="' + (act === 'tenses' ? 'active' : '') + '">' + ICON.tenses + '<span>Tenses</span></a>' +
       '<a href="irregular-verbs.html" class="' + (act === 'verb' ? 'active' : '') + '">' + ICON.verb + '<span>Irregular</span></a>' +
