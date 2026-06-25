@@ -222,7 +222,9 @@
         <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
       </div>
     </div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 5 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 5 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">My sister <span class="ex-hl">jogs</span> around the lake every morning.<span class="ex-translate">Saudari saya berlari di sekeliling danau setiap pagi.</span></span>
         <span class="ex-note">Kebiasaan rutin — verb mendapat -s karena subjek orang ketiga tunggal</span>
@@ -243,6 +245,7 @@
         <span class="ex-sentence"><span class="ex-hl">Does</span> your uncle repair antique clocks?<span class="ex-translate">Apakah paman Anda memperbaiki jam antik?</span></span>
         <span class="ex-note">Kalimat tanya — "Does" untuk orang ketiga tunggal, verb kembali ke V1</span>
       </div>
+    </div>
     </div>
   </div>
 
@@ -405,7 +408,9 @@
       </tbody>
     </table>
     <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 7 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 7 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">My neighbor <span class="ex-hl">doesn't</span> drink coffee after sunset.<span class="ex-translate">Tetangga saya tidak minum kopi setelah matahari terbenam.</span></span>
         <span class="ex-note">= My neighbor does not drink coffee after sunset.</span>
@@ -435,9 +440,12 @@
         <span class="ex-note">= She does not trust unverified online reviews.</span>
       </div>
     </div>
+    </div>
 
     <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
-    <div class="examples-list">
+    <div class="ex-collapse">
+      <button type="button" class="ex-toggle" data-show="Tampilkan 5 Contoh"><span class="ex-tg-ic">▸</span><span class="ex-tg-label">Tampilkan 5 Contoh</span></button>
+      <div class="examples-list ex-body">
       <div class="example-item">
         <span class="ex-sentence">The local bakery <span class="ex-hl">doesn't</span> sell pastries before dawn.<span class="ex-translate">Toko roti setempat tidak menjual kue kering sebelum fajar.</span></span>
         <span class="ex-note">Subject: the local bakery — bukan pronoun, pakai doesn't</span>
@@ -458,6 +466,7 @@
         <span class="ex-sentence">The mountain river <span class="ex-hl">doesn't</span> freeze during autumn.<span class="ex-translate">Sungai pegunungan itu tidak membeku selama musim gugur.</span></span>
         <span class="ex-note">Subject: the mountain river — tunggal, pakai doesn't</span>
       </div>
+    </div>
     </div>
 
     <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
@@ -591,6 +600,28 @@
     const pct = total > 0 ? (scrolled / total) * 100 : 0;
     document.getElementById('progress-bar').style.width = pct + '%';
   });
+</script>
+<style>
+  .ex-collapse{ margin-top:4px; }
+  .ex-toggle{ width:100%; display:flex; align-items:center; justify-content:center; gap:10px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:13px 16px; color:var(--teal); font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s,border-color .15s; }
+  .ex-toggle:hover{ border-color:var(--teal2); background:var(--navy3); }
+  .ex-tg-ic{ display:inline-block; transition:transform .25s ease; }
+  .ex-collapse.open .ex-tg-ic{ transform:rotate(90deg); }
+  .ex-body{ display:none !important; margin-top:12px; }
+  .ex-collapse.open .ex-body{ display:flex !important; }
+</style>
+<script>
+  (function(){
+    var ts = document.querySelectorAll('.ex-toggle');
+    for (var i=0;i<ts.length;i++){
+      ts[i].addEventListener('click', function(){
+        var c = this.parentNode;
+        var open = c.classList.toggle('open');
+        var lbl = this.querySelector('.ex-tg-label');
+        lbl.textContent = open ? 'Sembunyikan Contoh' : (this.getAttribute('data-show') || 'Tampilkan Contoh');
+      });
+    }
+  })();
 </script>
 </body>
 </html>
