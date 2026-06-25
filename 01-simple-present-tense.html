@@ -590,6 +590,35 @@
     </div>
   </div>
 
+  <!-- NAVIGASI ANTAR TENSE + KUIS -->
+  <style>
+    .tense-nav{ margin-top:48px; display:flex; flex-direction:column; gap:14px; }
+    .tn-row{ display:flex; gap:12px; }
+    @media (max-width:520px){ .tn-row{ flex-direction:column; } }
+    .tn-btn{ display:flex; flex-direction:column; justify-content:center; text-decoration:none; border-radius:14px; padding:14px 18px; font-family:'Space Grotesk',sans-serif; transition:transform .08s, filter .15s, border-color .15s, background .15s; }
+    .tn-btn:active{ transform:scale(.99); }
+    .tn-dir{ font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:.85; margin-bottom:3px; }
+    .tn-name{ font-size:15px; font-weight:700; }
+    .tn-back{ flex:1; background:var(--navy2); border:1px solid var(--teal2); color:var(--teal); }
+    .tn-back:hover{ background:var(--navy3); border-color:var(--teal); }
+    .tn-back .tn-dir{ color:var(--muted); }
+    .tn-next{ flex:1; align-items:flex-end; text-align:right; background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); border:1px solid transparent; }
+    .tn-next:hover{ filter:brightness(1.08); }
+    .tn-next .tn-dir{ color:rgba(15,23,41,.7); }
+    .tn-quiz{ align-items:center; text-align:center; background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); font-size:16px; font-weight:700; padding:17px 18px; border-radius:14px; text-decoration:none; font-family:'Space Grotesk',sans-serif; transition:filter .15s, transform .08s; }
+    .tn-quiz:hover{ filter:brightness(1.08); }
+    .tn-quiz:active{ transform:scale(.99); }
+    .tn-quiz-note{ text-align:center; font-size:13px; color:var(--muted); margin-top:-4px; }
+  </style>
+  <div class="tense-nav">
+    <div class="tn-row">
+      <a class="tn-btn tn-back" href="home.html"><span class="tn-dir">‹ Kembali</span><span class="tn-name">Menu Tenses</span></a>
+      <a class="tn-btn tn-next" href="02-present-continuous-tense.html"><span class="tn-dir">Lanjut ›</span><span class="tn-name">Present Continuous</span></a>
+    </div>
+    <a class="tn-quiz" href="quiz.html?tense=01">✎ Kerjakan Kuis Simple Present</a>
+    <div class="tn-quiz-note">Selesaikan kuis agar kamu makin paham.</div>
+  </div>
+
 </div><!-- /.page -->
 
 <footer>

@@ -180,6 +180,7 @@
         var src = ytEmbed(res.data.youtube_url);
         if (!src) return;
         if (document.getElementById('__videoSection')) return;
+        var navEl = page.querySelector('.tense-nav');   // jika ada blok navigasi, video di atasnya
         var wrap = document.createElement('div');
         wrap.id = '__videoSection';
         wrap.innerHTML =
@@ -197,7 +198,7 @@
               'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' +
             '</div>' +
           '</div>';
-        page.appendChild(wrap);
+        if (navEl) page.insertBefore(wrap, navEl); else page.appendChild(wrap);
       });
   }
 })();
