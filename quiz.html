@@ -106,8 +106,8 @@
   const app = document.getElementById('app');
   const navTitle = document.getElementById('navTitle');
   const bar = document.getElementById('progress-bar');
-  const TENSE_QUIZZES = window.TENSE_QUIZZES || {};
-  const MIX_QUIZ = window.MIX_QUIZ || [];
+  const QUIZZES = window.TENSE_QUIZZES || {};
+  const MIX = window.MIX_QUIZ || [];
 
   function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
   function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
@@ -121,8 +121,8 @@
     navTitle.textContent = 'Latihan Soal';
     bar.style.width = '0%';
     let cards = '';
-    Object.keys(TENSE_QUIZZES).sort().forEach(id => {
-      cards += '<a class="pick" href="quiz.html?tense=' + id + '"><div class="pn">' + id + '</div><div class="pname">' + esc(TENSE_QUIZZES[id].name.replace(' Tense','')) + '</div></a>';
+    Object.keys(QUIZZES).sort().forEach(id => {
+      cards += '<a class="pick" href="quiz.html?tense=' + id + '"><div class="pn">' + id + '</div><div class="pname">' + esc(QUIZZES[id].name.replace(' Tense','')) + '</div></a>';
     });
     app.innerHTML =
       '<div class="eyebrow">Latihan Soal · Active Recall</div>' +
@@ -142,10 +142,10 @@
 
   function buildSet(){
     if(tenseId === 'mix'){
-      const qs = shuffle(MIX_QUIZ).slice(0, 12).map(q => ({ type:'mc', q:'Tense apakah kalimat ini?\n“' + q.q + '”', options:q.options, answer:q.answer, explain:q.explain }));
+      const qs = shuffle(MIX).slice(0, 12).map(q => ({ type:'mc', q:'Tense apakah kalimat ini?\n“' + q.q + '”', options:q.options, answer:q.answer, explain:q.explain }));
       return { title:'Kuis Campuran — Tebak Tense', file:null, questions:qs };
     }
-    const t = TENSE_QUIZZES[tenseId];
+    const t = QUIZZES[tenseId];
     if(!t) return null;
     return { title:t.name, file:t.file, questions:shuffle(t.questions) };
   }
