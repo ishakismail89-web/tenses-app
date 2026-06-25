@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16 Tenses – Daftar Bahan Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#0F1729; --navy2:#1A2540; --navy3:#243356;
+    --teal:#2DD4BF; --teal2:#0F9688; --amber:#F59E0B; --purple:#A78BFA;
+    --white:#F0EDE6; --muted:#8A97B0; --border:rgba(255,255,255,0.07);
+  }
+  html,body { overflow-x:hidden; max-width:100vw; }
+  body { background:var(--navy); color:var(--white); font-family:'Inter',sans-serif; line-height:1.6; min-height:100vh; }
+  .page { max-width:880px; margin:0 auto; padding:56px 24px 80px; }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal); margin-bottom:14px; }
+  h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,7vw,52px); font-weight:700; color:var(--teal); line-height:1.1; margin-bottom:16px; }
+  h1 em { font-style:normal; color:var(--amber); }
+  .lead { font-size:16px; color:var(--muted); max-width:560px; margin-bottom:40px; }
+  .group { margin-bottom:36px; }
+  .group-title { font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:14px; padding-left:4px; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  @media (max-width:560px){ .grid{ grid-template-columns:1fr; } }
+  a.card { display:flex; align-items:center; gap:16px; text-decoration:none; background:var(--navy2); border:1px solid var(--border); border-radius:14px; padding:16px 18px; transition:border-color .15s, transform .08s, background .15s; }
+  a.card:hover { border-color:var(--teal); background:var(--navy3); transform:translateY(-2px); }
+  .num { flex-shrink:0; width:40px; height:40px; border-radius:10px; background:var(--navy3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; color:var(--teal); }
+  .info { min-width:0; }
+  .name { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; color:var(--white); margin-bottom:3px; }
+  .formula { font-size:12px; color:var(--muted); font-family:'Space Grotesk',sans-serif; }
+  .formula b { color:var(--teal); font-weight:600; }
+  footer { text-align:center; padding:32px 24px; font-size:12px; color:var(--muted); border-top:1px solid var(--border); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="guard.js"></script>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">English Grammar · Bahan Belajar</div>
+  <h1>16 <em>Tenses</em><br>Bahasa Inggris</h1>
+  <p class="lead">Kumpulan lengkap 16 tenses — disusun per kelompok waktu. Klik salah satu untuk membuka halaman belajarnya: kegunaan, rumus, contoh kalimat, tabel semua subjek, contraction, kesalahan umum, dan time signal.</p>
+
+  <div class="group" data-admin-only style="display:none;">
+    <div class="group-title" style="color:var(--purple);">⚙ Admin</div>
+    <div class="grid">
+      <a class="card" href="admin.html" style="grid-column:1/-1;border-color:var(--purple);"><div class="num" style="color:var(--purple);">⚙</div><div class="info"><div class="name">Kelola Video Tense</div><div class="formula">Tambah / edit link YouTube tiap tense</div></div></a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">⏱ Present (Masa Kini)</div>
+    <div class="grid">
+      <a class="card" href="01-simple-present-tense.html"><div class="num">01</div><div class="info"><div class="name">Simple Present</div><div class="formula">S + <b>V1</b> (-s/es)</div></div></a>
+      <a class="card" href="02-present-continuous-tense.html"><div class="num">02</div><div class="info"><div class="name">Present Continuous</div><div class="formula">S + <b>am/is/are</b> + V-ing</div></div></a>
+      <a class="card" href="03-present-perfect-tense.html"><div class="num">03</div><div class="info"><div class="name">Present Perfect</div><div class="formula">S + <b>have/has</b> + V3</div></div></a>
+      <a class="card" href="04-present-perfect-continuous-tense.html"><div class="num">04</div><div class="info"><div class="name">Present Perfect Continuous</div><div class="formula">S + <b>have/has been</b> + V-ing</div></div></a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">🕰 Past (Masa Lampau)</div>
+    <div class="grid">
+      <a class="card" href="05-simple-past-tense.html"><div class="num">05</div><div class="info"><div class="name">Simple Past</div><div class="formula">S + <b>V2</b></div></div></a>
+      <a class="card" href="06-past-continuous-tense.html"><div class="num">06</div><div class="info"><div class="name">Past Continuous</div><div class="formula">S + <b>was/were</b> + V-ing</div></div></a>
+      <a class="card" href="07-past-perfect-tense.html"><div class="num">07</div><div class="info"><div class="name">Past Perfect</div><div class="formula">S + <b>had</b> + V3</div></div></a>
+      <a class="card" href="08-past-perfect-continuous-tense.html"><div class="num">08</div><div class="info"><div class="name">Past Perfect Continuous</div><div class="formula">S + <b>had been</b> + V-ing</div></div></a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">🚀 Future (Masa Depan)</div>
+    <div class="grid">
+      <a class="card" href="09-simple-future-tense.html"><div class="num">09</div><div class="info"><div class="name">Simple Future</div><div class="formula">S + <b>will</b> + V1</div></div></a>
+      <a class="card" href="10-future-continuous-tense.html"><div class="num">10</div><div class="info"><div class="name">Future Continuous</div><div class="formula">S + <b>will be</b> + V-ing</div></div></a>
+      <a class="card" href="11-future-perfect-tense.html"><div class="num">11</div><div class="info"><div class="name">Future Perfect</div><div class="formula">S + <b>will have</b> + V3</div></div></a>
+      <a class="card" href="12-future-perfect-continuous-tense.html"><div class="num">12</div><div class="info"><div class="name">Future Perfect Continuous</div><div class="formula">S + <b>will have been</b> + V-ing</div></div></a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">↩ Past Future (Masa Depan di Masa Lampau)</div>
+    <div class="grid">
+      <a class="card" href="13-past-future-tense.html"><div class="num">13</div><div class="info"><div class="name">Past Future</div><div class="formula">S + <b>would</b> + V1</div></div></a>
+      <a class="card" href="14-past-future-continuous-tense.html"><div class="num">14</div><div class="info"><div class="name">Past Future Continuous</div><div class="formula">S + <b>would be</b> + V-ing</div></div></a>
+      <a class="card" href="15-past-future-perfect-tense.html"><div class="num">15</div><div class="info"><div class="name">Past Future Perfect</div><div class="formula">S + <b>would have</b> + V3</div></div></a>
+      <a class="card" href="16-past-future-perfect-continuous-tense.html"><div class="num">16</div><div class="info"><div class="name">Past Future Perfect Continuous</div><div class="formula">S + <b>would have been</b> + V-ing</div></div></a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">📝 Latihan Soal (Quiz)</div>
+    <div class="grid">
+      <a class="card" href="quiz.html?tense=mix"><div class="num">🎲</div><div class="info"><div class="name">Kuis Campuran</div><div class="formula">Tebak tense dari kalimat — <b>16 tenses</b></div></div></a>
+      <a class="card" href="quiz.html"><div class="num">🎯</div><div class="info"><div class="name">Latihan per Tense</div><div class="formula">Pilih tense, <b>kerjakan soalnya</b></div></div></a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">📚 Vocabulary (Kosakata)</div>
+    <div class="grid">
+      <a class="card" href="irregular-verbs.html" style="grid-column:1/-1;"><div class="num">📖</div><div class="info"><div class="name">300+ Irregular Verbs</div><div class="formula">V1 · V2 · V3 · <b>Arti</b> — dengan tombol mata</div></div></a>
+    </div>
+  </div>
+</div>
+<footer>16 Tenses · English Grammar · Bahan Belajar</footer>
+</body>
+</html>

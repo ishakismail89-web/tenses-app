@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal – 16 Tenses</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --navy:#0F1729; --navy2:#1A2540; --navy3:#243356;
+    --teal:#2DD4BF; --teal2:#0F9688; --amber:#F59E0B; --purple:#A78BFA;
+    --green:#4ADE80; --red:#F87171;
+    --white:#F0EDE6; --muted:#8A97B0; --border:rgba(255,255,255,0.07);
+  }
+  html,body { overflow-x:hidden; max-width:100vw; }
+  body { background:var(--navy); color:var(--white); font-family:'Inter',sans-serif; line-height:1.6; min-height:100vh; }
+  #progress-bar { position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg,var(--teal),var(--amber)); z-index:999; transition:width .25s; }
+  nav { position:sticky; top:0; background:rgba(15,23,41,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); z-index:100; padding:14px 24px; display:flex; align-items:center; gap:12px; }
+  .nav-badge { background:var(--amber); color:var(--navy); font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; padding:4px 10px; border-radius:20px; text-transform:uppercase; }
+  nav span { font-size:13px; color:var(--muted); font-weight:500; }
+  .page { max-width:680px; margin:0 auto; padding:40px 22px 90px; }
+
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber); margin-bottom:10px; }
+  h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(26px,5vw,38px); font-weight:700; color:var(--teal); line-height:1.15; margin-bottom:8px; }
+  .lead { font-size:14px; color:var(--muted); margin-bottom:28px; }
+
+  /* Picker */
+  .pick-title { font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin:24px 0 12px; }
+  .pick-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  @media (max-width:520px){ .pick-grid{ grid-template-columns:1fr; } }
+  a.pick { display:flex; align-items:center; gap:14px; text-decoration:none; background:var(--navy2); border:1px solid var(--border); border-radius:13px; padding:14px 16px; transition:border-color .15s,transform .08s,background .15s; }
+  a.pick:hover { border-color:var(--teal); background:var(--navy3); transform:translateY(-2px); }
+  a.pick .pn { flex-shrink:0; width:36px; height:36px; border-radius:9px; background:var(--navy3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--teal); font-size:14px; }
+  a.pick .pname { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; color:var(--white); }
+  a.pick.mix { background:linear-gradient(135deg,rgba(45,212,191,.16),rgba(245,158,11,.12)); border-color:var(--teal2); }
+
+  /* Quiz */
+  .meta-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; font-size:13px; color:var(--muted); }
+  .meta-row b { color:var(--teal); font-family:'Space Grotesk',sans-serif; }
+  .qcard { background:var(--navy2); border:1px solid var(--border); border-radius:18px; padding:26px 24px; }
+  .qtype { font-family:'Space Grotesk',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }
+  .qtext { font-size:18px; line-height:1.5; font-weight:500; margin-bottom:22px; }
+  .qtext .blank { color:var(--amber); font-weight:700; letter-spacing:1px; }
+
+  .options { display:flex; flex-direction:column; gap:10px; }
+  .opt { text-align:left; background:var(--navy3); border:1px solid var(--border); border-radius:12px; padding:14px 16px; color:var(--white); font-size:15px; cursor:pointer; transition:border-color .12s,background .12s; font-family:inherit; display:flex; align-items:center; gap:12px; }
+  .opt:hover:not(:disabled) { border-color:var(--teal); }
+  .opt .mark { flex-shrink:0; width:24px; height:24px; border-radius:7px; background:var(--navy2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:12px; font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--muted); }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--green); background:rgba(74,222,128,.12); }
+  .opt.correct .mark { background:var(--green); color:var(--navy); border-color:var(--green); }
+  .opt.wrong { border-color:var(--red); background:rgba(248,113,113,.10); }
+  .opt.wrong .mark { background:var(--red); color:var(--navy); border-color:var(--red); }
+
+  .fill-wrap { display:flex; gap:10px; }
+  .fill-wrap input { flex:1; background:var(--navy3); border:1px solid var(--border); border-radius:12px; padding:14px 16px; color:var(--white); font-size:16px; outline:none; transition:border-color .15s,box-shadow .15s; }
+  .fill-wrap input:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(45,212,191,.15); }
+  .fill-wrap input.correct { border-color:var(--green); }
+  .fill-wrap input.wrong { border-color:var(--red); }
+
+  .btn { background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); border:none; border-radius:12px; padding:14px 20px; font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; cursor:pointer; transition:filter .15s,transform .05s; }
+  .btn:hover { filter:brightness(1.08); } .btn:active { transform:scale(.99); }
+  .btn.ghost { background:var(--navy2); color:var(--teal); border:1px solid var(--teal2); }
+  .btn:disabled { opacity:.5; cursor:not-allowed; }
+
+  .feedback { margin-top:18px; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.5; display:none; }
+  .feedback.show { display:block; }
+  .feedback.ok { background:rgba(74,222,128,.12); border:1px solid rgba(74,222,128,.3); }
+  .feedback.no { background:rgba(248,113,113,.12); border:1px solid rgba(248,113,113,.3); }
+  .feedback .fb-head { font-weight:700; font-family:'Space Grotesk',sans-serif; margin-bottom:4px; }
+  .feedback.ok .fb-head { color:var(--green); }
+  .feedback.no .fb-head { color:var(--red); }
+  .feedback .ans { color:var(--teal); font-weight:600; }
+  .feedback .exp { color:var(--muted); margin-top:4px; }
+
+  .actions { margin-top:22px; display:flex; gap:10px; }
+  .actions .btn { flex:1; }
+
+  /* Result */
+  .result { text-align:center; background:var(--navy2); border:1px solid var(--border); border-radius:20px; padding:40px 28px; }
+  .result .score-ring { font-family:'Space Grotesk',sans-serif; font-size:54px; font-weight:700; color:var(--teal); line-height:1; margin-bottom:6px; }
+  .result .score-sub { font-size:14px; color:var(--muted); margin-bottom:14px; }
+  .result .msg { font-size:16px; font-weight:600; margin-bottom:26px; }
+  .result .res-actions { display:flex; flex-direction:column; gap:10px; }
+  .result .res-actions .btn { width:100%; }
+  footer { text-align:center; padding:30px 24px; font-size:12px; color:var(--muted); border-top:1px solid var(--border); margin-top:30px; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="guard.js"></script>
+<script src="quiz-data.js"></script>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-badge">Latihan</div>
+  <span id="navTitle">Latihan Soal</span>
+</nav>
+
+<div class="page" id="app"></div>
+
+<footer>Latihan Soal · 16 Tenses · English Grammar</footer>
+
+<script>
+  const app = document.getElementById('app');
+  const navTitle = document.getElementById('navTitle');
+  const bar = document.getElementById('progress-bar');
+  const TENSE_QUIZZES = window.TENSE_QUIZZES || {};
+  const MIX_QUIZ = window.MIX_QUIZ || [];
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function norm(s){ return String(s).toLowerCase().trim().replace(/['’]/g,'').replace(/[.?!]+$/,'').replace(/\s+/g,' '); }
+  function param(name){ return new URLSearchParams(location.search).get(name); }
+
+  const tenseId = param('tense');
+
+  // ---------- PICKER ----------
+  function renderPicker(){
+    navTitle.textContent = 'Latihan Soal';
+    bar.style.width = '0%';
+    let cards = '';
+    Object.keys(TENSE_QUIZZES).sort().forEach(id => {
+      cards += '<a class="pick" href="quiz.html?tense=' + id + '"><div class="pn">' + id + '</div><div class="pname">' + esc(TENSE_QUIZZES[id].name.replace(' Tense','')) + '</div></a>';
+    });
+    app.innerHTML =
+      '<div class="eyebrow">Latihan Soal · Active Recall</div>' +
+      '<h1>Uji Pemahamanmu</h1>' +
+      '<p class="lead">Pilih satu tense untuk berlatih, atau coba <b style="color:var(--amber)">Kuis Campuran</b> untuk menebak tense dari sebuah kalimat.</p>' +
+      '<div class="pick-grid" style="margin-bottom:8px;">' +
+        '<a class="pick mix" href="quiz.html?tense=mix" style="grid-column:1/-1;"><div class="pn">🎲</div><div class="pname">Kuis Campuran — Tebak Tense (16 tenses)</div></a>' +
+      '</div>' +
+      '<div class="pick-title">Per Tense</div>' +
+      '<div class="pick-grid">' + cards + '</div>' +
+      '<div style="margin-top:26px;"><a class="btn ghost" href="home.html" style="text-decoration:none;display:inline-block;">&#9776; Kembali ke Menu</a></div>';
+  }
+
+  // ---------- QUIZ ----------
+  let QSET = null;   // {title, file, questions:[...]}
+  let idx = 0, score = 0, answered = false;
+
+  function buildSet(){
+    if(tenseId === 'mix'){
+      const qs = shuffle(MIX_QUIZ).slice(0, 12).map(q => ({ type:'mc', q:'Tense apakah kalimat ini?\n“' + q.q + '”', options:q.options, answer:q.answer, explain:q.explain }));
+      return { title:'Kuis Campuran — Tebak Tense', file:null, questions:qs };
+    }
+    const t = TENSE_QUIZZES[tenseId];
+    if(!t) return null;
+    return { title:t.name, file:t.file, questions:shuffle(t.questions) };
+  }
+
+  function startQuiz(){
+    QSET = buildSet();
+    if(!QSET){ renderPicker(); return; }
+    navTitle.textContent = QSET.title;
+    idx = 0; score = 0;
+    renderQuestion();
+  }
+
+  function renderQuestion(){
+    answered = false;
+    const q = QSET.questions[idx];
+    const total = QSET.questions.length;
+    bar.style.width = ((idx) / total * 100) + '%';
+
+    const qhtml = esc(q.q).replace(/\n/g,'<br>').replace(/___/g,'<span class="blank">_____</span>');
+    let body = '';
+    if(q.type === 'mc'){
+      const shuffled = shuffle(q.options.map((o,i)=>({o, correct:i===q.answer})));
+      const letters = ['A','B','C','D','E'];
+      body = '<div class="options">' + shuffled.map((it,i) =>
+        '<button class="opt" data-correct="' + (it.correct?'1':'0') + '"><span class="mark">' + letters[i] + '</span><span>' + esc(it.o) + '</span></button>'
+      ).join('') + '</div>';
+    } else {
+      body = '<div class="fill-wrap"><input type="text" id="fillInput" placeholder="Ketik jawabanmu…" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn" id="checkBtn">Periksa</button></div>';
+    }
+
+    app.innerHTML =
+      '<div class="meta-row"><span>Soal <b>' + (idx+1) + '</b> / ' + total + '</span><span>Skor: <b>' + score + '</b></span></div>' +
+      '<div class="qcard">' +
+        '<div class="qtype">' + (q.type==='mc' ? 'Pilihan Ganda' : 'Isian') + '</div>' +
+        '<div class="qtext">' + qhtml + '</div>' +
+        body +
+        '<div class="feedback" id="feedback"></div>' +
+        '<div class="actions" id="actions"></div>' +
+      '</div>';
+
+    if(q.type === 'mc'){
+      app.querySelectorAll('.opt').forEach(btn => btn.addEventListener('click', () => onMC(btn, q)));
+    } else {
+      const input = document.getElementById('fillInput');
+      const check = document.getElementById('checkBtn');
+      check.addEventListener('click', () => onFill(q));
+      input.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); if(!answered) onFill(q); else nextBtn(); } });
+      input.focus();
+    }
+  }
+
+  function showFeedback(ok, correctText, explain){
+    const fb = document.getElementById('feedback');
+    fb.className = 'feedback show ' + (ok ? 'ok':'no');
+    fb.innerHTML =
+      '<div class="fb-head">' + (ok ? '✓ Benar!' : '✕ Belum tepat') + '</div>' +
+      (ok ? '' : '<div>Jawaban: <span class="ans">' + esc(correctText) + '</span></div>') +
+      '<div class="exp">' + esc(explain) + '</div>';
+    const actions = document.getElementById('actions');
+    const last = idx === QSET.questions.length - 1;
+    actions.innerHTML = '<button class="btn" id="nextBtn">' + (last ? 'Lihat Hasil →' : 'Soal Berikutnya →') + '</button>';
+    document.getElementById('nextBtn').addEventListener('click', nextBtn);
+    document.getElementById('nextBtn').focus();
+  }
+
+  function onMC(btn, q){
+    if(answered) return; answered = true;
+    const correct = btn.dataset.correct === '1';
+    let correctText = '';
+    app.querySelectorAll('.opt').forEach(b => {
+      b.disabled = true;
+      if(b.dataset.correct === '1'){ b.classList.add('correct'); correctText = b.querySelector('span:last-child').textContent; }
+    });
+    if(correct){ score++; } else { btn.classList.add('wrong'); }
+    showFeedback(correct, correctText, q.explain);
+  }
+
+  function onFill(q){
+    if(answered) return;
+    const input = document.getElementById('fillInput');
+    const val = norm(input.value);
+    if(!val) { input.focus(); return; }
+    answered = true;
+    const accepted = q.answers.map(norm);
+    const ok = accepted.includes(val);
+    input.classList.add(ok ? 'correct' : 'wrong');
+    input.disabled = true;
+    document.getElementById('checkBtn').disabled = true;
+    if(ok) score++;
+    showFeedback(ok, q.answers[0], q.explain);
+  }
+
+  function nextBtn(){
+    idx++;
+    if(idx >= QSET.questions.length) renderResult();
+    else renderQuestion();
+  }
+
+  function renderResult(){
+    bar.style.width = '100%';
+    const total = QSET.questions.length;
+    const pct = Math.round(score / total * 100);
+    let msg, emoji;
+    if(pct === 100){ msg='Sempurna! Luar biasa 🎉'; emoji='🏆'; }
+    else if(pct >= 80){ msg='Hebat! Hampir sempurna.'; emoji='🌟'; }
+    else if(pct >= 60){ msg='Bagus! Terus berlatih ya.'; emoji='👍'; }
+    else if(pct >= 40){ msg='Lumayan — ulangi sekali lagi.'; emoji='💪'; }
+    else { msg='Jangan menyerah, coba lagi!'; emoji='📚'; }
+
+    const reviewLink = QSET.file ? '<a class="btn ghost" href="' + QSET.file + '" style="text-decoration:none;">📖 Buka Materinya</a>' : '';
+    app.innerHTML =
+      '<div class="result">' +
+        '<div style="font-size:40px;margin-bottom:8px;">' + emoji + '</div>' +
+        '<div class="score-ring">' + pct + '%</div>' +
+        '<div class="score-sub">' + score + ' dari ' + total + ' soal benar</div>' +
+        '<div class="msg">' + msg + '</div>' +
+        '<div class="res-actions">' +
+          '<button class="btn" id="retryBtn">🔁 Ulangi Kuis</button>' +
+          reviewLink +
+          '<a class="btn ghost" href="quiz.html" style="text-decoration:none;">Pilih Kuis Lain</a>' +
+          '<a class="btn ghost" href="home.html" style="text-decoration:none;">&#9776; Menu Utama</a>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('retryBtn').addEventListener('click', startQuiz);
+  }
+
+  // ---------- INIT ----------
+  if(!tenseId){ renderPicker(); }
+  else { startQuiz(); }
+</script>
+</body>
+</html>

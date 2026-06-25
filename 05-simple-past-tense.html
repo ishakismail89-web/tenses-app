@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Past Tense – Bahan Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:    #0F1729;
+    --navy2:   #1A2540;
+    --navy3:   #243356;
+    --teal:    #2DD4BF;
+    --teal2:   #0F9688;
+    --amber:   #F59E0B;
+    --red:     #F87171;
+    --green:   #4ADE80;
+    --white:   #F0EDE6;
+    --muted:   #8A97B0;
+    --border:  rgba(255,255,255,0.07);
+  }
+  html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+  body { background: var(--navy); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; min-height: 100vh; position: relative; }
+  #progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--teal), var(--amber)); z-index: 999; }
+  nav { position: sticky; top: 0; background: rgba(15,23,41,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .nav-badge { background: var(--teal); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+  nav span { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .hero { margin-bottom: 56px; }
+  .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 7vw, 56px); font-weight: 700; line-height: 1.1; color: var(--teal); margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-desc { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+  .hero-formula-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: var(--navy2); border: 1px solid var(--teal); border-radius: 12px; padding: 12px 20px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; }
+  .pill-s { color: var(--amber); }
+  .pill-op { color: var(--muted); font-size: 13px; }
+  .pill-hv { color: var(--teal); }
+  .pill-v3 { color: #A78BFA; }
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .section-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: var(--navy2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; color: var(--teal); margin-top: 4px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--teal); line-height: 1.3; }
+  .section-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .use-grid { grid-template-columns: 1fr; } }
+  .use-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .use-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
+  .formula-row:last-child { border-bottom: none; }
+  .formula-type { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; text-align: center; }
+  .type-pos { background: rgba(74,222,128,0.15); color: var(--green); }
+  .type-neg { background: rgba(248,113,113,0.15); color: var(--red); }
+  .type-que { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .formula-text { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ft-s { color: var(--amber); }
+  .ft-hv { color: var(--teal); }
+  .ft-not { color: var(--red); }
+  .ft-v3 { color: #A78BFA; }
+  .ft-qm { color: var(--muted); }
+  .signal-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .signal-chip { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; background: var(--navy2); border: 1px solid var(--teal2); color: var(--teal); padding: 8px 16px; border-radius: 40px; }
+  .examples-list { display: flex; flex-direction: column; gap: 12px; }
+  .example-item { background: var(--navy2); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 0 12px 12px 0; padding: 16px 20px; font-size: 15px; line-height: 1.5; }
+  .ex-hl { color: var(--teal); font-weight: 600; }
+  .ex-note { display: block; font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic; }
+  .ex-sentence { display: block; }
+  .ex-translate { display: block; font-size: 13px; color: #7FE3D6; margin-top: 4px; font-style: italic; }
+  .table-wrap { border-radius: 16px; overflow: hidden; }
+  .sentence-table { width: 100%; border-collapse: collapse; }
+  .sentence-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .sentence-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); position: relative; }
+  .td-type { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .que { color: var(--amber); }
+  .td-sen { color: var(--white); line-height: 1.5; }
+  .error-pair { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+  .error-row { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .error-row:last-child { border-bottom: none; }
+  .err-icon { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+  .err-icon.bad { background: rgba(248,113,113,0.15); color: var(--red); }
+  .err-icon.good { background: rgba(74,222,128,0.15); color: var(--green); }
+  .err-text { font-size: 14px; line-height: 1.5; }
+  .err-sentence { font-weight: 600; margin-bottom: 4px; }
+  .err-explain { font-size: 12px; color: var(--muted); }
+  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-good { color: var(--green); }
+  .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
+  .key-points { display: flex; flex-direction: column; gap: 12px; }
+  .key-point { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; color: var(--white); }
+  .key-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 8px; }
+  .detect-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .detect-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .detect-examples { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .detect-ex { font-size: 13px; color: var(--muted); padding-left: 16px; border-left: 2px solid var(--navy3); line-height: 1.6; }
+  .detect-ex strong { color: var(--teal); font-weight: 600; }
+  .contraction-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
+  .contraction-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .contraction-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); color: var(--white); }
+  .contraction-full { color: var(--muted); }
+  .contraction-arrow { color: var(--muted); font-size: 12px; padding: 0 6px; }
+  .contraction-short { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--teal); }
+  footer { text-align: center; padding: 32px 24px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="guard.js"></script>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-badge">Grammar</div>
+  <span>Simple Past Tense</span>
+</nav>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Tenses · English Grammar</div>
+    <h1>Simple <em>Past</em><br>Tense</h1>
+    <p class="hero-desc">Pelajari kapan, bagaimana, dan mengapa tense ini digunakan — lengkap dengan rumus, sinyal waktu, contraction, dan kesalahan yang harus dihindari.</p>
+    <div class="hero-formula-pill">
+      <span class="pill-s">S</span>
+      <span class="pill-op">+</span>
+      <span class="pill-v3">V2 (past)</span>
+    </div>
+  </div>
+
+  <!-- 1. KEGUNAAN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Kegunaan</div>
+        <div class="section-subtitle">Kapan tense ini dipakai?</div>
+      </div>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-card-icon">✅</div>
+        <div class="use-card-title">Aksi selesai di waktu lampau yang spesifik</div>
+        <div class="use-card-desc">Menggambarkan tindakan yang sudah tuntas pada titik waktu tertentu di masa lalu.</div>
+        <div class="use-card-ex">"I visited my grandmother yesterday."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">🔁</div>
+        <div class="use-card-title">Kebiasaan di masa lalu</div>
+        <div class="use-card-desc">Menyatakan rutinitas atau kebiasaan yang dulu sering dilakukan namun kini sudah tidak lagi.</div>
+        <div class="use-card-ex">"We played football every weekend when we were kids."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">🔗</div>
+        <div class="use-card-title">Rangkaian peristiwa lampau berurutan</div>
+        <div class="use-card-desc">Menceritakan beberapa kejadian yang terjadi satu demi satu di masa lalu.</div>
+        <div class="use-card-ex">"She woke up, made coffee, and read the newspaper."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">📜</div>
+        <div class="use-card-title">Keadaan atau fakta di masa lalu</div>
+        <div class="use-card-desc">Menyatakan kondisi, situasi, atau fakta yang berlaku pada masa lampau.</div>
+        <div class="use-card-ex">"The castle stood on a hill for centuries."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. RUMUS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Rumus Kalimat</div>
+        <div class="section-subtitle">Pola untuk semua jenis kalimat</div>
+      </div>
+    </div>
+    <div class="formula-block">
+      <div class="formula-row">
+        <div class="formula-type type-pos">(+) Positif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-v3">V2</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-neg">(−) Negatif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">did</span><span class="ft-not">not</span><span class="ft-qm">+</span><span class="ft-v3">V1</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-que">(?) Tanya</div>
+        <div class="formula-text">
+          <span class="ft-hv">Did</span><span class="ft-qm">+</span><span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-v3">V1</span><span class="ft-qm">?</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px; font-size:13px; color:var(--muted); padding:0 4px;">
+      <span style="color:var(--amber);">■</span> S = Subjek &nbsp;|&nbsp;
+      <span style="color:var(--teal);">■</span> did = auxiliary verb (sama untuk semua subjek) &nbsp;|&nbsp;
+      <span style="color:#A78BFA;">■</span> V2 = past form &nbsp;·&nbsp; V1 = base form (dipakai setelah did)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. CONTOH KALIMAT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Contoh Kalimat</div>
+        <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
+      </div>
+    </div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">My sister <span class="ex-hl">baked</span> a chocolate cake last night.<span class="ex-translate">Adik perempuan saya membuat kue cokelat tadi malam.</span></span>
+        <span class="ex-note">Aksi selesai pada titik waktu lampau yang spesifik (regular verb: bake → baked)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">We <span class="ex-hl">caught</span> the early train this morning.<span class="ex-translate">Kami menaiki kereta pagi tadi pagi.</span></span>
+        <span class="ex-note">Aksi yang sudah terjadi di waktu lampau (irregular verb: catch → caught)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The children <span class="ex-hl">painted</span> the wooden fence two days ago.<span class="ex-translate">Anak-anak mengecat pagar kayu dua hari yang lalu.</span></span>
+        <span class="ex-note">Penanda "ago" menunjukkan waktu lampau yang jelas</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">He <span class="ex-hl">taught</span> mathematics at that school in 2015.<span class="ex-translate">Dia mengajar matematika di sekolah itu pada tahun 2015.</span></span>
+        <span class="ex-note">Keadaan atau fakta pada periode lampau (irregular verb: teach → taught)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">When I was young, I <span class="ex-hl">collected</span> colorful seashells on the beach.<span class="ex-translate">Ketika saya kecil, saya mengumpulkan kerang berwarna-warni di pantai.</span></span>
+        <span class="ex-note">Kebiasaan di masa lalu dengan penanda "when I was young"</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. POLA LENGKAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Positif · Negatif · Tanya</div>
+        <div class="section-subtitle">Semua pronoun — dari I sampai They</div>
+      </div>
+    </div>
+    <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; padding-left:4px;">
+      ✅ DID — Semua Subjek (I · He · She · It · You · We · They)
+    </div>
+    <div style="margin-bottom:12px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:12px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Aturan Simple Past:</strong> Auxiliary verb <strong style="color:var(--teal)">did</strong> dipakai untuk <strong style="color:var(--teal)">semua subjek</strong>. Pada kalimat positif gunakan <strong style="color:#A78BFA">V2</strong>, tetapi dalam bentuk negatif (−) dan tanya (?) kata kerja kembali ke <strong style="color:#A78BFA">V1</strong> karena "did" sudah menandakan waktu lampau.
+    </div>
+    <div class="table-wrap" style="margin-bottom:20px;">
+    <table class="sentence-table">
+      <thead><tr><th style="width:60px;">Pronoun</th><th style="width:30px;">Tipe</th><th>Kalimat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">I</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--teal);">watched</strong> a documentary about the ocean.<span class="ex-translate">Saya menonton film dokumenter tentang lautan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--red);">did not watch</strong> a documentary about the ocean.<span class="ex-translate">Saya tidak menonton film dokumenter tentang lautan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Did</strong> I watch a documentary about the ocean?<span class="ex-translate">Apakah saya menonton film dokumenter tentang lautan?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">He</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--teal);">repaired</strong> the broken bicycle.<span class="ex-translate">Dia memperbaiki sepeda yang rusak.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--red);">did not repair</strong> the broken bicycle.<span class="ex-translate">Dia tidak memperbaiki sepeda yang rusak.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Did</strong> he repair the broken bicycle?<span class="ex-translate">Apakah dia memperbaiki sepeda yang rusak?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">She</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--teal);">sang</strong> a beautiful lullaby.<span class="ex-translate">Dia menyanyikan sebuah lagu nina bobo yang indah.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--red);">did not sing</strong> a beautiful lullaby.<span class="ex-translate">Dia tidak menyanyikan lagu nina bobo yang indah.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Did</strong> she sing a beautiful lullaby?<span class="ex-translate">Apakah dia menyanyikan lagu nina bobo yang indah?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">It</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--teal);">rained</strong> heavily all afternoon.<span class="ex-translate">Hujan turun deras sepanjang sore.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--red);">did not rain</strong> heavily all afternoon.<span class="ex-translate">Hujan tidak turun deras sepanjang sore.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Did</strong> it rain heavily all afternoon?<span class="ex-translate">Apakah hujan turun deras sepanjang sore?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">You</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--teal);">borrowed</strong> my umbrella last week.<span class="ex-translate">Kamu meminjam payung saya minggu lalu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--red);">did not borrow</strong> my umbrella last week.<span class="ex-translate">Kamu tidak meminjam payung saya minggu lalu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Did</strong> you borrow my umbrella last week?<span class="ex-translate">Apakah kamu meminjam payung saya minggu lalu?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">We</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--teal);">climbed</strong> the steep mountain trail.<span class="ex-translate">Kami mendaki jalur gunung yang curam.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--red);">did not climb</strong> the steep mountain trail.<span class="ex-translate">Kami tidak mendaki jalur gunung yang curam.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Did</strong> we climb the steep mountain trail?<span class="ex-translate">Apakah kami mendaki jalur gunung yang curam?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">They</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--teal);">wrote</strong> a letter to the mayor.<span class="ex-translate">Mereka menulis surat kepada wali kota.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--red);">did not write</strong> a letter to the mayor.<span class="ex-translate">Mereka tidak menulis surat kepada wali kota.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Did</strong> they write a letter to the mayor?<span class="ex-translate">Apakah mereka menulis surat kepada wali kota?</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:16px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:16px 20px; font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
+      <div><span style="color:var(--teal); font-weight:700;">DID</span> &nbsp;→&nbsp; I, He, She, It, You, We, They (semua subjek) — kata kerja jadi V1 setelah did</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. CONTRACTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Contraction (Bentuk Singkat)</div>
+        <div class="section-subtitle">Versi singkat yang sering dipakai dalam percakapan sehari-hari</div>
+      </div>
+    </div>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); padding-left:4px;">Negatif — didn't</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I did not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">I didn't</td></tr>
+        <tr><td class="contraction-full">you did not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">you didn't</td></tr>
+        <tr><td class="contraction-full">he did not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">he didn't</td></tr>
+        <tr><td class="contraction-full">she did not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">she didn't</td></tr>
+        <tr><td class="contraction-full">it did not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">it didn't</td></tr>
+        <tr><td class="contraction-full">we did not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">we didn't</td></tr>
+        <tr><td class="contraction-full">they did not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">they didn't</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">I <span class="ex-hl">didn't</span> finish my homework before dinner.<span class="ex-translate">Saya tidak menyelesaikan pekerjaan rumah sebelum makan malam.</span></span>
+        <span class="ex-note">= I did not finish my homework before dinner. (setelah didn't pakai V1: finish)</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">You <span class="ex-hl">didn't</span> answer the teacher's question.<span class="ex-translate">Kamu tidak menjawab pertanyaan guru.</span></span>
+        <span class="ex-note">= You did not answer the teacher's question.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">He <span class="ex-hl">didn't</span> lock the front door last night.<span class="ex-translate">Dia tidak mengunci pintu depan tadi malam.</span></span>
+        <span class="ex-note">= He did not lock the front door last night.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">She <span class="ex-hl">didn't</span> enjoy the spicy soup at the restaurant.<span class="ex-translate">Dia tidak menikmati sup pedas di restoran itu.</span></span>
+        <span class="ex-note">= She did not enjoy the spicy soup at the restaurant.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">We <span class="ex-hl">didn't</span> notice the warning sign on the road.<span class="ex-translate">Kami tidak memperhatikan rambu peringatan di jalan.</span></span>
+        <span class="ex-note">= We did not notice the warning sign on the road.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">They <span class="ex-hl">didn't</span> attend the morning rehearsal.<span class="ex-translate">Mereka tidak menghadiri latihan pagi.</span></span>
+        <span class="ex-note">= They did not attend the morning rehearsal.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">It <span class="ex-hl">didn't</span> work properly after the update.<span class="ex-translate">Alat itu tidak berfungsi dengan baik setelah pembaruan.</span></span>
+        <span class="ex-note">= It did not work properly after the update.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">The old clock <span class="ex-hl">didn't</span> ring at midnight.<span class="ex-translate">Jam tua itu tidak berbunyi pada tengah malam.</span></span>
+        <span class="ex-note">Subject: the old clock — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The football players <span class="ex-hl">didn't</span> celebrate after the match.<span class="ex-translate">Para pemain sepak bola tidak merayakan kemenangan setelah pertandingan.</span></span>
+        <span class="ex-note">Subject: the football players — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The bakery <span class="ex-hl">didn't</span> sell fresh bread that morning.<span class="ex-translate">Toko roti itu tidak menjual roti segar pagi itu.</span></span>
+        <span class="ex-note">Subject: the bakery — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The tourists <span class="ex-hl">didn't</span> reach the summit before sunset.<span class="ex-translate">Para wisatawan tidak mencapai puncak sebelum matahari terbenam.</span></span>
+        <span class="ex-note">Subject: the tourists — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The volunteers <span class="ex-hl">didn't</span> plant the trees near the river.<span class="ex-translate">Para relawan tidak menanam pohon di dekat sungai.</span></span>
+        <span class="ex-note">Subject: the volunteers — bukan pronoun</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Tips:</strong> Contraction <strong style="color:var(--teal)">didn't</strong> sangat umum dalam <strong style="color:var(--teal)">percakapan sehari-hari</strong> dan tulisan informal. Untuk tulisan formal, gunakan bentuk lengkap (<strong style="color:var(--teal)">did not</strong>). Ingat: setelah <strong style="color:var(--amber)">didn't</strong> kata kerja selalu kembali ke <strong style="color:var(--teal)">V1</strong> (base form).
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. KESALAHAN UMUM -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">Kesalahan Umum</div>
+        <div class="section-subtitle">Error yang sering terjadi dan cara menghindarinya</div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">She did went home early.</div>
+          <div class="err-explain">Salah: setelah "did" kata kerja wajib kembali ke V1 (go), bukan V2 (went)</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">She went home early.</div>
+          <div class="err-explain">Benar: kalimat positif cukup pakai V2 (went) tanpa "did"</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">I buyed a ticket for the concert.</div>
+          <div class="err-explain">Salah: "buy" adalah irregular verb, tidak bisa ditambah -ed</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">I bought a ticket for the concert.</div>
+          <div class="err-explain">Benar: bentuk lampau dari "buy" adalah "bought" (irregular verb)</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">They didn't came to the party.</div>
+          <div class="err-explain">Salah: setelah "didn't" kata kerja harus V1 (come), bukan V2 (came)</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">They didn't come to the party.</div>
+          <div class="err-explain">Benar: didn't + V1 (come) karena "did" sudah menandakan waktu lampau</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. TIME SIGNAL & CARA CEPAT MENGENALI -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">Time Signal & Cara Cepat Mengenali</div>
+        <div class="section-subtitle">Penanda waktu + deteksi Simple Past dalam satu langkah</div>
+      </div>
+    </div>
+    <div class="detect-box">
+      <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
+      <div class="signal-grid" style="margin-bottom:16px;">
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">yesterday</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">last night</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">last week</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">last year</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">... ago</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">in 2015</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">this morning</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">just now</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">when I was young</div>
+      </div>
+      <div style="font-size:13px; color:var(--muted); margin-bottom:16px;">Jika salah satu muncul + ada kata kerja dalam bentuk <strong style="color:var(--teal)">V2</strong> (atau <strong style="color:var(--teal)">did</strong> + V1 untuk negatif/tanya) → Simple Past Tense</div>
+      <div class="detect-examples">
+        <div class="detect-ex">The fishermen returned with a huge catch <strong>yesterday</strong>.</div>
+        <div class="detect-ex"><strong>Last night</strong>, the orchestra performed a famous symphony.</div>
+        <div class="detect-ex">We moved into this neighborhood <strong>two years ago</strong>.</div>
+        <div class="detect-ex">My father drove a yellow taxi <strong>in 2015</strong>.</div>
+        <div class="detect-ex"><strong>When I was young</strong>, my family raised chickens in the backyard.</div>
+      </div>
+      <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
+        💡 Penanda <strong style="color:var(--teal)">yesterday</strong>, <strong style="color:var(--teal)">last ...</strong>, dan <strong style="color:var(--teal)">... ago</strong> adalah ciri khas tense ini. Ingat: kata kerja beraturan ditambah <strong style="color:var(--teal)">-ed</strong> (play → played), sedangkan kata kerja tak beraturan berubah bentuk (go → went, buy → bought).
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- KEY CONCEPT -->
+  <div class="key-box">
+    <h3>👉 Kunci Utama</h3>
+    <div class="key-points">
+      <div class="key-point"><div class="key-dot"></div><div>Kalimat positif memakai pola <strong>S + V2</strong> — kata kerja beraturan ditambah <strong>-ed</strong>, kata kerja tak beraturan berubah bentuk (go → went, buy → bought).</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Gunakan <strong>did</strong> untuk semua subjek dalam kalimat negatif dan tanya — tidak ada perbedaan antara I, he, she, it, you, we, they.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Setelah <strong>did / didn't</strong> kata kerja selalu kembali ke <strong>V1</strong> (base form), karena "did" sudah menandakan waktu lampau.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Simple Past dipakai untuk aksi yang <strong>sudah selesai</strong> di waktu lampau yang spesifik — sering disertai penanda seperti <strong>yesterday</strong> atau <strong>ago</strong>. Contraction negatif: <strong>didn't</strong>.</div></div>
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<footer>
+  Simple Past Tense · English Grammar · Bahan Belajar
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

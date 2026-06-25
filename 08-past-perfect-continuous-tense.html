@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Perfect Continuous Tense – Bahan Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:    #0F1729;
+    --navy2:   #1A2540;
+    --navy3:   #243356;
+    --teal:    #2DD4BF;
+    --teal2:   #0F9688;
+    --amber:   #F59E0B;
+    --red:     #F87171;
+    --green:   #4ADE80;
+    --white:   #F0EDE6;
+    --muted:   #8A97B0;
+    --border:  rgba(255,255,255,0.07);
+  }
+  html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+  body { background: var(--navy); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; min-height: 100vh; position: relative; }
+  #progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--teal), var(--amber)); z-index: 999; }
+  nav { position: sticky; top: 0; background: rgba(15,23,41,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .nav-badge { background: var(--teal); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+  nav span { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .hero { margin-bottom: 56px; }
+  .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 7vw, 56px); font-weight: 700; line-height: 1.1; color: var(--teal); margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-desc { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+  .hero-formula-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: var(--navy2); border: 1px solid var(--teal); border-radius: 12px; padding: 12px 20px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; }
+  .pill-s { color: var(--amber); }
+  .pill-op { color: var(--muted); font-size: 13px; }
+  .pill-hv { color: var(--teal); }
+  .pill-v3 { color: #A78BFA; }
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .section-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: var(--navy2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; color: var(--teal); margin-top: 4px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--teal); line-height: 1.3; }
+  .section-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .use-grid { grid-template-columns: 1fr; } }
+  .use-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .use-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
+  .formula-row:last-child { border-bottom: none; }
+  .formula-type { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; text-align: center; }
+  .type-pos { background: rgba(74,222,128,0.15); color: var(--green); }
+  .type-neg { background: rgba(248,113,113,0.15); color: var(--red); }
+  .type-que { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .formula-text { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ft-s { color: var(--amber); }
+  .ft-hv { color: var(--teal); }
+  .ft-not { color: var(--red); }
+  .ft-v3 { color: #A78BFA; }
+  .ft-qm { color: var(--muted); }
+  .signal-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .signal-chip { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; background: var(--navy2); border: 1px solid var(--teal2); color: var(--teal); padding: 8px 16px; border-radius: 40px; }
+  .examples-list { display: flex; flex-direction: column; gap: 12px; }
+  .example-item { background: var(--navy2); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 0 12px 12px 0; padding: 16px 20px; font-size: 15px; line-height: 1.5; }
+  .ex-hl { color: var(--teal); font-weight: 600; }
+  .ex-note { display: block; font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic; }
+  .ex-sentence { display: block; }
+  .ex-translate { display: block; font-size: 13px; color: #7FE3D6; margin-top: 4px; font-style: italic; }
+  .table-wrap { border-radius: 16px; overflow: hidden; }
+  .sentence-table { width: 100%; border-collapse: collapse; }
+  .sentence-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .sentence-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); position: relative; }
+  .td-type { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .que { color: var(--amber); }
+  .td-sen { color: var(--white); line-height: 1.5; }
+  .error-pair { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+  .error-row { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .error-row:last-child { border-bottom: none; }
+  .err-icon { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+  .err-icon.bad { background: rgba(248,113,113,0.15); color: var(--red); }
+  .err-icon.good { background: rgba(74,222,128,0.15); color: var(--green); }
+  .err-text { font-size: 14px; line-height: 1.5; }
+  .err-sentence { font-weight: 600; margin-bottom: 4px; }
+  .err-explain { font-size: 12px; color: var(--muted); }
+  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-good { color: var(--green); }
+  .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
+  .key-points { display: flex; flex-direction: column; gap: 12px; }
+  .key-point { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; color: var(--white); }
+  .key-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 8px; }
+  .detect-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .detect-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .detect-examples { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .detect-ex { font-size: 13px; color: var(--muted); padding-left: 16px; border-left: 2px solid var(--navy3); line-height: 1.6; }
+  .detect-ex strong { color: var(--teal); font-weight: 600; }
+  .contraction-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
+  .contraction-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .contraction-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); color: var(--white); }
+  .contraction-full { color: var(--muted); }
+  .contraction-arrow { color: var(--muted); font-size: 12px; padding: 0 6px; }
+  .contraction-short { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--teal); }
+  footer { text-align: center; padding: 32px 24px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="guard.js"></script>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-badge">Grammar</div>
+  <span>Past Perfect Continuous Tense</span>
+</nav>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Tenses · English Grammar</div>
+    <h1>Past Perfect <em>Continuous</em><br>Tense</h1>
+    <p class="hero-desc">Pelajari kapan, bagaimana, dan mengapa tense ini digunakan — lengkap dengan rumus, sinyal waktu, contraction, dan kesalahan yang harus dihindari.</p>
+    <div class="hero-formula-pill">
+      <span class="pill-s">S</span>
+      <span class="pill-op">+</span>
+      <span class="pill-hv">had been</span>
+      <span class="pill-op">+</span>
+      <span class="pill-v3">V-ing</span>
+    </div>
+  </div>
+
+  <!-- 1. KEGUNAAN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Kegunaan</div>
+        <div class="section-subtitle">Kapan tense ini dipakai?</div>
+      </div>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-card-icon">⏳</div>
+        <div class="use-card-title">Durasi aksi sebelum titik waktu lampau</div>
+        <div class="use-card-desc">Menggambarkan aksi yang telah berlangsung selama suatu periode sebelum momen tertentu di masa lalu.</div>
+        <div class="use-card-ex">"She had been studying for six hours before the exam."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">🔍</div>
+        <div class="use-card-title">Penyebab situasi lampau (efeknya terlihat)</div>
+        <div class="use-card-desc">Menjelaskan alasan dari sebuah kondisi di masa lalu yang efeknya masih terlihat saat itu.</div>
+        <div class="use-card-ex">"His shoes were muddy because he had been hiking all morning."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">⏱️</div>
+        <div class="use-card-title">Menekankan lamanya aksi sebelum aksi lain</div>
+        <div class="use-card-desc">Menonjolkan berapa lama suatu aksi berjalan sebelum aksi lampau lain memutusnya.</div>
+        <div class="use-card-ex">"They had been waiting for an hour when the bus finally arrived."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">💬</div>
+        <div class="use-card-title">Reported speech dari present perfect continuous</div>
+        <div class="use-card-desc">Mengubah kalimat present perfect continuous menjadi bentuk lampau saat melaporkan ucapan.</div>
+        <div class="use-card-ex">"He said he had been painting the fence all day."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. RUMUS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Rumus Kalimat</div>
+        <div class="section-subtitle">Pola untuk semua jenis kalimat</div>
+      </div>
+    </div>
+    <div class="formula-block">
+      <div class="formula-row">
+        <div class="formula-type type-pos">(+) Positif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">had been</span><span class="ft-qm">+</span><span class="ft-v3">V-ing</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-neg">(−) Negatif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">had</span><span class="ft-not">not</span><span class="ft-hv">been</span><span class="ft-qm">+</span><span class="ft-v3">V-ing</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-que">(?) Tanya</div>
+        <div class="formula-text">
+          <span class="ft-hv">Had</span><span class="ft-qm">+</span><span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">been</span><span class="ft-qm">+</span><span class="ft-v3">V-ing</span><span class="ft-qm">?</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px; font-size:13px; color:var(--muted); padding:0 4px;">
+      <span style="color:var(--amber);">■</span> S = Subjek &nbsp;|&nbsp;
+      <span style="color:var(--teal);">■</span> had been = auxiliary verb (sama untuk semua subjek) &nbsp;|&nbsp;
+      <span style="color:#A78BFA;">■</span> V-ing = present participle (kata kerja + akhiran -ing)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. CONTOH KALIMAT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Contoh Kalimat</div>
+        <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
+      </div>
+    </div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">By noon, the volunteers <span class="ex-hl">had been planting</span> trees <span class="ex-hl">for</span> five straight hours.<span class="ex-translate">Menjelang siang, para sukarelawan telah menanam pohon selama lima jam berturut-turut.</span></span>
+        <span class="ex-note">Durasi aksi yang berlangsung sebelum titik waktu lampau</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The kitchen smelled amazing because Grandma <span class="ex-hl">had been baking</span> bread <span class="ex-hl">since</span> dawn.<span class="ex-translate">Dapur itu beraroma harum karena Nenek telah memanggang roti sejak fajar.</span></span>
+        <span class="ex-note">Penyebab situasi lampau yang efeknya masih terlihat</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">My eyes were tired because I <span class="ex-hl">had been reading</span> the manuscript <span class="ex-hl">all day</span>.<span class="ex-translate">Mataku lelah karena aku telah membaca naskah itu sepanjang hari.</span></span>
+        <span class="ex-note">Efek terlihat dari aksi yang berlangsung lama</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The mechanics <span class="ex-hl">had been repairing</span> the engine <span class="ex-hl">before</span> the storm knocked out the power.<span class="ex-translate">Para montir telah memperbaiki mesin itu sebelum badai memutus aliran listrik.</span></span>
+        <span class="ex-note">Aksi berdurasi yang diputus oleh aksi lampau lain</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">How long had</span> the children <span class="ex-hl">been rehearsing</span> the play before the teacher walked in?<span class="ex-translate">Berapa lama anak-anak itu telah berlatih drama sebelum guru masuk?</span></span>
+        <span class="ex-note">Pertanyaan tentang durasi aksi sebelum aksi lampau lain</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. POLA LENGKAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Positif · Negatif · Tanya</div>
+        <div class="section-subtitle">Semua pronoun — dari I sampai They</div>
+      </div>
+    </div>
+    <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; padding-left:4px;">
+      ✅ HAD BEEN — Semua Subjek (I · He · She · It · You · We · They)
+    </div>
+    <div style="margin-bottom:12px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:12px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Keunggulan Past Perfect Continuous:</strong> Auxiliary verb <strong style="color:var(--teal)">had been</strong> digunakan untuk <strong style="color:var(--teal)">semua subjek</strong> — tidak ada perbedaan bentuk antara I, he, she, it, you, we, they.
+    </div>
+    <div class="table-wrap" style="margin-bottom:20px;">
+    <table class="sentence-table">
+      <thead><tr><th style="width:60px;">Pronoun</th><th style="width:30px;">Tipe</th><th>Kalimat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">I</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--teal);">had been editing</strong> the documentary for hours before the deadline.<span class="ex-translate">Saya telah menyunting film dokumenter itu selama berjam-jam sebelum tenggat waktu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--red);">had not been editing</strong> the documentary for hours before the deadline.<span class="ex-translate">Saya belum menyunting film dokumenter itu selama berjam-jam sebelum tenggat waktu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Had</strong> I been editing the documentary for hours before the deadline?<span class="ex-translate">Apakah saya telah menyunting film dokumenter itu selama berjam-jam sebelum tenggat waktu?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">He</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--teal);">had been jogging</strong> along the river since sunrise.<span class="ex-translate">Dia telah berlari santai di tepi sungai sejak matahari terbit.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--red);">had not been jogging</strong> along the river since sunrise.<span class="ex-translate">Dia belum berlari santai di tepi sungai sejak matahari terbit.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Had</strong> he been jogging along the river since sunrise?<span class="ex-translate">Apakah dia telah berlari santai di tepi sungai sejak matahari terbit?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">She</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--teal);">had been knitting</strong> a scarf until her wool ran out.<span class="ex-translate">Dia telah merajut sebuah syal sampai benang wolnya habis.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--red);">had not been knitting</strong> a scarf until her wool ran out.<span class="ex-translate">Dia belum merajut sebuah syal sampai benang wolnya habis.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Had</strong> she been knitting a scarf until her wool ran out?<span class="ex-translate">Apakah dia telah merajut sebuah syal sampai benang wolnya habis?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">It</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--teal);">had been raining</strong> heavily before the match was cancelled.<span class="ex-translate">Hujan telah turun dengan deras sebelum pertandingan itu dibatalkan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--red);">had not been raining</strong> heavily before the match was cancelled.<span class="ex-translate">Hujan belum turun dengan deras sebelum pertandingan itu dibatalkan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Had</strong> it been raining heavily before the match was cancelled?<span class="ex-translate">Apakah hujan telah turun dengan deras sebelum pertandingan itu dibatalkan?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">You</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--teal);">had been practicing</strong> the violin for months before the recital.<span class="ex-translate">Kamu telah berlatih biola selama berbulan-bulan sebelum resital itu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--red);">had not been practicing</strong> the violin for months before the recital.<span class="ex-translate">Kamu belum berlatih biola selama berbulan-bulan sebelum resital itu.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Had</strong> you been practicing the violin for months before the recital?<span class="ex-translate">Apakah kamu telah berlatih biola selama berbulan-bulan sebelum resital itu?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">We</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--teal);">had been negotiating</strong> the merger long before the news leaked.<span class="ex-translate">Kami telah menegosiasikan merger itu jauh sebelum beritanya bocor.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--red);">had not been negotiating</strong> the merger long before the news leaked.<span class="ex-translate">Kami belum menegosiasikan merger itu jauh sebelum beritanya bocor.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Had</strong> we been negotiating the merger long before the news leaked?<span class="ex-translate">Apakah kami telah menegosiasikan merger itu jauh sebelum beritanya bocor?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">They</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--teal);">had been digging</strong> the well for days when they finally struck water.<span class="ex-translate">Mereka telah menggali sumur itu selama berhari-hari ketika akhirnya menemukan air.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--red);">had not been digging</strong> the well for days when they finally struck water.<span class="ex-translate">Mereka belum menggali sumur itu selama berhari-hari ketika akhirnya menemukan air.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Had</strong> they been digging the well for days when they finally struck water?<span class="ex-translate">Apakah mereka telah menggali sumur itu selama berhari-hari ketika akhirnya menemukan air?</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:16px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:16px 20px; font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
+      <div><span style="color:var(--teal); font-weight:700;">HAD BEEN</span> &nbsp;→&nbsp; I, He, She, It, You, We, They (semua subjek)</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. CONTRACTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Contraction (Bentuk Singkat)</div>
+        <div class="section-subtitle">Versi singkat yang sering dipakai dalam percakapan sehari-hari</div>
+      </div>
+    </div>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); padding-left:4px;">Positif — 'd been</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I had been</td><td class="contraction-arrow">→</td><td class="contraction-short">I'd been</td></tr>
+        <tr><td class="contraction-full">you had been</td><td class="contraction-arrow">→</td><td class="contraction-short">you'd been</td></tr>
+        <tr><td class="contraction-full">he had been</td><td class="contraction-arrow">→</td><td class="contraction-short">he'd been</td></tr>
+        <tr><td class="contraction-full">she had been</td><td class="contraction-arrow">→</td><td class="contraction-short">she'd been</td></tr>
+        <tr><td class="contraction-full">it had been</td><td class="contraction-arrow">→</td><td class="contraction-short">it'd been</td></tr>
+        <tr><td class="contraction-full">we had been</td><td class="contraction-arrow">→</td><td class="contraction-short">we'd been</td></tr>
+        <tr><td class="contraction-full">they had been</td><td class="contraction-arrow">→</td><td class="contraction-short">they'd been</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); padding-left:4px;">Negatif — hadn't been</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I had not been</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">I hadn't been</td></tr>
+        <tr><td class="contraction-full">you had not been</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">you hadn't been</td></tr>
+        <tr><td class="contraction-full">he had not been</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">he hadn't been</td></tr>
+        <tr><td class="contraction-full">she had not been</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">she hadn't been</td></tr>
+        <tr><td class="contraction-full">it had not been</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">it hadn't been</td></tr>
+        <tr><td class="contraction-full">we had not been</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">we hadn't been</td></tr>
+        <tr><td class="contraction-full">they had not been</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">they hadn't been</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">By the time we met, <span class="ex-hl">I'd been</span> travelling across Asia for a year.<span class="ex-translate">Saat kita bertemu, aku telah berkeliling Asia selama setahun.</span></span>
+        <span class="ex-note">= By the time we met, I had been travelling across Asia for a year.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">You'd been</span> complaining about the noise long before the neighbours apologized.<span class="ex-translate">Kamu telah mengeluhkan kebisingan itu jauh sebelum para tetangga meminta maaf.</span></span>
+        <span class="ex-note">= You had been complaining about the noise long before the neighbours apologized.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">He'd been</span> coaching the team for a decade before he retired.<span class="ex-translate">Dia telah melatih tim itu selama satu dekade sebelum pensiun.</span></span>
+        <span class="ex-note">= He had been coaching the team for a decade before he retired.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">She'd been</span> saving money quietly until she bought her first apartment.<span class="ex-translate">Dia telah menabung diam-diam sampai akhirnya membeli apartemen pertamanya.</span></span>
+        <span class="ex-note">= She had been saving money quietly until she bought her first apartment.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">We'd been</span> rehearsing the choir piece before the conductor changed the key.<span class="ex-translate">Kami telah berlatih lagu paduan suara itu sebelum sang dirigen mengubah nada dasarnya.</span></span>
+        <span class="ex-note">= We had been rehearsing the choir piece before the conductor changed the key.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">They'd been</span> arguing about the budget until the manager stepped in.<span class="ex-translate">Mereka telah berdebat soal anggaran sampai sang manajer turun tangan.</span></span>
+        <span class="ex-note">= They had been arguing about the budget until the manager stepped in.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The patient <span class="ex-hl">hadn't been</span> sleeping well for weeks before the diagnosis.<span class="ex-translate">Pasien itu belum tidur nyenyak selama berminggu-minggu sebelum diagnosis.</span></span>
+        <span class="ex-note">= The patient had not been sleeping well for weeks before the diagnosis.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">The factory workers <span class="ex-hl">had been protesting</span> outside the gate for three days before management responded.<span class="ex-translate">Para buruh pabrik telah berunjuk rasa di luar gerbang selama tiga hari sebelum manajemen menanggapi.</span></span>
+        <span class="ex-note">Subject: the factory workers — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The old printer <span class="ex-hl">had been jamming</span> repeatedly before the technician replaced it.<span class="ex-translate">Printer tua itu telah macet berulang kali sebelum teknisi menggantinya.</span></span>
+        <span class="ex-note">Subject: the old printer — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The marketing department <span class="ex-hl">had been testing</span> the campaign for weeks before the launch.<span class="ex-translate">Departemen pemasaran telah menguji kampanye itu selama berminggu-minggu sebelum peluncuran.</span></span>
+        <span class="ex-note">Subject: the marketing department — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The stray dog <span class="ex-hl">had been wandering</span> the alley for hours before someone fed it.<span class="ex-translate">Anjing liar itu telah berkeliaran di gang selama berjam-jam sebelum seseorang memberinya makan.</span></span>
+        <span class="ex-note">Subject: the stray dog — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The fire alarm <span class="ex-hl">had been ringing</span> for minutes before anyone evacuated the building.<span class="ex-translate">Alarm kebakaran itu telah berbunyi selama beberapa menit sebelum ada yang mengosongkan gedung.</span></span>
+        <span class="ex-note">Subject: the fire alarm — bukan pronoun</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Tips:</strong> Contraction <strong style="color:var(--teal)">hadn't been</strong> umum dipakai dalam <strong style="color:var(--teal)">percakapan sehari-hari</strong> dan tulisan informal. Untuk tulisan formal, gunakan bentuk lengkap (<strong style="color:var(--teal)">had not been</strong>). Ingat: contraction <strong style="color:var(--amber)">'d</strong> di sini berarti <strong style="color:var(--teal)">had</strong> dan selalu diikuti <strong style="color:var(--teal)">been</strong> sebelum V-ing.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. KESALAHAN UMUM -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">Kesalahan Umum</div>
+        <div class="section-subtitle">Error yang sering terjadi dan cara menghindarinya</div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">She had been work hard all semester.</div>
+          <div class="err-explain">Salah: setelah "had been" wajib memakai V-ing (present participle), bukan bentuk dasar (work)</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">She had been working hard all semester.</div>
+          <div class="err-explain">Benar: had been + V-ing (working)</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">They had working all night on the project.</div>
+          <div class="err-explain">Salah: kata "been" tidak boleh dihilangkan — polanya selalu had + been + V-ing</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">They had been working all night on the project.</div>
+          <div class="err-explain">Benar: had been + V-ing (working)</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">I had been knowing the answer the whole time.</div>
+          <div class="err-explain">Salah: kata kerja stative seperti "know" tidak dipakai dalam bentuk continuous</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">I had known the answer the whole time.</div>
+          <div class="err-explain">Benar: gunakan Past Perfect biasa (had + V3) untuk stative verb</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. TIME SIGNAL & CARA CEPAT MENGENALI -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">Time Signal & Cara Cepat Mengenali</div>
+        <div class="section-subtitle">Penanda waktu + deteksi Past Perfect Continuous dalam satu langkah</div>
+      </div>
+    </div>
+    <div class="detect-box">
+      <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
+      <div class="signal-grid" style="margin-bottom:16px;">
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">for</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">since</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">before</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">how long</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">until then</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">by the time</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">all day</div>
+      </div>
+      <div style="font-size:13px; color:var(--muted); margin-bottom:16px;">Jika salah satu muncul + ada <strong style="color:var(--teal)">had been</strong> + <strong style="color:var(--teal)">V-ing</strong> → Past Perfect Continuous Tense</div>
+      <div class="detect-examples">
+        <div class="detect-ex">The athletes had been training <strong>for</strong> months before the championship.</div>
+        <div class="detect-ex">She had been managing the café <strong>since</strong> her father fell ill.</div>
+        <div class="detect-ex">We had been cleaning the attic <strong>all day</strong> when the guests suddenly arrived.</div>
+        <div class="detect-ex"><strong>By the time</strong> the rescuers came, the climbers had been shivering for hours.</div>
+        <div class="detect-ex">He had been lecturing <strong>until then</strong>, so the students looked exhausted.</div>
+      </div>
+      <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
+        💡 Frasa <strong style="color:var(--teal)">for</strong> dan <strong style="color:var(--teal)">since</strong> menekankan durasi, sedangkan <strong style="color:var(--teal)">before</strong> dan <strong style="color:var(--teal)">by the time</strong> menandai aksi lampau lain yang menjadi titik acuan. Kombinasi penanda durasi + titik waktu lampau adalah ciri khas tense ini.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- KEY CONCEPT -->
+  <div class="key-box">
+    <h3>👉 Kunci Utama</h3>
+    <div class="key-points">
+      <div class="key-point"><div class="key-dot"></div><div>Selalu gunakan pola <strong>had been + V-ing</strong> — jangan lupa akhiran -ing pada kata kerja dan jangan menghilangkan kata "been".</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Gunakan <strong>had been</strong> untuk semua subjek — tidak ada perbedaan antara I, he, she, it, you, we, they.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Tense ini menekankan <strong>durasi</strong> sebuah aksi yang berlangsung sebelum titik atau aksi tertentu di masa lalu, dan sering menjelaskan penyebabnya.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Hindari kata kerja stative (know, believe, own) dalam bentuk ini — pakai Past Perfect biasa. Contraction: <strong>'d been</strong> (positif) dan <strong>hadn't been</strong> (negatif).</div></div>
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<footer>
+  Past Perfect Continuous Tense · English Grammar · Bahan Belajar
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

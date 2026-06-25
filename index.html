@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk · 16 Tenses</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0e1525; --card:#161f33; --field:#0f1828; --border:#26324d;
+    --accent:#5b7cfa; --accent2:#8b9dff; --txt:#eef1f8; --muted:#8b96b0;
+    --err:#ff6b6b; --ok:#3ddc97;
+  }
+  body{min-height:100vh;background:radial-gradient(1200px 600px at 70% -10%,#1d2a4d,transparent),var(--bg);
+    color:var(--txt);font-family:-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 30px;box-shadow:0 30px 80px rgba(0,0,0,.45);}
+  .logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;}
+  h1{font-size:23px;font-weight:700;margin-bottom:6px;}
+  .sub{font-size:14px;color:var(--muted);margin-bottom:26px;}
+  .field{margin-bottom:16px;}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px;font-weight:500;}
+  .input-wrap{position:relative;}
+  input{width:100%;background:var(--field);border:1px solid var(--border);border-radius:11px;padding:13px 15px;color:var(--txt);font-size:15px;outline:none;transition:border-color .15s,box-shadow .15s;}
+  input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,124,250,.18);}
+  input::placeholder{color:#5a647d;}
+  .toggle-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:4px;}
+  .btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:11px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px;transition:filter .15s,transform .05s;}
+  .btn:hover{filter:brightness(1.08);} .btn:active{transform:scale(.99);}
+  .btn:disabled{opacity:.6;cursor:not-allowed;}
+  .msg{font-size:13px;border-radius:10px;padding:11px 14px;margin-bottom:16px;display:none;}
+  .msg.err{display:block;background:rgba(255,107,107,.12);color:var(--err);border:1px solid rgba(255,107,107,.3);}
+  .msg.ok{display:block;background:rgba(61,220,151,.12);color:var(--ok);border:1px solid rgba(61,220,151,.3);}
+  .switch{text-align:center;font-size:14px;color:var(--muted);margin-top:22px;}
+  .switch a{color:var(--accent2);font-weight:600;text-decoration:none;cursor:pointer;}
+  .switch a:hover{text-decoration:underline;}
+  .note{margin-top:24px;font-size:11px;color:#697390;line-height:1.5;border-top:1px solid var(--border);padding-top:16px;}
+  .hint{font-size:11.5px;color:#697390;margin-top:6px;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🔐</div>
+    <h1 id="title">Selamat datang kembali</h1>
+    <p class="sub" id="subtitle">Masuk untuk membuka materi 16 Tenses.</p>
+
+    <div class="msg" id="msg"></div>
+
+    <form id="form" autocomplete="off">
+      <div class="field" id="nameField" style="display:none;">
+        <label for="name">Nama</label>
+        <input type="text" id="name" placeholder="Nama lengkap">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="kamu@email.com" autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="toggle-eye" id="eye">Lihat</button>
+        </div>
+        <div class="hint" id="pwHint" style="display:none;">Minimal 6 karakter.</div>
+      </div>
+      <button type="submit" class="btn" id="submitBtn">Masuk</button>
+    </form>
+
+    <p class="switch" id="switch">Belum punya akun? <a id="switchLink">Daftar</a></p>
+
+    <p class="note">🔒 Login asli via <b>Supabase</b>. Akun tersimpan aman di server, bisa dipakai di perangkat & browser mana pun.</p>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+  const $ = (id)=>document.getElementById(id);
+  const msg = $('msg');
+  function showMsg(t,type){ msg.textContent=t; msg.className='msg '+type; }
+  function clearMsg(){ msg.className='msg'; msg.textContent=''; }
+
+  // Cek konfigurasi
+  if (typeof SUPABASE_URL === 'undefined' || SUPABASE_URL.indexOf('GANTI_') === 0) {
+    showMsg('config.js belum diisi. Isi SUPABASE_URL & SUPABASE_ANON_KEY dulu.', 'err');
+  }
+  const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Sudah login? langsung ke materi.
+  client.auth.getSession().then(({data})=>{ if(data.session){ location.replace('home.html'); } });
+
+  let mode='login';
+  function setMode(m){
+    mode=m; clearMsg();
+    const reg = m==='register';
+    $('nameField').style.display = reg ? 'block':'none';
+    $('pwHint').style.display = reg ? 'block':'none';
+    $('title').textContent = reg ? 'Buat akun baru' : 'Selamat datang kembali';
+    $('subtitle').textContent = reg ? 'Daftar untuk membuka materi 16 Tenses.' : 'Masuk untuk membuka materi 16 Tenses.';
+    $('submitBtn').textContent = reg ? 'Daftar' : 'Masuk';
+    $('password').setAttribute('autocomplete', reg ? 'new-password':'current-password');
+    $('switch').innerHTML = reg
+      ? 'Sudah punya akun? <a id="switchLink">Masuk</a>'
+      : 'Belum punya akun? <a id="switchLink">Daftar</a>';
+    $('switchLink').onclick = ()=> setMode(reg ? 'login' : 'register');
+  }
+  $('switchLink').onclick = ()=> setMode('register');
+
+  $('eye').onclick = ()=>{
+    const p=$('password'); const show=p.type==='password';
+    p.type = show ? 'text':'password';
+    $('eye').textContent = show ? 'Sembunyikan':'Lihat';
+  };
+
+  $('form').addEventListener('submit', async (e)=>{
+    e.preventDefault(); clearMsg();
+    const name=$('name').value.trim();
+    const email=$('email').value.trim().toLowerCase();
+    const password=$('password').value;
+    const btn=$('submitBtn');
+
+    if(!email || !password) return showMsg('Email dan password wajib diisi.','err');
+    if(mode==='register' && !name) return showMsg('Nama wajib diisi.','err');
+    if(mode==='register' && password.length<6) return showMsg('Password minimal 6 karakter.','err');
+
+    btn.disabled=true; btn.textContent='Memproses...';
+    try{
+      if(mode==='register'){
+        const { data, error } = await client.auth.signUp({
+          email, password, options:{ data:{ name } }
+        });
+        if(error) throw error;
+        if(data.session){
+          showMsg('Akun berhasil dibuat! Mengarahkan...','ok');
+          setTimeout(()=> location.replace('home.html'), 700);
+        } else {
+          // Email confirmation masih aktif di Supabase
+          showMsg('Akun dibuat. Cek email kamu untuk verifikasi, lalu Masuk. (Atau matikan "Confirm email" di Supabase agar langsung masuk.)','ok');
+          setMode('login');
+        }
+      } else {
+        const { error } = await client.auth.signInWithPassword({ email, password });
+        if(error) throw error;
+        showMsg('Berhasil masuk! Mengarahkan...','ok');
+        setTimeout(()=> location.replace('home.html'), 500);
+      }
+    }catch(err){
+      const m = (err && err.message) ? err.message : 'Terjadi kesalahan.';
+      // Pesan ramah untuk error umum
+      if(/invalid login/i.test(m)) showMsg('Email atau password salah.','err');
+      else if(/already registered/i.test(m)) showMsg('Email sudah terdaftar. Silakan Masuk.','err');
+      else showMsg(m,'err');
+    }finally{
+      btn.disabled=false; btn.textContent = mode==='register' ? 'Daftar':'Masuk';
+    }
+  });
+
+  setMode('login');
+</script>
+</body>
+</html>

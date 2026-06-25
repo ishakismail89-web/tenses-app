@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Future Tense – Bahan Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:    #0F1729;
+    --navy2:   #1A2540;
+    --navy3:   #243356;
+    --teal:    #2DD4BF;
+    --teal2:   #0F9688;
+    --amber:   #F59E0B;
+    --red:     #F87171;
+    --green:   #4ADE80;
+    --white:   #F0EDE6;
+    --muted:   #8A97B0;
+    --border:  rgba(255,255,255,0.07);
+  }
+  html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+  body { background: var(--navy); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; min-height: 100vh; position: relative; }
+  #progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--teal), var(--amber)); z-index: 999; }
+  nav { position: sticky; top: 0; background: rgba(15,23,41,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .nav-badge { background: var(--teal); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+  nav span { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .hero { margin-bottom: 56px; }
+  .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 7vw, 56px); font-weight: 700; line-height: 1.1; color: var(--teal); margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-desc { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+  .hero-formula-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: var(--navy2); border: 1px solid var(--teal); border-radius: 12px; padding: 12px 20px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; }
+  .pill-s { color: var(--amber); }
+  .pill-op { color: var(--muted); font-size: 13px; }
+  .pill-hv { color: var(--teal); }
+  .pill-v3 { color: #A78BFA; }
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .section-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: var(--navy2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; color: var(--teal); margin-top: 4px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--teal); line-height: 1.3; }
+  .section-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .use-grid { grid-template-columns: 1fr; } }
+  .use-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .use-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .use-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .use-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .use-card-ex { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 8px; }
+  .formula-block { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .formula-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; padding: 18px 24px; gap: 20px; border-bottom: 1px solid var(--border); }
+  .formula-row:last-child { border-bottom: none; }
+  .formula-type { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; text-align: center; }
+  .type-pos { background: rgba(74,222,128,0.15); color: var(--green); }
+  .type-neg { background: rgba(248,113,113,0.15); color: var(--red); }
+  .type-que { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .formula-text { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ft-s { color: var(--amber); }
+  .ft-hv { color: var(--teal); }
+  .ft-not { color: var(--red); }
+  .ft-v3 { color: #A78BFA; }
+  .ft-qm { color: var(--muted); }
+  .signal-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .signal-chip { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; background: var(--navy2); border: 1px solid var(--teal2); color: var(--teal); padding: 8px 16px; border-radius: 40px; }
+  .examples-list { display: flex; flex-direction: column; gap: 12px; }
+  .example-item { background: var(--navy2); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 0 12px 12px 0; padding: 16px 20px; font-size: 15px; line-height: 1.5; }
+  .ex-hl { color: var(--teal); font-weight: 600; }
+  .ex-note { display: block; font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic; }
+  .ex-sentence { display: block; }
+  .ex-translate { display: block; font-size: 13px; color: #7FE3D6; margin-top: 4px; font-style: italic; }
+  .table-wrap { border-radius: 16px; overflow: hidden; }
+  .sentence-table { width: 100%; border-collapse: collapse; }
+  .sentence-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .sentence-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); position: relative; }
+  .td-type { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .que { color: var(--amber); }
+  .td-sen { color: var(--white); line-height: 1.5; }
+  .error-pair { background: var(--navy2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+  .error-row { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .error-row:last-child { border-bottom: none; }
+  .err-icon { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+  .err-icon.bad { background: rgba(248,113,113,0.15); color: var(--red); }
+  .err-icon.good { background: rgba(74,222,128,0.15); color: var(--green); }
+  .err-text { font-size: 14px; line-height: 1.5; }
+  .err-sentence { font-weight: 600; margin-bottom: 4px; }
+  .err-explain { font-size: 12px; color: var(--muted); }
+  .err-bad { color: var(--red); text-decoration: line-through; opacity: 0.8; }
+  .err-good { color: var(--green); }
+  .key-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .key-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--teal); margin-bottom: 16px; }
+  .key-points { display: flex; flex-direction: column; gap: 12px; }
+  .key-point { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; color: var(--white); }
+  .key-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 8px; }
+  .detect-box { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .detect-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .detect-examples { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .detect-ex { font-size: 13px; color: var(--muted); padding-left: 16px; border-left: 2px solid var(--navy3); line-height: 1.6; }
+  .detect-ex strong { color: var(--teal); font-weight: 600; }
+  .contraction-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
+  .contraction-table th { background: var(--navy3); font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 20px; text-align: left; color: var(--muted); }
+  .contraction-table td { background: var(--navy2); padding: 14px 20px; font-size: 14px; border-top: 1px solid var(--border); color: var(--white); }
+  .contraction-full { color: var(--muted); }
+  .contraction-arrow { color: var(--muted); font-size: 12px; padding: 0 6px; }
+  .contraction-short { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--teal); }
+  footer { text-align: center; padding: 32px 24px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="guard.js"></script>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-badge">Grammar</div>
+  <span>Simple Future Tense</span>
+</nav>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Tenses · English Grammar</div>
+    <h1>Simple <em>Future</em><br>Tense</h1>
+    <p class="hero-desc">Pelajari kapan, bagaimana, dan mengapa tense ini digunakan — lengkap dengan rumus, sinyal waktu, contraction, dan kesalahan yang harus dihindari.</p>
+    <div class="hero-formula-pill">
+      <span class="pill-s">S</span>
+      <span class="pill-op">+</span>
+      <span class="pill-hv">will</span>
+      <span class="pill-op">+</span>
+      <span class="pill-v3">V1 (Kata Kerja Dasar)</span>
+    </div>
+  </div>
+
+  <!-- 1. KEGUNAAN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Kegunaan</div>
+        <div class="section-subtitle">Kapan tense ini dipakai?</div>
+      </div>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-card-icon">🔮</div>
+        <div class="use-card-title">Prediksi tentang masa depan</div>
+        <div class="use-card-desc">Menyatakan ramalan atau dugaan tentang sesuatu yang diperkirakan terjadi di masa depan.</div>
+        <div class="use-card-ex">"It will rain heavily tomorrow afternoon."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">⚡</div>
+        <div class="use-card-title">Keputusan spontan saat berbicara</div>
+        <div class="use-card-desc">Menyatakan keputusan yang baru saja diambil pada saat sedang berbicara, tanpa rencana sebelumnya.</div>
+        <div class="use-card-ex">"I will answer the phone for you."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">🤝</div>
+        <div class="use-card-title">Janji, tawaran & permintaan</div>
+        <div class="use-card-desc">Menyatakan janji, menawarkan bantuan, atau mengajukan permintaan kepada orang lain.</div>
+        <div class="use-card-ex">"I will help you carry those boxes."</div>
+      </div>
+      <div class="use-card">
+        <div class="use-card-icon">📅</div>
+        <div class="use-card-title">Fakta / kepastian masa depan</div>
+        <div class="use-card-desc">Menyatakan kejadian yang pasti akan terjadi. Alternatif <strong style="color:var(--teal)">be going to + V1</strong> dipakai untuk rencana yang sudah disiapkan.</div>
+        <div class="use-card-ex">"The sun will set at six o'clock."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. RUMUS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Rumus Kalimat</div>
+        <div class="section-subtitle">Pola untuk semua jenis kalimat</div>
+      </div>
+    </div>
+    <div class="formula-block">
+      <div class="formula-row">
+        <div class="formula-type type-pos">(+) Positif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">will</span><span class="ft-qm">+</span><span class="ft-v3">V1</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-neg">(−) Negatif</div>
+        <div class="formula-text">
+          <span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-hv">will</span><span class="ft-not">not</span><span class="ft-qm">+</span><span class="ft-v3">V1</span>
+        </div>
+      </div>
+      <div class="formula-row">
+        <div class="formula-type type-que">(?) Tanya</div>
+        <div class="formula-text">
+          <span class="ft-hv">Will</span><span class="ft-qm">+</span><span class="ft-s">S</span><span class="ft-qm">+</span><span class="ft-v3">V1</span><span class="ft-qm">?</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px; font-size:13px; color:var(--muted); padding:0 4px;">
+      <span style="color:var(--amber);">■</span> S = Subjek &nbsp;|&nbsp;
+      <span style="color:var(--teal);">■</span> will = auxiliary verb (sama untuk semua subjek) &nbsp;|&nbsp;
+      <span style="color:#A78BFA;">■</span> V1 = kata kerja dasar (bentuk pertama, tanpa -s/-es)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. CONTOH KALIMAT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Contoh Kalimat</div>
+        <div class="section-subtitle">Penggunaan nyata dalam kalimat</div>
+      </div>
+    </div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">The weather forecast says it <span class="ex-hl">will snow</span> in the mountains next week.<span class="ex-translate">Ramalan cuaca mengatakan akan turun salju di pegunungan minggu depan.</span></span>
+        <span class="ex-note">Prediksi tentang sesuatu yang diperkirakan terjadi di masa depan</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">Don't worry, I <span class="ex-hl">will fix</span> your bicycle tonight.<span class="ex-translate">Jangan khawatir, saya akan memperbaiki sepedamu malam ini.</span></span>
+        <span class="ex-note">Keputusan spontan yang diambil saat sedang berbicara</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">I promise I <span class="ex-hl">will return</span> your camera before Sunday.<span class="ex-translate">Saya berjanji akan mengembalikan kameramu sebelum hari Minggu.</span></span>
+        <span class="ex-note">Janji yang diberikan kepada orang lain</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The new shopping mall <span class="ex-hl">will open</span> its doors soon.<span class="ex-translate">Pusat perbelanjaan baru itu akan segera membuka pintunya.</span></span>
+        <span class="ex-note">Fakta yang dipastikan akan terjadi di masa depan</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">Will you <span class="ex-hl">join</span> us for dinner later this evening?<span class="ex-translate">Apakah kamu akan bergabung dengan kami untuk makan malam nanti malam?</span></span>
+        <span class="ex-note">Pertanyaan / permintaan tentang rencana di masa depan</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. POLA LENGKAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Positif · Negatif · Tanya</div>
+        <div class="section-subtitle">Semua pronoun — dari I sampai They</div>
+      </div>
+    </div>
+    <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; padding-left:4px;">
+      ✅ WILL — Semua Subjek (I · He · She · It · You · We · They)
+    </div>
+    <div style="margin-bottom:12px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:12px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Keunggulan Simple Future:</strong> Auxiliary verb <strong style="color:var(--teal)">will</strong> dipakai untuk <strong style="color:var(--teal)">semua subjek</strong> dan selalu diikuti <strong style="color:var(--teal)">kata kerja dasar (V1)</strong> — tidak ada penambahan -s/-es meskipun subjeknya he, she, atau it.
+    </div>
+    <div class="table-wrap" style="margin-bottom:20px;">
+    <table class="sentence-table">
+      <thead><tr><th style="width:60px;">Pronoun</th><th style="width:30px;">Tipe</th><th>Kalimat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">I</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--teal);">will bake</strong> a chocolate cake for the party.<span class="ex-translate">Saya akan memanggang kue cokelat untuk pesta.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">I <strong style="color:var(--red);">will not bake</strong> a chocolate cake for the party.<span class="ex-translate">Saya tidak akan memanggang kue cokelat untuk pesta.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Will</strong> I bake a chocolate cake for the party?<span class="ex-translate">Apakah saya akan memanggang kue cokelat untuk pesta?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">He</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--teal);">will repair</strong> the broken fence this weekend.<span class="ex-translate">Dia akan memperbaiki pagar yang rusak akhir pekan ini.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">He <strong style="color:var(--red);">will not repair</strong> the broken fence this weekend.<span class="ex-translate">Dia tidak akan memperbaiki pagar yang rusak akhir pekan ini.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Will</strong> he repair the broken fence this weekend?<span class="ex-translate">Apakah dia akan memperbaiki pagar yang rusak akhir pekan ini?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">She</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--teal);">will paint</strong> the bedroom wall a soft blue.<span class="ex-translate">Dia akan mengecat dinding kamar tidur dengan warna biru lembut.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">She <strong style="color:var(--red);">will not paint</strong> the bedroom wall a soft blue.<span class="ex-translate">Dia tidak akan mengecat dinding kamar tidur dengan warna biru lembut.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Will</strong> she paint the bedroom wall a soft blue?<span class="ex-translate">Apakah dia akan mengecat dinding kamar tidur dengan warna biru lembut?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">It</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--teal);">will charge</strong> the battery within two hours.<span class="ex-translate">Alat itu akan mengisi baterai dalam waktu dua jam.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">It <strong style="color:var(--red);">will not charge</strong> the battery within two hours.<span class="ex-translate">Alat itu tidak akan mengisi baterai dalam waktu dua jam.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Will</strong> it charge the battery within two hours?<span class="ex-translate">Apakah alat itu akan mengisi baterai dalam waktu dua jam?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">You</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--teal);">will enjoy</strong> the live concert next month.<span class="ex-translate">Kamu akan menikmati konser langsung itu bulan depan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">You <strong style="color:var(--red);">will not enjoy</strong> the live concert next month.<span class="ex-translate">Kamu tidak akan menikmati konser langsung itu bulan depan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Will</strong> you enjoy the live concert next month?<span class="ex-translate">Apakah kamu akan menikmati konser langsung itu bulan depan?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">We</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--teal);">will plant</strong> a hundred trees along the riverbank.<span class="ex-translate">Kami akan menanam seratus pohon di sepanjang tepi sungai.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">We <strong style="color:var(--red);">will not plant</strong> a hundred trees along the riverbank.<span class="ex-translate">Kami tidak akan menanam seratus pohon di sepanjang tepi sungai.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Will</strong> we plant a hundred trees along the riverbank?<span class="ex-translate">Apakah kami akan menanam seratus pohon di sepanjang tepi sungai?</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type" style="color:var(--amber); font-size:13px;" rowspan="3">They</td>
+          <td class="td-type pos">(+)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--teal);">will visit</strong> the ancient temple during the holiday.<span class="ex-translate">Mereka akan mengunjungi kuil kuno itu selama liburan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type neg">(−)</td>
+          <td class="td-sen"><span class="ex-sentence">They <strong style="color:var(--red);">will not visit</strong> the ancient temple during the holiday.<span class="ex-translate">Mereka tidak akan mengunjungi kuil kuno itu selama liburan.</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-type que">(?)</td>
+          <td class="td-sen"><span class="ex-sentence"><strong style="color:var(--teal);">Will</strong> they visit the ancient temple during the holiday?<span class="ex-translate">Apakah mereka akan mengunjungi kuil kuno itu selama liburan?</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:16px; background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:16px 20px; font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
+      <div><span style="color:var(--teal); font-weight:700;">WILL</span> &nbsp;→&nbsp; I, He, She, It, You, We, They (semua subjek)</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. CONTRACTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Contraction (Bentuk Singkat)</div>
+        <div class="section-subtitle">Versi singkat yang sering dipakai dalam percakapan sehari-hari</div>
+      </div>
+    </div>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); padding-left:4px;">Positif — 'll</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I will</td><td class="contraction-arrow">→</td><td class="contraction-short">I'll</td></tr>
+        <tr><td class="contraction-full">you will</td><td class="contraction-arrow">→</td><td class="contraction-short">you'll</td></tr>
+        <tr><td class="contraction-full">he will</td><td class="contraction-arrow">→</td><td class="contraction-short">he'll</td></tr>
+        <tr><td class="contraction-full">she will</td><td class="contraction-arrow">→</td><td class="contraction-short">she'll</td></tr>
+        <tr><td class="contraction-full">it will</td><td class="contraction-arrow">→</td><td class="contraction-short">it'll</td></tr>
+        <tr><td class="contraction-full">we will</td><td class="contraction-arrow">→</td><td class="contraction-short">we'll</td></tr>
+        <tr><td class="contraction-full">they will</td><td class="contraction-arrow">→</td><td class="contraction-short">they'll</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); padding-left:4px;">Negatif — won't</div>
+    <table class="contraction-table" style="margin-bottom:16px;">
+      <thead><tr><th>Bentuk Lengkap</th><th></th><th>Contraction</th></tr></thead>
+      <tbody>
+        <tr><td class="contraction-full">I will not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">I won't</td></tr>
+        <tr><td class="contraction-full">you will not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">you won't</td></tr>
+        <tr><td class="contraction-full">he will not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">he won't</td></tr>
+        <tr><td class="contraction-full">she will not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">she won't</td></tr>
+        <tr><td class="contraction-full">it will not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">it won't</td></tr>
+        <tr><td class="contraction-full">we will not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">we won't</td></tr>
+        <tr><td class="contraction-full">they will not</td><td class="contraction-arrow">→</td><td class="contraction-short" style="color:var(--red);">they won't</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-bottom:12px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px;">Contoh Kalimat</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">I'll</span> call you as soon as the train arrives.<span class="ex-translate">Saya akan menelepon kamu segera setelah kereta tiba.</span></span>
+        <span class="ex-note">= I will call you as soon as the train arrives.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">You'll</span> understand the lesson better after the workshop.<span class="ex-translate">Kamu akan memahami pelajaran ini lebih baik setelah lokakarya.</span></span>
+        <span class="ex-note">= You will understand the lesson better after the workshop.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">He'll</span> drive the visitors to the airport tonight.<span class="ex-translate">Dia akan mengantar para tamu ke bandara malam ini.</span></span>
+        <span class="ex-note">= He will drive the visitors to the airport tonight.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">She'll</span> design the wedding invitations next week.<span class="ex-translate">Dia akan merancang undangan pernikahan minggu depan.</span></span>
+        <span class="ex-note">= She will design the wedding invitations next week.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">We'll</span> celebrate your birthday at the beach this year.<span class="ex-translate">Kami akan merayakan ulang tahunmu di pantai tahun ini.</span></span>
+        <span class="ex-note">= We will celebrate your birthday at the beach this year.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence"><span class="ex-hl">They'll</span> announce the winner during the ceremony.<span class="ex-translate">Mereka akan mengumumkan pemenangnya saat upacara berlangsung.</span></span>
+        <span class="ex-note">= They will announce the winner during the ceremony.</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">I <span class="ex-hl">won't</span> forget your kindness in the future.<span class="ex-translate">Saya tidak akan melupakan kebaikanmu di masa depan.</span></span>
+        <span class="ex-note">= I will not forget your kindness in the future.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding-left:4px; margin-bottom:10px;">5 Contoh dengan Subject Lain (Bukan Pronoun)</div>
+    <div class="examples-list">
+      <div class="example-item">
+        <span class="ex-sentence">The cleaning staff <span class="ex-hl">will mop</span> the lobby floor before the guests arrive.<span class="ex-translate">Petugas kebersihan akan mengepel lantai lobi sebelum para tamu datang.</span></span>
+        <span class="ex-note">Subject: the cleaning staff — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">My grandmother <span class="ex-hl">will knit</span> a warm scarf for the winter.<span class="ex-translate">Nenek saya akan merajut syal hangat untuk musim dingin.</span></span>
+        <span class="ex-note">Subject: my grandmother — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The local bakery <span class="ex-hl">will sell</span> fresh croissants every morning.<span class="ex-translate">Toko roti setempat akan menjual croissant segar setiap pagi.</span></span>
+        <span class="ex-note">Subject: the local bakery — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The orchestra <span class="ex-hl">will perform</span> a classical symphony tonight.<span class="ex-translate">Orkestra itu akan menampilkan simfoni klasik malam ini.</span></span>
+        <span class="ex-note">Subject: the orchestra — bukan pronoun</span>
+      </div>
+      <div class="example-item">
+        <span class="ex-sentence">The volunteer group <span class="ex-hl">will clean</span> the public park the day after tomorrow.<span class="ex-translate">Kelompok relawan itu akan membersihkan taman umum lusa.</span></span>
+        <span class="ex-note">Subject: the volunteer group — bukan pronoun</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy2); border-radius:10px; padding:14px 18px; border:1px solid var(--border);">
+      💡 <strong style="color:var(--white)">Tips:</strong> Contraction <strong style="color:var(--red)">won't</strong> sangat umum dalam <strong style="color:var(--teal)">percakapan sehari-hari</strong> dan tulisan informal. Untuk tulisan formal, gunakan bentuk lengkap (<strong style="color:var(--teal)">will not</strong>). Ingat: setelah <strong style="color:var(--amber)">'ll</strong> dan <strong style="color:var(--red)">won't</strong> selalu pakai kata kerja dasar (V1).
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. KESALAHAN UMUM -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">Kesalahan Umum</div>
+        <div class="section-subtitle">Error yang sering terjadi dan cara menghindarinya</div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">I will to call you after lunch.</div>
+          <div class="err-explain">Salah: setelah "will" tidak boleh ada "to" — langsung gunakan kata kerja dasar</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">I will call you after lunch.</div>
+          <div class="err-explain">Benar: will + V1 (call), tanpa "to"</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">She will goes to the market tomorrow.</div>
+          <div class="err-explain">Salah: setelah "will" pakai kata kerja dasar (V1), jangan tambahkan -s/-es meskipun subjeknya she</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">She will go to the market tomorrow.</div>
+          <div class="err-explain">Benar: will + V1 (go) untuk semua subjek</div>
+        </div>
+      </div>
+    </div>
+    <div class="error-pair">
+      <div class="error-row">
+        <div class="err-icon bad">✕</div>
+        <div class="err-text">
+          <div class="err-sentence err-bad">They will not coming to the picnic next Sunday.</div>
+          <div class="err-explain">Salah: setelah "will not" gunakan kata kerja dasar (V1), bukan bentuk -ing</div>
+        </div>
+      </div>
+      <div class="error-row">
+        <div class="err-icon good">✓</div>
+        <div class="err-text">
+          <div class="err-sentence err-good">They will not come to the picnic next Sunday.</div>
+          <div class="err-explain">Benar: will not + V1 (come), bukan "coming"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. TIME SIGNAL & CARA CEPAT MENGENALI -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">Time Signal & Cara Cepat Mengenali</div>
+        <div class="section-subtitle">Penanda waktu + deteksi Simple Future dalam satu langkah</div>
+      </div>
+    </div>
+    <div class="detect-box">
+      <div class="detect-title">🔍 Cari time signal-nya terlebih dulu</div>
+      <div class="signal-grid" style="margin-bottom:16px;">
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">tomorrow</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">next week</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">next month</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">soon</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">later</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">tonight</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">in the future</div>
+        <div class="signal-chip" style="font-size:12px; padding:6px 12px;">the day after tomorrow</div>
+      </div>
+      <div style="font-size:13px; color:var(--muted); margin-bottom:16px;">Jika salah satu muncul + ada <strong style="color:var(--teal)">will</strong> + <strong style="color:var(--teal)">V1</strong> → Simple Future Tense</div>
+      <div class="detect-examples">
+        <div class="detect-ex"><strong>Tomorrow</strong>, we will move into the new apartment.</div>
+        <div class="detect-ex"><strong>Next month</strong>, the company will launch a brand-new mobile app.</div>
+        <div class="detect-ex">She will send the invitation cards <strong>later</strong> today.</div>
+        <div class="detect-ex">The children will plant flowers in the garden <strong>the day after tomorrow</strong>.</div>
+        <div class="detect-ex">People will travel to other planets <strong>in the future</strong>.</div>
+      </div>
+      <div style="margin-top:16px; font-size:13px; color:var(--muted); background:var(--navy3); border-radius:10px; padding:14px 18px;">
+        💡 Selain <strong style="color:var(--teal)">will + V1</strong>, kamu juga bisa memakai <strong style="color:var(--teal)">be going to + V1</strong> (am/is/are going to) untuk rencana yang sudah disiapkan. Keduanya sama-sama menunjuk masa depan.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- KEY CONCEPT -->
+  <div class="key-box">
+    <h3>👉 Kunci Utama</h3>
+    <div class="key-points">
+      <div class="key-point"><div class="key-dot"></div><div>Selalu gunakan pola <strong>will + V1</strong> — kata kerja setelah "will" tetap dalam bentuk dasar, tanpa "to" dan tanpa -s/-es.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Gunakan <strong>will</strong> untuk semua subjek — tidak ada perbedaan antara I, he, she, it, you, we, they.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Simple Future dipakai untuk <strong>prediksi, keputusan spontan, janji/tawaran, dan kepastian</strong> masa depan; alternatifnya adalah <strong>be going to + V1</strong>.</div></div>
+      <div class="key-point"><div class="key-dot"></div><div>Contraction <strong>won't</strong> umum di percakapan — gunakan <strong>will not</strong> untuk tulisan formal. Contraction positif: <strong>'ll</strong>.</div></div>
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<footer>
+  Simple Future Tense · English Grammar · Bahan Belajar
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+</script>
+</body>
+</html>
