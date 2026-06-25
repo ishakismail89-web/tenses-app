@@ -593,16 +593,15 @@
   <!-- NAVIGASI ANTAR TENSE + KUIS -->
   <style>
     .tense-nav{ margin-top:48px; display:flex; flex-direction:column; gap:14px; }
-    .tn-row{ display:flex; gap:12px; }
-    @media (max-width:520px){ .tn-row{ flex-direction:column; } }
-    .tn-btn{ display:flex; flex-direction:column; justify-content:center; text-decoration:none; border-radius:11px; padding:9px 13px; font-family:'Space Grotesk',sans-serif; transition:transform .08s, filter .15s, border-color .15s, background .15s; }
+    .tn-row{ display:flex; gap:10px; }
+    .tn-btn{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; text-decoration:none; border-radius:11px; padding:9px 12px; font-family:'Space Grotesk',sans-serif; transition:transform .08s, filter .15s, border-color .15s, background .15s; }
     .tn-btn:active{ transform:scale(.99); }
     .tn-dir{ font-size:9.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:.85; margin-bottom:2px; }
     .tn-name{ font-size:13px; font-weight:700; }
     .tn-back{ flex:1; background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); border:1px solid transparent; }
     .tn-back:hover{ filter:brightness(1.08); }
     .tn-back .tn-dir{ color:rgba(15,23,41,.7); }
-    .tn-next{ flex:1; align-items:flex-end; text-align:right; background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); border:1px solid transparent; }
+    .tn-next{ flex:1; background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); border:1px solid transparent; }
     .tn-next:hover{ filter:brightness(1.08); }
     .tn-next .tn-dir{ color:rgba(15,23,41,.7); }
     .tn-quiz{ align-items:center; text-align:center; background:linear-gradient(135deg,var(--teal),var(--teal2)); color:var(--navy); font-size:14px; font-weight:700; padding:12px 16px; border-radius:11px; text-decoration:none; font-family:'Space Grotesk',sans-serif; transition:filter .15s, transform .08s; }
