@@ -32,10 +32,10 @@ create policy "admin can write videos"
   for all
   to authenticated
   using (
-    (auth.jwt() ->> 'email') = 'GANTI_DENGAN_EMAIL_ADMIN@email.com'
+    (auth.jwt() ->> 'email') = 'ishakismail89@gmail.com'
   )
   with check (
-    (auth.jwt() ->> 'email') = 'GANTI_DENGAN_EMAIL_ADMIN@email.com'
+    (auth.jwt() ->> 'email') = 'ishakismail89@gmail.com'
   );
 
 -- Selesai. Untuk menambah admin lain nanti, ubah kedua policy di atas
