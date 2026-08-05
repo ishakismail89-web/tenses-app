@@ -108,7 +108,14 @@
         'html.__hasbnav body{ padding-bottom:calc(76px + env(safe-area-inset-bottom,0px)); }' +
         '#__bnav{ position:fixed; left:0; right:0; bottom:0; top:auto; height:auto; z-index:9998; display:flex; justify-content:space-around; align-items:stretch;' +
           ' background:rgba(18,26,46,0.92); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-top:1px solid #26324d;' +
-          ' padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px)); }' +
+          ' padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));' +
+          ' transition:transform .28s ease, opacity .28s ease; will-change:transform; }' +
+        // Disembunyikan saat menggulir turun. Digeser +4px agar bayangan tepinya ikut keluar layar.
+        '#__bnav.__hide{ transform:translateY(calc(100% + 4px)); opacity:0; pointer-events:none; }' +
+        // Tombol tema menyisihkan tempat untuk nav; saat nav sembunyi, ikut turun.
+        'html.__hasbnav #__themeWrap{ transition:bottom .28s ease; }' +
+        'html.__hasbnav.__bnavhide #__themeWrap{ bottom:18px; }' +
+        '@media (prefers-reduced-motion: reduce){ #__bnav, html.__hasbnav #__themeWrap{ transition:none; } }' +
         '#__bnav a{ flex:1; max-width:160px; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 4px; text-decoration:none;' +
           ' color:#8A97B0; font:600 11px/1 -apple-system,sans-serif; transition:color .18s ease;' +
           ' -webkit-tap-highlight-color:transparent; }' +
@@ -144,6 +151,48 @@
       '<a href="quiz.html" class="' + (act === 'latihan' ? 'active' : '') + '">' + ICON.latihan + '<span>Latihan</span></a>';
     document.body.appendChild(nav);
     document.documentElement.classList.add('__hasbnav');
+    autoHideBottomNav(nav);
+  }
+
+  // Sembunyikan nav saat menggulir turun, tampilkan lagi saat menggulir naik.
+  function autoHideBottomNav(nav) {
+    var JITTER = 6;      // gulir sependek ini diabaikan supaya menu tidak berkedip
+    var TOP_ZONE = 80;   // dekat puncak halaman, menu selalu tampil
+    var END_ZONE = 24;   // sudah mentok bawah, menu tampil lagi agar tetap terjangkau
+    var lastY = scrollY();
+    var hidden = false;
+    var ticking = false;
+
+    function scrollY() {
+      return window.pageYOffset || document.documentElement.scrollTop || 0;
+    }
+
+    function setHidden(h) {
+      if (h === hidden) return;
+      hidden = h;
+      nav.classList.toggle('__hide', h);
+      document.documentElement.classList.toggle('__bnavhide', h);
+    }
+
+    function update() {
+      ticking = false;
+      var y = scrollY();
+      var delta = y - lastY;
+      // Jangan perbarui lastY di bawah ambang, supaya gulir pelan tetap terakumulasi.
+      if (Math.abs(delta) < JITTER) return;
+      lastY = y;
+
+      var doc = document.documentElement;
+      var atEnd = y + window.innerHeight >= doc.scrollHeight - END_ZONE;
+      if (y <= TOP_ZONE || atEnd) { setHidden(false); return; }
+      setHidden(delta > 0);
+    }
+
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }, { passive: true });
   }
 
   // ---------- Embed video di halaman tense ----------
