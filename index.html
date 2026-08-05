@@ -196,6 +196,16 @@
           options:{ data:{ name }, emailRedirectTo: HOME_URL }
         });
         if(error) throw error;
+        // Kalau email sudah terdaftar, Supabase sengaja membalas seolah-olah
+        // berhasil — lengkap dengan confirmation_sent_at palsu — supaya orang
+        // luar tidak bisa menebak email mana yang punya akun. Satu-satunya
+        // penanda jujurnya: identities kosong. Tanpa cek ini, pengguna lama
+        // disuruh menunggu email verifikasi yang tidak pernah dikirim.
+        if(data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0){
+          setMode('login');            // setMode membersihkan pesan, jadi panggil dulu
+          $('email').value = email;
+          return showMsg('Email ini sudah terdaftar. Silakan Masuk dengan password kamu.','err');
+        }
         if(data.session){
           showMsg('Akun berhasil dibuat! Mengarahkan...','ok');
           setTimeout(()=> location.replace('home.html'), 700);
