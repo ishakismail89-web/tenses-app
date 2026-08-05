@@ -31,13 +31,20 @@
   #progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--teal), var(--amber)); z-index: 999; }
   /* Header penanda tense: tertahan di atas selama menggulir, jadi pembaca selalu
      tahu sedang di tense mana. Nomor + nama, dua-duanya berwarna tema tense. */
-  nav { position: sticky; top: 0; background: rgba(15,23,41,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); border-radius: 0 0 10px 10px; z-index: 100; padding: 12px 24px; display: flex; align-items: center; gap: 12px; }
+  /* Penutup celah 10px di atas header: tanpa ini isi halaman menyembul di
+     antara tepi layar dan header saat menggulir. Warnanya = latar halaman,
+     jadi header tampak melayang di atas halaman yang bersih. */
+  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; height: 12px; background: var(--navy); z-index: 99; pointer-events: none; }
+  /* Lebarnya mengikuti kolom isi: 24px dari tepi layar, dan mentok 672px
+     (720px .page dikurangi padding kirinya-kanannya) supaya tepi header
+     sejajar betul dengan tepi teks di bawahnya. */
+  nav { position: sticky; top: 10px; width: calc(100% - 48px); max-width: 672px; margin: 10px auto 0; background: rgba(15,23,41,0.92); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 10px; z-index: 100; padding: 12px 18px; display: flex; align-items: center; gap: 12px; }
   /* Semburat warna tema di atas latar gelap — lapisan sendiri (bukan properti
      background) supaya tak terhapus oleh override mode terang di theme.js. */
   nav::after { content: ''; position: absolute; inset: 0; background: var(--glow); border-radius: inherit; pointer-events: none; z-index: -1; }
   .nav-badge { flex-shrink: 0; min-width: 30px; height: 26px; display: inline-flex; align-items: center; justify-content: center; background: var(--teal); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; padding: 0 8px; border-radius: 20px; }
   nav span { font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: var(--teal); font-weight: 600; letter-spacing: -0.01em; }
-  @media (max-width: 400px) { nav { padding: 12px 16px; gap: 10px; } nav span { font-size: 15px; } }
+  @media (max-width: 400px) { nav { padding: 11px 14px; gap: 10px; } nav span { font-size: 15px; } }
   .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
   .hero { margin-bottom: 56px; position: relative; }
   .hero::before { content:''; position:absolute; top:-40px; left:-24px; right:-24px; height:320px; background: radial-gradient(560px 260px at 25% 0%, var(--glow), transparent 70%); pointer-events:none; z-index:-1; }
