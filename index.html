@@ -44,6 +44,9 @@
   .btn-google:disabled{opacity:.6;cursor:not-allowed;}
   .hint{font-size:11.5px;color:#697390;margin-top:6px;}
   .hint.bad{color:var(--err);} .hint.good{color:var(--ok);}
+  .forgot{text-align:center;margin-top:14px;font-size:13px;}
+  .forgot a{color:var(--muted);text-decoration:none;cursor:pointer;}
+  .forgot a:hover{color:var(--accent2);text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -69,7 +72,7 @@
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="kamu@email.com" autocomplete="username">
       </div>
-      <div class="field">
+      <div class="field" id="passwordField">
         <label for="password">Password</label>
         <div class="input-wrap">
           <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
@@ -88,6 +91,9 @@
       <button type="submit" class="btn" id="submitBtn">Masuk</button>
     </form>
 
+    <p class="forgot" id="forgot"><a id="forgotLink">Lupa password?</a></p>
+
+    <div id="altLogin">
     <div class="divider"><span>atau</span></div>
 
     <button type="button" class="btn-google" id="googleBtn">
@@ -99,6 +105,7 @@
       </svg>
       Masuk dengan Google
     </button>
+    </div>
 
     <p class="switch" id="switch">Belum punya akun? <a id="switchLink">Daftar</a></p>
   </div>
@@ -122,8 +129,13 @@
   client.auth.getSession().then(({data})=>{ if(data.session){ location.replace('home.html'); } });
 
   // Tujuan setelah berhasil masuk / setelah link verifikasi email diklik.
-  const HOME_URL = window.location.origin
-    + window.location.pathname.replace(/index\.html$/, '') + 'home.html';
+  const BASE_URL = window.location.origin
+    + window.location.pathname.replace(/index\.html$/, '');
+  const HOME_URL = BASE_URL + 'home.html';
+  // Link reset TIDAK boleh mendarat di index.html: link itu membuat sesi, dan
+  // halaman ini melempar sesi apa pun ke home — pengguna tak akan sempat
+  // mengganti password. Karena itu ada halaman tersendiri.
+  const RESET_URL = BASE_URL + 'reset-password.html';
 
   // Aturan password: panjang saja, tanpa syarat jenis karakter.
   const MIN_PW = 6;
@@ -132,21 +144,30 @@
   function setMode(m){
     mode=m; clearMsg();
     const reg = m==='register';
+    const rst = m==='reset';
     $('nameField').style.display = reg ? 'block':'none';
     $('confirmField').style.display = reg ? 'block':'none';
     $('pwHint').style.display = reg ? 'block':'none';
+    // Mode reset hanya butuh email — password justru yang mau diganti.
+    $('passwordField').style.display = rst ? 'none':'block';
+    $('altLogin').style.display = rst ? 'none':'block';
+    $('forgot').style.display = (m==='login') ? 'block':'none';
     if(!reg){ $('confirm').value=''; }
     checkMatch();
-    $('title').textContent = reg ? 'Buat akun baru' : 'Selamat datang kembali';
-    $('subtitle').textContent = reg ? 'Daftar untuk membuka materi 16 Tenses.' : 'Masuk untuk membuka materi 16 Tenses.';
-    $('submitBtn').textContent = reg ? 'Daftar' : 'Masuk';
+    $('title').textContent = rst ? 'Reset password' : (reg ? 'Buat akun baru' : 'Selamat datang kembali');
+    $('subtitle').textContent = rst
+      ? 'Masukkan email kamu. Kami kirim link untuk membuat password baru.'
+      : (reg ? 'Daftar untuk membuka materi 16 Tenses.' : 'Masuk untuk membuka materi 16 Tenses.');
+    $('submitBtn').textContent = rst ? 'Kirim link reset' : (reg ? 'Daftar' : 'Masuk');
     $('password').setAttribute('autocomplete', reg ? 'new-password':'current-password');
-    $('switch').innerHTML = reg
-      ? 'Sudah punya akun? <a id="switchLink">Masuk</a>'
-      : 'Belum punya akun? <a id="switchLink">Daftar</a>';
-    $('switchLink').onclick = ()=> setMode(reg ? 'login' : 'register');
+    $('switch').innerHTML = rst
+      ? 'Ingat password kamu? <a id="switchLink">Kembali ke Masuk</a>'
+      : (reg ? 'Sudah punya akun? <a id="switchLink">Masuk</a>'
+             : 'Belum punya akun? <a id="switchLink">Daftar</a>');
+    $('switchLink').onclick = ()=> setMode(reg ? 'login' : (rst ? 'login' : 'register'));
   }
   $('switchLink').onclick = ()=> setMode('register');
+  $('forgotLink').onclick = ()=> setMode('reset');
 
   function makeEye(btnId, inputId){
     $(btnId).onclick = ()=>{
@@ -178,6 +199,25 @@
     const password=$('password').value;
     const confirm=$('confirm').value;
     const btn=$('submitBtn');
+
+    if(mode==='reset'){
+      if(!email) return showMsg('Email wajib diisi.','err');
+      btn.disabled=true; btn.textContent='Mengirim...';
+      try{
+        const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo: RESET_URL });
+        if(error) throw error;
+        setMode('login');   // setMode membersihkan pesan, jadi panggil dulu
+        $('email').value = email;
+        showMsg('Kalau ' + email + ' terdaftar, kami sudah kirim link reset ke sana. '
+              + 'Buka email itu dan klik link-nya untuk membuat password baru.','ok');
+      }catch(err){
+        showMsg((err && err.message) ? err.message : 'Gagal mengirim link reset.','err');
+      }finally{
+        btn.disabled=false;
+        if(mode==='reset') btn.textContent='Kirim link reset';
+      }
+      return;
+    }
 
     if(!email || !password) return showMsg('Email dan password wajib diisi.','err');
     if(mode==='register'){
