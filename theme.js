@@ -47,11 +47,15 @@
     // ---- Toggle switch ala Apple/iOS + label (bukan ikon) ----
     '#__themeWrap{ position:fixed; right:18px; bottom:18px; z-index:10000; display:flex; flex-direction:column; align-items:center; gap:7px;' +
       ' transition:opacity .28s ease, transform .28s ease; }' +
-    // halaman login: toggle dipindah ke kiri atas
-    '#__themeWrap.__themeTopLeft{ right:auto; bottom:auto; left:18px; top:18px; }' +
+    // Bila halaman menyediakan [data-theme-slot] (halaman login), toggle duduk di
+    // dalam slot itu — bukan melayang di atas halaman — dan tersusun mendatar.
+    '#__themeWrap.__themeInSlot{ position:static; flex-direction:row; gap:8px; }' +
+    '#__themeWrap.__themeInSlot #__themeLabel{ font-size:10.5px; padding:4px 9px; }' +
+    '#__themeWrap.__themeInSlot #__themeBtn{ width:44px; height:26px; }' +
+    '#__themeWrap.__themeInSlot #__themeBtn::after{ width:20px; height:20px; }' +
+    'html[data-theme="dark"] #__themeWrap.__themeInSlot #__themeBtn::after{ transform:translateX(18px); }' +
     // Hanya tampil di ujung halaman; di tengah guliran ia meredup dan tidak bisa diklik.
     '#__themeWrap.__hide{ opacity:0; pointer-events:none; transform:translateY(14px); }' +
-    '#__themeWrap.__themeTopLeft.__hide{ transform:translateY(-14px); }' +
     '@media (prefers-reduced-motion: reduce){ #__themeWrap{ transition:none; } }' +
     // Label: sans tipis (Inter 300; jatuh ke SF Light di halaman login yang tanpa Google Fonts).
     // Latar sengaja beropasitas rendah — keterbacaan dijaga oleh warna teks + blur, bukan oleh latar pekat.
@@ -94,9 +98,8 @@
     if (document.getElementById('__themeWrap')) return;
     var wrap = document.createElement('div');
     wrap.id = '__themeWrap';
-    // Halaman login (index.html) dapat posisi kiri atas, bukan kanan bawah.
-    var file = location.pathname.split('/').pop();
-    if (file === '' || file === 'index.html') { wrap.classList.add('__themeTopLeft'); }
+    var slot = document.querySelector('[data-theme-slot]');
+    if (slot) { wrap.classList.add('__themeInSlot'); }
 
     var label = document.createElement('span');
     label.id = '__themeLabel';
@@ -113,8 +116,14 @@
 
     wrap.appendChild(label);
     wrap.appendChild(btn);
-    document.body.appendChild(wrap);
-    autoHideToggle(wrap);
+    if (slot) {
+      // Di dalam kartu ia bagian dari tata letak, bukan lapisan mengambang —
+      // jadi tidak perlu ikut aturan sembunyi-saat-menggulir.
+      slot.appendChild(wrap);
+    } else {
+      document.body.appendChild(wrap);
+      autoHideToggle(wrap);
+    }
   }
 
   // Toggle hanya tampil di ujung halaman: paling atas atau paling bawah.
