@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verifikasi Akun — Tenses.id</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0e1525; --card:#161f33; --field:#0f1828; --border:#26324d;
+    --accent:#5b7cfa; --accent2:#8b9dff; --txt:#eef1f8; --muted:#8b96b0;
+    --err:#ff6b6b; --ok:#3ddc97;
+  }
+  body{min-height:100vh;background:radial-gradient(1200px 600px at 70% -10%,#1d2a4d,transparent),var(--bg);
+    color:var(--txt);font-family:-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .card{position:relative;width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 30px;box-shadow:0 30px 80px rgba(0,0,0,.45);text-align:center;}
+  .theme-slot{position:absolute;top:16px;right:16px;z-index:2;}
+  .logo{width:48px;height:48px;border-radius:14px;background:var(--field);border:1px solid var(--border);color:var(--accent2);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+  .logo svg{width:24px;height:24px;display:block;}
+  h1{font-size:23px;font-weight:700;margin-bottom:6px;}
+  .sub{font-size:14px;color:var(--muted);}
+  .msg{font-size:13px;border-radius:10px;padding:11px 14px;margin-top:20px;display:none;text-align:left;}
+  .msg.err{display:block;background:rgba(255,107,107,.12);color:var(--err);border:1px solid rgba(255,107,107,.3);}
+  .msg.ok{display:block;background:rgba(61,220,151,.12);color:var(--ok);border:1px solid rgba(61,220,151,.3);}
+  .spinner{width:26px;height:26px;border:2.5px solid var(--border);border-top-color:var(--accent2);border-radius:50%;margin:22px auto 0;animation:putar .8s linear infinite;}
+  @keyframes putar{to{transform:rotate(360deg);}}
+  @media (prefers-reduced-motion: reduce){ .spinner{animation-duration:2.4s;} }
+  .switch{font-size:14px;color:var(--muted);margin-top:22px;display:none;}
+  .switch a{color:var(--accent2);font-weight:600;text-decoration:none;}
+  .switch a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="theme-slot" data-theme-slot></div>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 6.5 9.6 17 4 11.4"/>
+      </svg>
+    </div>
+    <h1 id="title">Mengaktifkan akun</h1>
+    <p class="sub" id="subtitle">Sebentar, kami sedang memeriksa link kamu...</p>
+    <div class="spinner" id="spinner"></div>
+    <div class="msg" id="msg"></div>
+    <p class="switch" id="back"><a href="index.html">Kembali ke halaman Masuk</a></p>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="theme.js"></script>
+<script>
+  const $ = (id)=>document.getElementById(id);
+  const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function selesai(judul, sub){ $('title').textContent=judul; $('subtitle').textContent=sub; $('spinner').style.display='none'; }
+  function gagal(pesan){
+    selesai('Link tidak bisa dipakai', 'Akun kamu belum aktif.');
+    $('msg').textContent = pesan; $('msg').className = 'msg err';
+    $('back').style.display = 'block';
+  }
+
+  // Link verifikasi di email menunjuk ke halaman ini dengan membawa token_hash,
+  // bukan ke alamat Supabase — supaya yang terlihat pengguna hanya tenses.id.
+  // Token ditukar jadi sesi lewat verifyOtp(). Karena penukaran itu terjadi di
+  // sini (JavaScript), pemindai email yang cuma mengambil halaman tidak ikut
+  // menghanguskan tokennya seperti pada link redirect bawaan Supabase.
+  (async function verifikasi(){
+    const q = new URLSearchParams(location.search);
+    const token_hash = q.get('token_hash');
+    const type = q.get('type') || 'signup';
+
+    // Link lama (sebelum pindah domain) menaruh token di fragment dan sudah
+    // ditukar sendiri oleh supabase-js sebelum kode ini jalan.
+    if(!token_hash){
+      const { data } = await client.auth.getSession();
+      if(data.session){ return sukses(); }
+      return gagal('Link verifikasi tidak lengkap. Buka lagi link dari email, atau daftar ulang lewat halaman Masuk.');
+    }
+
+    const { error } = await client.auth.verifyOtp({ token_hash, type });
+    if(error){
+      const m = (error.message || '').toLowerCase();
+      if(/expired/.test(m))
+        return gagal('Link verifikasi sudah kedaluwarsa. Daftar ulang dengan email yang sama untuk mendapat link baru.');
+      if(/already|used/.test(m))
+        return gagal('Link ini sudah pernah dipakai. Kalau akunmu sudah aktif, langsung Masuk saja.');
+      return gagal(error.message || 'Link verifikasi tidak berlaku.');
+    }
+    sukses();
+  })();
+
+  function sukses(){
+    selesai('Akun kamu aktif!', 'Mengarahkan ke materi...');
+    $('msg').textContent = 'Verifikasi berhasil. Selamat belajar!';
+    $('msg').className = 'msg ok';
+    // Token dihapus dari URL supaya tidak ikut tersalin atau tersimpan di riwayat.
+    history.replaceState(null, '', location.pathname);
+    setTimeout(()=> location.replace('home.html'), 1200);
+  }
+</script>
+</body>
+</html>
