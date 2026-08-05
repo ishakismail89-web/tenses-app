@@ -1,0 +1,12 @@
+{
+  "name": "tenses-tests",
+  "private": true,
+  "type": "module",
+  "description": "Test UI dan konten untuk aplikasi Tenses. Sengaja dipisah dari root agar Vercel tidak menganggap ini project Node.",
+  "scripts": {
+    "test": "node run-all.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}
