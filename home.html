@@ -27,10 +27,24 @@
   a.card:hover { border-color:var(--teal); background:var(--navy3); transform:translateY(-2px); }
   .num { flex-shrink:0; width:40px; height:40px; border-radius:10px; background:var(--navy3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; color:var(--teal); }
   .info { min-width:0; }
-  .name { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; color:var(--white); margin-bottom:3px; }
-  .formula { font-size:12px; color:var(--muted); font-family:'Space Grotesk',sans-serif; }
+  .name { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; color:var(--white); margin-bottom:5px; }
+  .formula { font-size:12.5px; color:var(--muted); font-family:'Space Grotesk',sans-serif; line-height:1.6; letter-spacing:0.01em; }
   .formula b { color:var(--teal); font-weight:600; }
   footer { text-align:center; padding:32px 24px; font-size:12px; color:var(--muted); border-top:1px solid var(--border); }
+
+  /* Warna per kelompok tense */
+  .grp-present { --g:#2DD4BF; --g2:#0F9688; }
+  .grp-past { --g:#38BDF8; --g2:#0284C7; }
+  .grp-future { --g:#A78BFA; --g2:#7C3AED; }
+  .grp-pastfuture { --g:#F472B6; --g2:#DB2777; }
+  html[data-theme="light"] .grp-present { --g:#0D9488; --g2:#0F766E; }
+  html[data-theme="light"] .grp-past { --g:#0369A1; --g2:#075985; }
+  html[data-theme="light"] .grp-future { --g:#6D28D9; --g2:#5B21B6; }
+  html[data-theme="light"] .grp-pastfuture { --g:#BE185D; --g2:#9D174D; }
+  .group[class*="grp-"] .group-title { color:var(--g); }
+  .group[class*="grp-"] .num { background:var(--g); color:var(--navy); border-color:var(--g); }
+  .group[class*="grp-"] .formula b { color:var(--g); }
+  .group[class*="grp-"] a.card:hover { border-color:var(--g); }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
@@ -44,49 +58,49 @@
   <p class="lead">Kumpulan lengkap 16 tenses — disusun per kelompok waktu. Klik salah satu untuk membuka halaman belajarnya: kegunaan, rumus, contoh kalimat, tabel semua subjek, contraction, kesalahan umum, dan time signal.</p>
 
   <div class="group" data-admin-only style="display:none;">
-    <div class="group-title" style="color:var(--purple);">⚙ Admin</div>
+    <div class="group-title" style="color:var(--purple);display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>Admin</div>
     <div class="grid">
-      <a class="card" href="admin.html" style="grid-column:1/-1;border-color:var(--purple);"><div class="num" style="color:var(--purple);">⚙</div><div class="info"><div class="name">Kelola Video Tense</div><div class="formula">Tambah / edit link YouTube tiap tense</div></div></a>
+      <a class="card" href="admin.html" style="grid-column:1/-1;border-color:var(--purple);"><div class="num" style="color:var(--purple);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></div><div class="info"><div class="name">Kelola Video Tense</div><div class="formula">Tambah / edit link YouTube tiap tense</div></div></a>
     </div>
   </div>
 
-  <div class="group">
-    <div class="group-title">⏱ Present (Masa Kini)</div>
+  <div class="group grp-present">
+    <div class="group-title">Present (Masa Kini)</div>
     <div class="grid">
-      <a class="card" href="01-simple-present-tense.html"><div class="num">01</div><div class="info"><div class="name">Simple Present</div><div class="formula">S + <b>V1</b> (-s/es)</div></div></a>
-      <a class="card" href="02-present-continuous-tense.html"><div class="num">02</div><div class="info"><div class="name">Present Continuous</div><div class="formula">S + <b>am/is/are</b> + V-ing</div></div></a>
-      <a class="card" href="03-present-perfect-tense.html"><div class="num">03</div><div class="info"><div class="name">Present Perfect</div><div class="formula">S + <b>have/has</b> + V3</div></div></a>
-      <a class="card" href="04-present-perfect-continuous-tense.html"><div class="num">04</div><div class="info"><div class="name">Present Perfect Continuous</div><div class="formula">S + <b>have/has been</b> + V-ing</div></div></a>
+      <a class="card" href="01-simple-present-tense.html"><div class="num">01</div><div class="info"><div class="name">Simple Present</div><div class="formula">Subject + <b>Verb-1</b> (-s/es)</div></div></a>
+      <a class="card" href="02-present-continuous-tense.html"><div class="num">02</div><div class="info"><div class="name">Present Continuous</div><div class="formula">Subject + <b>am/is/are</b> + Verb-ing</div></div></a>
+      <a class="card" href="03-present-perfect-tense.html"><div class="num">03</div><div class="info"><div class="name">Present Perfect</div><div class="formula">Subject + <b>have/has</b> + Verb-3</div></div></a>
+      <a class="card" href="04-present-perfect-continuous-tense.html"><div class="num">04</div><div class="info"><div class="name">Present Perfect Continuous</div><div class="formula">Subject + <b>have/has been</b> + Verb-ing</div></div></a>
     </div>
   </div>
 
-  <div class="group">
-    <div class="group-title">🕰 Past (Masa Lampau)</div>
+  <div class="group grp-past">
+    <div class="group-title">Past (Masa Lampau)</div>
     <div class="grid">
-      <a class="card" href="05-simple-past-tense.html"><div class="num">05</div><div class="info"><div class="name">Simple Past</div><div class="formula">S + <b>V2</b></div></div></a>
-      <a class="card" href="06-past-continuous-tense.html"><div class="num">06</div><div class="info"><div class="name">Past Continuous</div><div class="formula">S + <b>was/were</b> + V-ing</div></div></a>
-      <a class="card" href="07-past-perfect-tense.html"><div class="num">07</div><div class="info"><div class="name">Past Perfect</div><div class="formula">S + <b>had</b> + V3</div></div></a>
-      <a class="card" href="08-past-perfect-continuous-tense.html"><div class="num">08</div><div class="info"><div class="name">Past Perfect Continuous</div><div class="formula">S + <b>had been</b> + V-ing</div></div></a>
+      <a class="card" href="05-simple-past-tense.html"><div class="num">05</div><div class="info"><div class="name">Simple Past</div><div class="formula">Subject + <b>Verb-2</b></div></div></a>
+      <a class="card" href="06-past-continuous-tense.html"><div class="num">06</div><div class="info"><div class="name">Past Continuous</div><div class="formula">Subject + <b>was/were</b> + Verb-ing</div></div></a>
+      <a class="card" href="07-past-perfect-tense.html"><div class="num">07</div><div class="info"><div class="name">Past Perfect</div><div class="formula">Subject + <b>had</b> + Verb-3</div></div></a>
+      <a class="card" href="08-past-perfect-continuous-tense.html"><div class="num">08</div><div class="info"><div class="name">Past Perfect Continuous</div><div class="formula">Subject + <b>had been</b> + Verb-ing</div></div></a>
     </div>
   </div>
 
-  <div class="group">
-    <div class="group-title">🚀 Future (Masa Depan)</div>
+  <div class="group grp-future">
+    <div class="group-title">Future (Masa Depan)</div>
     <div class="grid">
-      <a class="card" href="09-simple-future-tense.html"><div class="num">09</div><div class="info"><div class="name">Simple Future</div><div class="formula">S + <b>will</b> + V1</div></div></a>
-      <a class="card" href="10-future-continuous-tense.html"><div class="num">10</div><div class="info"><div class="name">Future Continuous</div><div class="formula">S + <b>will be</b> + V-ing</div></div></a>
-      <a class="card" href="11-future-perfect-tense.html"><div class="num">11</div><div class="info"><div class="name">Future Perfect</div><div class="formula">S + <b>will have</b> + V3</div></div></a>
-      <a class="card" href="12-future-perfect-continuous-tense.html"><div class="num">12</div><div class="info"><div class="name">Future Perfect Continuous</div><div class="formula">S + <b>will have been</b> + V-ing</div></div></a>
+      <a class="card" href="09-simple-future-tense.html"><div class="num">09</div><div class="info"><div class="name">Simple Future</div><div class="formula">Subject + <b>will</b> + Verb-1</div></div></a>
+      <a class="card" href="10-future-continuous-tense.html"><div class="num">10</div><div class="info"><div class="name">Future Continuous</div><div class="formula">Subject + <b>will be</b> + Verb-ing</div></div></a>
+      <a class="card" href="11-future-perfect-tense.html"><div class="num">11</div><div class="info"><div class="name">Future Perfect</div><div class="formula">Subject + <b>will have</b> + Verb-3</div></div></a>
+      <a class="card" href="12-future-perfect-continuous-tense.html"><div class="num">12</div><div class="info"><div class="name">Future Perfect Continuous</div><div class="formula">Subject + <b>will have been</b> + Verb-ing</div></div></a>
     </div>
   </div>
 
-  <div class="group">
-    <div class="group-title">↩ Past Future (Masa Depan di Masa Lampau)</div>
+  <div class="group grp-pastfuture">
+    <div class="group-title">Past Future (Masa Depan di Masa Lampau)</div>
     <div class="grid">
-      <a class="card" href="13-past-future-tense.html"><div class="num">13</div><div class="info"><div class="name">Past Future</div><div class="formula">S + <b>would</b> + V1</div></div></a>
-      <a class="card" href="14-past-future-continuous-tense.html"><div class="num">14</div><div class="info"><div class="name">Past Future Continuous</div><div class="formula">S + <b>would be</b> + V-ing</div></div></a>
-      <a class="card" href="15-past-future-perfect-tense.html"><div class="num">15</div><div class="info"><div class="name">Past Future Perfect</div><div class="formula">S + <b>would have</b> + V3</div></div></a>
-      <a class="card" href="16-past-future-perfect-continuous-tense.html"><div class="num">16</div><div class="info"><div class="name">Past Future Perfect Continuous</div><div class="formula">S + <b>would have been</b> + V-ing</div></div></a>
+      <a class="card" href="13-past-future-tense.html"><div class="num">13</div><div class="info"><div class="name">Past Future</div><div class="formula">Subject + <b>would</b> + Verb-1</div></div></a>
+      <a class="card" href="14-past-future-continuous-tense.html"><div class="num">14</div><div class="info"><div class="name">Past Future Continuous</div><div class="formula">Subject + <b>would be</b> + Verb-ing</div></div></a>
+      <a class="card" href="15-past-future-perfect-tense.html"><div class="num">15</div><div class="info"><div class="name">Past Future Perfect</div><div class="formula">Subject + <b>would have</b> + Verb-3</div></div></a>
+      <a class="card" href="16-past-future-perfect-continuous-tense.html"><div class="num">16</div><div class="info"><div class="name">Past Future Perfect Continuous</div><div class="formula">Subject + <b>would have been</b> + Verb-ing</div></div></a>
     </div>
   </div>
 

@@ -11,8 +11,12 @@
     --navy:    #0F1729;
     --navy2:   #1A2540;
     --navy3:   #243356;
-    --teal:    #2DD4BF;
-    --teal2:   #0F9688;
+    --teal:    #38BDF8;
+    --teal2:   #0284C7;
+    --teal-light:  #0369A1;
+    --teal2-light: #075985;
+    --glow:        rgba(56,189,248,.16);
+    --glow-light:  rgba(3,105,161,.10);
     --amber:   #F59E0B;
     --red:     #F87171;
     --green:   #4ADE80;
@@ -27,7 +31,8 @@
   .nav-badge { background: var(--teal); color: var(--navy); font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
   nav span { font-size: 13px; color: var(--muted); font-weight: 500; }
   .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
-  .hero { margin-bottom: 56px; }
+  .hero { margin-bottom: 56px; position: relative; }
+  .hero::before { content:''; position:absolute; top:-40px; left:-24px; right:-24px; height:320px; background: radial-gradient(560px 260px at 25% 0%, var(--glow), transparent 70%); pointer-events:none; z-index:-1; }
   .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
   .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 7vw, 56px); font-weight: 700; line-height: 1.1; color: var(--teal); margin-bottom: 20px; }
   .hero h1 em { font-style: normal; color: var(--teal); }

@@ -35,6 +35,18 @@
   a.pick .pname { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; color:var(--white); }
   a.pick.mix { background:linear-gradient(135deg,rgba(45,212,191,.16),rgba(245,158,11,.12)); border-color:var(--teal2); }
 
+  /* Warna per kelompok tense (preview di picker) */
+  .grp-present { --g:#2DD4BF; }
+  .grp-past { --g:#38BDF8; }
+  .grp-future { --g:#A78BFA; }
+  .grp-pastfuture { --g:#F472B6; }
+  html[data-theme="light"] .grp-present { --g:#0D9488; }
+  html[data-theme="light"] .grp-past { --g:#0369A1; }
+  html[data-theme="light"] .grp-future { --g:#6D28D9; }
+  html[data-theme="light"] .grp-pastfuture { --g:#BE185D; }
+  a.pick[class*="grp-"] .pn { background:var(--g); color:var(--navy); border-color:var(--g); }
+  a.pick[class*="grp-"]:hover { border-color:var(--g); }
+
   /* Quiz */
   .meta-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; font-size:13px; color:var(--muted); }
   .meta-row b { color:var(--teal); font-family:'Space Grotesk',sans-serif; }
@@ -110,6 +122,31 @@
   const QUIZZES = window.TENSE_QUIZZES || {};
   const MIX = window.MIX_QUIZ || [];
 
+  // Palet warna per kelompok tense (dark, light)
+  const GROUP_PALETTE = {
+    present:    { dark:['#2DD4BF','#0F9688'], light:['#0D9488','#0F766E'] },
+    past:       { dark:['#38BDF8','#0284C7'], light:['#0369A1','#075985'] },
+    future:     { dark:['#A78BFA','#7C3AED'], light:['#6D28D9','#5B21B6'] },
+    pastfuture: { dark:['#F472B6','#DB2777'], light:['#BE185D','#9D174D'] },
+  };
+  function groupOf(id){
+    const n = parseInt(id, 10);
+    if(n >= 1 && n <= 4) return 'present';
+    if(n >= 5 && n <= 8) return 'past';
+    if(n >= 9 && n <= 12) return 'future';
+    if(n >= 13 && n <= 16) return 'pastfuture';
+    return null;
+  }
+
+  function applyGroupColor(id){
+    const grp = groupOf(id) || 'present';
+    const pal = GROUP_PALETTE[grp];
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const [teal, teal2] = isLight ? pal.light : pal.dark;
+    document.documentElement.style.setProperty('--teal', teal);
+    document.documentElement.style.setProperty('--teal2', teal2);
+  }
+
   function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
   function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
   function norm(s){ return String(s).toLowerCase().trim().replace(/['’]/g,'').replace(/[.?!]+$/,'').replace(/\s+/g,' '); }
@@ -123,7 +160,8 @@
     bar.style.width = '0%';
     let cards = '';
     Object.keys(QUIZZES).sort().forEach(id => {
-      cards += '<a class="pick" href="quiz.html?tense=' + id + '"><div class="pn">' + id + '</div><div class="pname">' + esc(QUIZZES[id].name.replace(' Tense','')) + '</div></a>';
+      const grp = groupOf(id) || '';
+      cards += '<a class="pick grp-' + grp + '" href="quiz.html?tense=' + id + '"><div class="pn">' + id + '</div><div class="pname">' + esc(QUIZZES[id].name.replace(' Tense','')) + '</div></a>';
     });
     app.innerHTML =
       '<div class="eyebrow">Latihan Soal · Active Recall</div>' +
@@ -152,12 +190,17 @@
   }
 
   function startQuiz(){
+    applyGroupColor(tenseId);
     QSET = buildSet();
     if(!QSET){ renderPicker(); return; }
     navTitle.textContent = QSET.title;
     idx = 0; score = 0;
     renderQuestion();
   }
+
+  // Re-terapkan warna grup saat mode terang/gelap di-toggle selagi kuis aktif.
+  new MutationObserver(() => { if(tenseId) applyGroupColor(tenseId); })
+    .observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
 
   function renderQuestion(){
     answered = false;
