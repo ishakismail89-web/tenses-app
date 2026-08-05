@@ -102,9 +102,9 @@ console.log('\n### reset-password.html — link sah');
 
   await page.fill('#password','rahasiabaru'); await page.fill('#confirm','rahasialain');
   await page.waitForTimeout(250);
-  check('tidak cocok — hint langsung memberi tahu', (await page.locator('#confirmHint').innerText()).trim(), 'Password belum sama.');
+  check('tidak cocok — hint langsung memberi tahu', (await page.locator('#confirmHint').innerText()).trim(), 'Password tidak sama.');
   await page.click('#submitBtn'); await page.waitForTimeout(300);
-  check('tidak cocok ditolak', /belum sama/i.test(await page.locator('#msg').innerText()), true);
+  check('tidak cocok ditolak', /tidak sama/i.test(await page.locator('#msg').innerText()), true);
   check('tidak cocok — belum menyimpan', (await page.evaluate(()=>window.__calls)).length, 0);
 
   await page.fill('#confirm','rahasiabaru'); await page.waitForTimeout(250);

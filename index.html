@@ -78,7 +78,7 @@
           <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
           <button type="button" class="toggle-eye" id="eye">Lihat</button>
         </div>
-        <div class="hint" id="pwHint" style="display:none;">Minimal 6 karakter — bebas huruf besar, huruf kecil, angka, atau simbol.</div>
+        <div class="hint" id="pwHint" style="display:none;">Minimal 6 karakter.</div>
       </div>
       <div class="field" id="confirmField" style="display:none;">
         <label for="confirm">Konfirmasi Password</label>
@@ -153,7 +153,7 @@
     $('altLogin').style.display = rst ? 'none':'block';
     $('forgot').style.display = (m==='login') ? 'block':'none';
     if(!reg){ $('confirm').value=''; }
-    checkMatch();
+    periksaIsian();
     $('title').textContent = rst ? 'Reset password' : (reg ? 'Buat akun baru' : 'Selamat datang kembali');
     $('subtitle').textContent = rst
       ? 'Masukkan email kamu. Kami kirim link untuk membuat password baru.'
@@ -180,17 +180,30 @@
   makeEye('eyeConfirm','confirm');
 
   // Beri tahu kecocokan password sambil diketik, jangan tunggu sampai submit.
-  function checkMatch(){
-    const hint=$('confirmHint');
-    if(mode!=='register'){ hint.textContent=''; hint.className='hint'; return; }
+  // Panjang diperiksa lebih dulu daripada kecocokan: password yang pasti ditolak
+  // saat didaftarkan tidak boleh sempat menyala hijau "sama".
+  function periksaIsian(){
+    const pwHint=$('pwHint'), cfHint=$('confirmHint');
+    if(mode!=='register'){ cfHint.textContent=''; cfHint.className='hint'; return; }
     const pw=$('password').value, cf=$('confirm').value;
-    if(!cf){ hint.textContent=''; hint.className='hint'; return; }
-    const same = pw===cf;
-    hint.textContent = same ? 'Password cocok.' : 'Password belum sama.';
-    hint.className = 'hint ' + (same ? 'good':'bad');
+
+    if(!pw){ pwHint.textContent='Minimal '+MIN_PW+' karakter.'; pwHint.className='hint'; }
+    else if(pw.length<MIN_PW){ pwHint.textContent='Password terlalu pendek. Minimal '+MIN_PW+' karakter.'; pwHint.className='hint bad'; }
+    else { pwHint.textContent='Panjang password sudah cukup.'; pwHint.className='hint good'; }
+
+    if(!cf){ cfHint.textContent=''; cfHint.className='hint'; return; }
+    if(pw!==cf){ cfHint.textContent='Password tidak sama.'; cfHint.className='hint bad'; return; }
+    if(pw.length<MIN_PW){ cfHint.textContent='Password terlalu pendek. Minimal '+MIN_PW+' karakter.'; cfHint.className='hint bad'; return; }
+    cfHint.textContent='Password sama.'; cfHint.className='hint good';
   }
-  $('password').addEventListener('input', checkMatch);
-  $('confirm').addEventListener('input', checkMatch);
+
+  // Peringatan merah dari percobaan sebelumnya ikut hilang begitu isian
+  // diperbaiki. Pesan hijau — misalnya "link verifikasi sudah dikirim" —
+  // sengaja dibiarkan, karena itu keterangan yang masih perlu dibaca.
+  function bersihkanGalat(){ if(msg.classList.contains('err')) clearMsg(); }
+  ['password','confirm','email','name'].forEach(function(id){
+    $(id).addEventListener('input', function(){ bersihkanGalat(); periksaIsian(); });
+  });
 
   $('form').addEventListener('submit', async (e)=>{
     e.preventDefault(); clearMsg();
@@ -222,9 +235,9 @@
     if(!email || !password) return showMsg('Email dan password wajib diisi.','err');
     if(mode==='register'){
       if(!name) return showMsg('Nama wajib diisi.','err');
-      if(password.length<MIN_PW) return showMsg('Password minimal '+MIN_PW+' karakter.','err');
+      if(password.length<MIN_PW) return showMsg('Password terlalu pendek. Minimal '+MIN_PW+' karakter.','err');
       if(!confirm) return showMsg('Konfirmasi password wajib diisi.','err');
-      if(password!==confirm) return showMsg('Password dan konfirmasi password belum sama.','err');
+      if(password!==confirm) return showMsg('Password dan konfirmasinya tidak sama.','err');
     }
 
     btn.disabled=true; btn.textContent='Memproses...';

@@ -54,9 +54,8 @@ await page.click('#switchLink');
 await page.waitForTimeout(300);
 check('mode Daftar — field konfirmasi muncul', await visible('#confirmField'), true);
 check('mode Daftar — keterangan 6 karakter muncul', await visible('#pwHint'), true);
-check('keterangan menyebut 6 karakter dan bebas jenis',
-      /6 karakter/.test(await page.locator('#pwHint').innerText()) &&
-      /simbol/.test(await page.locator('#pwHint').innerText()), true,
+check('keterangan menyebut 6 karakter',
+      /6 karakter/.test(await page.locator('#pwHint').innerText()), true,
       `("${await page.locator('#pwHint').innerText()}")`);
 
 // ---------- 2. Umpan balik langsung saat mengetik ----------
@@ -66,13 +65,47 @@ await page.fill('#email', 'coba@contoh.com');
 await page.fill('#password', 'abc123');
 await page.fill('#confirm', 'abc1');
 await page.waitForTimeout(250);
-check('belum sama — hint memberi tahu', await page.locator('#confirmHint').innerText(), 'Password belum sama.');
+check('belum sama — hint memberi tahu', await page.locator('#confirmHint').innerText(), 'Password tidak sama.');
 check('belum sama — hint berwarna merah',
       await page.locator('#confirmHint').getAttribute('class'), 'hint bad');
 
 await page.fill('#confirm', 'abc123');
 await page.waitForTimeout(250);
-check('sudah sama — hint memberi tahu', await page.locator('#confirmHint').innerText(), 'Password cocok.');
+check('sudah sama — hint memberi tahu', await page.locator('#confirmHint').innerText(), 'Password sama.');
+
+// Panjang diperiksa lebih dulu daripada kecocokan: dua isian yang sama tapi
+// terlalu pendek dulu menyala hijau "cocok", lalu ditolak begitu tombol ditekan.
+await page.fill('#password', 'abc'); await page.fill('#confirm', 'abc');
+await page.waitForTimeout(250);
+check('pendek — keterangan password memerah',
+      await page.locator('#pwHint').getAttribute('class'), 'hint bad');
+check('pendek walau sama — konfirmasi tidak hijau',
+      (await page.locator('#confirmHint').getAttribute('class') || '').includes('good'), false,
+      `("${await page.locator('#confirmHint').innerText()}")`);
+check('pendek walau sama — konfirmasi menyebut batas panjang',
+      /terlalu pendek/i.test(await page.locator('#confirmHint').innerText()), true);
+
+await page.fill('#password', 'abc123'); await page.fill('#confirm', 'abc123');
+await page.waitForTimeout(250);
+check('cukup panjang — keterangan password menghijau',
+      await page.locator('#pwHint').getAttribute('class'), 'hint good');
+
+// Peringatan merah sisa percobaan sebelumnya harus pergi begitu isian diperbaiki.
+await page.fill('#password', 'abc'); await page.fill('#confirm', 'abc');
+await page.click('#submitBtn'); await page.waitForTimeout(350);
+check('submit pendek — muncul peringatan merah',
+      (await page.locator('#msg').getAttribute('class') || '').includes('err'), true);
+await page.fill('#password', 'abc123');
+await page.waitForTimeout(200);
+check('peringatan merah hilang saat mengetik lagi',
+      (await page.locator('#msg').getAttribute('class') || '').includes('err'), false);
+
+// Sebaliknya, keterangan hijau masih perlu dibaca — jangan ikut terhapus.
+await page.evaluate(() => { const m = document.getElementById('msg'); m.className = 'msg ok'; m.textContent = 'Link verifikasi sudah dikirim.'; });
+await page.fill('#password', 'abc1234');
+await page.waitForTimeout(200);
+check('pesan hijau bertahan saat mengetik',
+      (await page.locator('#msg').getAttribute('class') || '').includes('ok'), true);
 
 // ---------- 3. Guard: panjang minimal, tanpa syarat jenis karakter ----------
 console.log('\n--- Guard password ---');
@@ -100,7 +133,7 @@ await fresh(); await page.click('#switchLink'); await page.waitForTimeout(250);
 await page.fill('#name', 'Ishak'); await page.fill('#email', 'coba@contoh.com');
 await page.fill('#password', 'rahasia1'); await page.fill('#confirm', 'rahasia2');
 await page.click('#submitBtn'); await page.waitForTimeout(350);
-check('tidak cocok ditolak', /belum sama/i.test(await msgText()), true, `("${await msgText()}")`);
+check('tidak cocok ditolak', /tidak sama/i.test(await msgText()), true, `("${await msgText()}")`);
 check('tidak cocok — signUp tidak dipanggil',
       await page.evaluate(() => window.__calls.length), 0);
 
