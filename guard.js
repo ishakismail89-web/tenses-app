@@ -87,11 +87,14 @@
   }
 
   // ---------- Bottom navigation (Tenses / Irregular / Latihan) ----------
+  // Menu hanya menyala di halaman utama tiap bagian. Begitu masuk ke halaman
+  // rincian (mis. 01-simple-present-tense.html), tidak ada menu yang menyala —
+  // warnanya kembali normal.
   function activeSection() {
     var f = (location.pathname.split('/').pop() || '').toLowerCase();
     if (f === 'irregular-verbs.html') return 'verb';
     if (f === 'quiz.html') return 'latihan';
-    if (f === 'home.html' || f === '' || /^\d{2}-.*tense\.html$/.test(f)) return 'tenses';
+    if (f === 'home.html' || f === '') return 'tenses';
     return '';
   }
 
