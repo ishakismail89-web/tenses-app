@@ -115,10 +115,9 @@
           ' transition:transform .28s ease, opacity .28s ease; will-change:transform; }' +
         // Disembunyikan saat menggulir turun. Digeser +4px agar bayangan tepinya ikut keluar layar.
         '#__bnav.__hide{ transform:translateY(calc(100% + 4px)); opacity:0; pointer-events:none; }' +
-        // Tombol tema menyisihkan tempat untuk nav; saat nav sembunyi, ikut turun.
-        'html.__hasbnav #__themeWrap{ transition:bottom .28s ease; }' +
-        'html.__hasbnav.__uihide #__themeWrap{ bottom:18px; }' +
-        '@media (prefers-reduced-motion: reduce){ #__bnav, html.__hasbnav #__themeWrap{ transition:none; } }' +
+        // Catatan: toggle tema tidak perlu digeser saat nav sembunyi. Toggle hanya
+        // tampil di ujung halaman (lihat theme.js), dan di sana nav selalu tampil juga.
+        '@media (prefers-reduced-motion: reduce){ #__bnav{ transition:none; } }' +
         '#__bnav a{ flex:1; max-width:160px; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 4px; text-decoration:none;' +
           ' color:#8A97B0; font:600 11px/1 -apple-system,sans-serif; transition:color .18s ease;' +
           ' -webkit-tap-highlight-color:transparent; }' +

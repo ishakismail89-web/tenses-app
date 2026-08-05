@@ -45,11 +45,22 @@
     // shadow kartu lebih halus di mode terang
     'html[data-theme="light"] .card,html[data-theme="light"] .qcard,html[data-theme="light"] .panel,html[data-theme="light"] .row,html[data-theme="light"] .use-card,html[data-theme="light"] .key-box,html[data-theme="light"] .detect-box{ box-shadow:0 1px 3px rgba(15,23,41,.06); }' +
     // ---- Toggle switch ala Apple/iOS + label (bukan ikon) ----
-    '#__themeWrap{ position:fixed; right:18px; bottom:18px; z-index:10000; display:flex; flex-direction:column; align-items:center; gap:7px; }' +
+    '#__themeWrap{ position:fixed; right:18px; bottom:18px; z-index:10000; display:flex; flex-direction:column; align-items:center; gap:7px;' +
+      ' transition:opacity .28s ease, transform .28s ease; }' +
     // halaman login: toggle dipindah ke kiri atas
     '#__themeWrap.__themeTopLeft{ right:auto; bottom:auto; left:18px; top:18px; }' +
-    '#__themeLabel{ font-family:"Space Grotesk",sans-serif; font-size:11px; font-weight:600; letter-spacing:0.03em; color:#C7D0E0; background:rgba(15,23,41,0.75); padding:4px 10px; border-radius:20px; white-space:nowrap; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }' +
-    'html[data-theme="light"] #__themeLabel{ color:#5A647D; background:rgba(255,255,255,0.85); box-shadow:0 2px 8px rgba(15,23,41,.08); }' +
+    // Hanya tampil di ujung halaman; di tengah guliran ia meredup dan tidak bisa diklik.
+    '#__themeWrap.__hide{ opacity:0; pointer-events:none; transform:translateY(14px); }' +
+    '#__themeWrap.__themeTopLeft.__hide{ transform:translateY(-14px); }' +
+    '@media (prefers-reduced-motion: reduce){ #__themeWrap{ transition:none; } }' +
+    // Label: sans tipis (Inter 300; jatuh ke SF Light di halaman login yang tanpa Google Fonts).
+    // Latar sengaja beropasitas rendah — keterbacaan dijaga oleh warna teks + blur, bukan oleh latar pekat.
+    '#__themeLabel{ font-family:Inter,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:11.5px; font-weight:300;' +
+      ' letter-spacing:0.07em; color:#DCE4F0; background:rgba(15,23,41,0.42); padding:5px 11px; border-radius:20px;' +
+      ' white-space:nowrap; border:1px solid rgba(255,255,255,0.07);' +
+      ' -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }' +
+    'html[data-theme="light"] #__themeLabel{ color:#46506A; background:rgba(255,255,255,0.52);' +
+      ' border-color:rgba(15,23,41,0.07); box-shadow:0 2px 8px rgba(15,23,41,.05); }' +
     '#__themeBtn{ width:52px; height:30px; border-radius:999px; padding:3px; cursor:pointer; border:none;' +
       ' background:#8E8E93; box-shadow:0 4px 14px rgba(0,0,0,.25); transition:background .2s ease, transform .15s ease; }' +
     '#__themeBtn::after{ content:""; display:block; width:24px; height:24px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3);' +
@@ -103,6 +114,37 @@
     wrap.appendChild(label);
     wrap.appendChild(btn);
     document.body.appendChild(wrap);
+    autoHideToggle(wrap);
+  }
+
+  // Toggle hanya tampil di ujung halaman: paling atas atau paling bawah.
+  // Berbeda dari bottom nav yang juga muncul saat menggulir naik — toggle jarang
+  // dipakai, jadi di tengah guliran ia sengaja disingkirkan.
+  function autoHideToggle(wrap) {
+    var TOP_ZONE = 80;   // masih dianggap "paling atas"
+    var END_ZONE = 24;   // masih dianggap "paling bawah"
+    var ticking = false;
+
+    function atEdge() {
+      var doc = document.documentElement;
+      var y = window.pageYOffset || doc.scrollTop || 0;
+      var max = doc.scrollHeight - window.innerHeight;
+      if (max <= TOP_ZONE) return true;   // halaman tak bisa digulir: selalu tampil
+      return y <= TOP_ZONE || y >= max - END_ZONE;
+    }
+
+    function update() {
+      ticking = false;
+      wrap.classList.toggle('__hide', !atEdge());
+    }
+
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addButton);
