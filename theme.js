@@ -30,7 +30,9 @@
     'html[data-theme="light"] nav{ background:rgba(255,255,255,0.85) !important; }' +
     'html[data-theme="light"] .nav-badge{ color:#FFFFFF !important; }' +
     // tombol Menu + dropdown dari guard.js (inline style gelap) -> mode terang
-    'html[data-theme="light"] #__menuBtn{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; color:#0D9488 !important; box-shadow:0 2px 10px rgba(15,23,41,.10); }' +
+    'html[data-theme="light"] #__bar:not(.__inline) #__menuBtn{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; box-shadow:0 2px 10px rgba(15,23,41,.10); }' +
+    // Mode menyatu: latarnya ikut header, jadi cukup warnanya yang disesuaikan.
+    'html[data-theme="light"] #__menuBtn{ color:#0D9488 !important; }' +
     'html[data-theme="light"] #__menuDrop{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; box-shadow:0 14px 36px rgba(15,23,41,.16) !important; }' +
     'html[data-theme="light"] #__menuDrop a,html[data-theme="light"] #__menuDrop button{ color:#15233D !important; }' +
     'html[data-theme="light"] #__menuDrop a:hover,html[data-theme="light"] #__menuDrop button:hover{ background:#EEF2F9 !important; }' +

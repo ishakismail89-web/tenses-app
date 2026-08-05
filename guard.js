@@ -52,11 +52,22 @@
       st.textContent =
         '#__bar{position:fixed;top:10px;right:12px;z-index:9999;transition:transform .28s ease, opacity .28s ease;}' +
         // Hanya tampil di ujung halaman — paling atas atau paling bawah.
-        'html.__barhide #__bar{transform:translateY(-150%);opacity:0;pointer-events:none;}' +
+        // Tidak berlaku untuk mode menyatu: di sana tombolnya ikut header sticky
+        // yang memang selalu terlihat, jadi tak perlu disembunyikan.
+        'html.__barhide #__bar:not(.__inline){transform:translateY(-150%);opacity:0;pointer-events:none;}' +
         '@media (prefers-reduced-motion: reduce){#__bar{transition:none;}}' +
         '#__menuBtn{font:600 12px/1 -apple-system,sans-serif;background:#1A2540;border:1px solid #26324d;padding:10px 15px;border-radius:20px;color:#2DD4BF;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}' +
         '#__menuBtn:hover{filter:brightness(1.12);}' +
-        '#__menuDrop{position:absolute;top:46px;right:0;min-width:194px;background:#1A2540;border:1px solid #26324d;border-radius:14px;padding:6px;box-shadow:0 14px 36px rgba(0,0,0,.45);display:none;flex-direction:column;}' +
+        // Mode menyatu: tombolnya duduk di dalam header card, tanpa latar sendiri
+        // (latarnya ikut header) dan hurufnya sedikit lebih besar.
+        '#__bar.__inline{position:relative;top:auto;right:auto;margin-left:auto;z-index:1;transition:none;}' +
+        '#__bar.__inline #__menuBtn{font:600 14px/1 "Space Grotesk",-apple-system,sans-serif;background:none;border:0;border-radius:0;padding:6px 0;gap:8px;}' +
+        '#__bar.__inline #__menuBtn:hover{filter:none;opacity:.72;}' +
+        // Judul header boleh menyusut supaya tak mendorong tombolnya keluar.
+        'nav[data-menu-inline] span{min-width:0;}' +
+        // Layar sempit: sisakan ikonnya saja, kata "Menu" disembunyikan.
+        '@media (max-width:400px){#__bar.__inline .__mlabel{display:none;}#__bar.__inline #__menuBtn{font-size:17px;gap:0;}}' +
+        '#__menuDrop{position:absolute;top:calc(100% + 10px);right:0;min-width:194px;background:#1A2540;border:1px solid #26324d;border-radius:14px;padding:6px;box-shadow:0 14px 36px rgba(0,0,0,.45);display:none;flex-direction:column;}' +
         '#__menuDrop.open{display:flex;}' +
         '#__menuDrop a,#__menuDrop button{font:600 13px/1 -apple-system,sans-serif;text-align:left;width:100%;background:none;border:0;padding:11px 13px;border-radius:9px;color:#eef1f8;text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:10px;}' +
         '#__menuDrop a:hover,#__menuDrop button:hover{background:#243356;}' +
@@ -73,9 +84,15 @@
     items += '<button type="button" id="__logoutBtn">&#9211; Keluar</button>';
 
     bar.innerHTML =
-      '<button type="button" id="__menuBtn">&#9776; Menu</button>' +
+      '<button type="button" id="__menuBtn">&#9776;<span class="__mlabel">Menu</span></button>' +
       '<div id="__menuDrop">' + items + '</div>';
-    document.body.appendChild(bar);
+
+    // Halaman yang header card-nya ditandai data-menu-inline menampung tombolnya
+    // di dalam header. Sisanya (mis. home.html yang tak punya header) tetap
+    // memakai tombol melayang di pojok kanan atas.
+    var host = document.querySelector('nav[data-menu-inline]');
+    if (host) { bar.className = '__inline'; host.appendChild(bar); }
+    else { document.body.appendChild(bar); }
 
     var btn = document.getElementById('__menuBtn');
     var drop = document.getElementById('__menuDrop');
