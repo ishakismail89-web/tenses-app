@@ -51,8 +51,8 @@
       st.id = '__barStyle';
       st.textContent =
         '#__bar{position:fixed;top:10px;right:12px;z-index:9999;transition:transform .28s ease, opacity .28s ease;}' +
-        // Ikut sembunyi bersama bottom nav saat menggulir turun (kelas dipasang di <html>).
-        'html.__uihide #__bar{transform:translateY(-150%);opacity:0;pointer-events:none;}' +
+        // Hanya tampil di ujung halaman — paling atas atau paling bawah.
+        'html.__barhide #__bar{transform:translateY(-150%);opacity:0;pointer-events:none;}' +
         '@media (prefers-reduced-motion: reduce){#__bar{transition:none;}}' +
         '#__menuBtn{font:600 12px/1 -apple-system,sans-serif;background:#1A2540;border:1px solid #26324d;padding:10px 15px;border-radius:20px;color:#2DD4BF;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}' +
         '#__menuBtn:hover{filter:brightness(1.12);}' +
@@ -156,14 +156,16 @@
     autoHideBottomNav(nav);
   }
 
-  // Sembunyikan bottom nav DAN tombol Menu saat menggulir turun,
-  // tampilkan lagi saat menggulir naik.
+  // Dua perilaku dari satu listener gulir:
+  //  - bottom nav : sembunyi saat menggulir turun, muncul saat menggulir naik
+  //  - tombol Menu: hanya tampil di ujung halaman (paling atas / paling bawah)
   function autoHideBottomNav(nav) {
     var JITTER = 6;      // gulir sependek ini diabaikan supaya menu tidak berkedip
     var TOP_ZONE = 80;   // dekat puncak halaman, menu selalu tampil
     var END_ZONE = 24;   // sudah mentok bawah, menu tampil lagi agar tetap terjangkau
     var lastY = scrollY();
     var hidden = false;
+    var barHidden = false;
     var ticking = false;
 
     function scrollY() {
@@ -174,8 +176,15 @@
       if (h === hidden) return;
       hidden = h;
       nav.classList.toggle('__hide', h);
-      document.documentElement.classList.toggle('__uihide', h);
-      // Jangan tinggalkan dropdown menu menggantung saat tombolnya ikut tersembunyi.
+    }
+
+    // Tombol Menu isinya cuma Admin dan Keluar, jadi tidak perlu ikut muncul
+    // tiap kali menggulir naik. Aturannya sama seperti toggle tema: ujung saja.
+    function setBarHidden(h) {
+      if (h === barHidden) return;
+      barHidden = h;
+      document.documentElement.classList.toggle('__barhide', h);
+      // Jangan tinggalkan dropdown menggantung saat tombolnya tersembunyi.
       if (h) {
         var drop = document.getElementById('__menuDrop');
         if (drop) drop.classList.remove('open');
@@ -185,14 +194,20 @@
     function update() {
       ticking = false;
       var y = scrollY();
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      // Halaman yang tak bisa digulir dihitung selalu "di ujung".
+      var atEdge = max <= TOP_ZONE || y <= TOP_ZONE || y >= max - END_ZONE;
+
+      // Berbasis posisi, tanpa ambang — tidak ada arah yang perlu ditebak.
+      setBarHidden(!atEdge);
+
+      // Bottom nav berbasis arah, jadi perlu ambang anti-kedip.
       var delta = y - lastY;
       // Jangan perbarui lastY di bawah ambang, supaya gulir pelan tetap terakumulasi.
       if (Math.abs(delta) < JITTER) return;
       lastY = y;
-
-      var doc = document.documentElement;
-      var atEnd = y + window.innerHeight >= doc.scrollHeight - END_ZONE;
-      if (y <= TOP_ZONE || atEnd) { setHidden(false); return; }
+      if (atEdge) { setHidden(false); return; }
       setHidden(delta > 0);
     }
 
@@ -201,6 +216,8 @@
       ticking = true;
       window.requestAnimationFrame(update);
     }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
   }
 
   // ---------- Embed video di halaman tense ----------
