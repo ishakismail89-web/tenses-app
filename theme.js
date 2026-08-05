@@ -39,7 +39,7 @@
     // bottom navigation (mode terang)
     'html[data-theme="light"] #__bnav{ background:rgba(255,255,255,0.92) !important; border-top-color:rgba(15,23,41,0.12) !important; }' +
     'html[data-theme="light"] #__bnav a{ color:#5A647D !important; }' +
-    'html[data-theme="light"] #__bnav a.active{ color:#0D9488 !important; background:rgba(13,148,136,0.10) !important; }' +
+    'html[data-theme="light"] #__bnav a.active{ color:#0D9488 !important; background:none !important; }' +
     // angkat toggle agar tidak tertutup bottom nav
     'html.__hasbnav #__themeWrap{ bottom:86px; }' +
     // shadow kartu lebih halus di mode terang

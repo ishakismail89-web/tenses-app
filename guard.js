@@ -106,18 +106,30 @@
         '#__bnav{ position:fixed; left:0; right:0; bottom:0; top:auto; height:auto; z-index:9998; display:flex; justify-content:space-around; align-items:stretch;' +
           ' background:rgba(18,26,46,0.92); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-top:1px solid #26324d;' +
           ' padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px)); }' +
-        '#__bnav a{ flex:1; max-width:160px; display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 4px; text-decoration:none;' +
-          ' color:#8A97B0; font:600 11px/1 -apple-system,sans-serif; border-radius:13px; transition:color .15s, background .15s; }' +
+        '#__bnav a{ flex:1; max-width:160px; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 4px; text-decoration:none;' +
+          ' color:#8A97B0; font:600 11px/1 -apple-system,sans-serif; transition:color .18s ease;' +
+          ' -webkit-tap-highlight-color:transparent; }' +
         '#__bnav a:hover{ color:#C7D0E0; }' +
-        '#__bnav a.active{ color:#2DD4BF; background:rgba(45,212,191,0.10); }' +
-        '#__bnav svg{ width:23px; height:23px; }';
+        // Tanda halaman aktif: cukup warna + garis ikon sedikit lebih tebal, tanpa blok warna di belakang ikon.
+        '#__bnav a.active{ color:#2DD4BF; }' +
+        '#__bnav a.active svg{ stroke-width:1.9; }' +
+        '#__bnav svg{ width:22px; height:22px; }';
       document.head.appendChild(st);
     }
 
+    // Satu keluarga ikon garis, tiap siluetnya sengaja dibuat beda supaya mudah
+    // dibedakan sekilas: lingkaran (jam), garis mendatar (daftar), diagonal (pensil).
+    function icon(body) {
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + body + '</svg>';
+    }
     var ICON = {
-      tenses: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
-      verb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-      latihan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>'
+      // Jam — tense adalah soal waktu.
+      tenses: icon('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 1.9"/>'),
+      // Daftar bertitik — kumpulan kata kerja tak beraturan.
+      verb: icon('<path d="M9 6.5h10.5M9 12h10.5M9 17.5h10.5"/><path d="M4.6 6.5h.01M4.6 12h.01M4.6 17.5h.01"/>'),
+      // Pensil — mengerjakan soal.
+      latihan: icon('<path d="M4.6 19.4h3.1L19 8.1a2.2 2.2 0 0 0-3.1-3.1L4.6 16.3z"/>')
     };
     var act = activeSection();
     var nav = document.createElement('div');   // pakai <div>, bukan <nav>, agar tak kena aturan CSS "nav{}" tiap halaman
