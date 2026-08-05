@@ -50,7 +50,10 @@
       var st = document.createElement('style');
       st.id = '__barStyle';
       st.textContent =
-        '#__bar{position:fixed;top:10px;right:12px;z-index:9999;}' +
+        '#__bar{position:fixed;top:10px;right:12px;z-index:9999;transition:transform .28s ease, opacity .28s ease;}' +
+        // Ikut sembunyi bersama bottom nav saat menggulir turun (kelas dipasang di <html>).
+        'html.__uihide #__bar{transform:translateY(-150%);opacity:0;pointer-events:none;}' +
+        '@media (prefers-reduced-motion: reduce){#__bar{transition:none;}}' +
         '#__menuBtn{font:600 12px/1 -apple-system,sans-serif;background:#1A2540;border:1px solid #26324d;padding:10px 15px;border-radius:20px;color:#2DD4BF;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}' +
         '#__menuBtn:hover{filter:brightness(1.12);}' +
         '#__menuDrop{position:absolute;top:46px;right:0;min-width:194px;background:#1A2540;border:1px solid #26324d;border-radius:14px;padding:6px;box-shadow:0 14px 36px rgba(0,0,0,.45);display:none;flex-direction:column;}' +
@@ -114,7 +117,7 @@
         '#__bnav.__hide{ transform:translateY(calc(100% + 4px)); opacity:0; pointer-events:none; }' +
         // Tombol tema menyisihkan tempat untuk nav; saat nav sembunyi, ikut turun.
         'html.__hasbnav #__themeWrap{ transition:bottom .28s ease; }' +
-        'html.__hasbnav.__bnavhide #__themeWrap{ bottom:18px; }' +
+        'html.__hasbnav.__uihide #__themeWrap{ bottom:18px; }' +
         '@media (prefers-reduced-motion: reduce){ #__bnav, html.__hasbnav #__themeWrap{ transition:none; } }' +
         '#__bnav a{ flex:1; max-width:160px; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 4px; text-decoration:none;' +
           ' color:#8A97B0; font:600 11px/1 -apple-system,sans-serif; transition:color .18s ease;' +
@@ -154,7 +157,8 @@
     autoHideBottomNav(nav);
   }
 
-  // Sembunyikan nav saat menggulir turun, tampilkan lagi saat menggulir naik.
+  // Sembunyikan bottom nav DAN tombol Menu saat menggulir turun,
+  // tampilkan lagi saat menggulir naik.
   function autoHideBottomNav(nav) {
     var JITTER = 6;      // gulir sependek ini diabaikan supaya menu tidak berkedip
     var TOP_ZONE = 80;   // dekat puncak halaman, menu selalu tampil
@@ -171,7 +175,12 @@
       if (h === hidden) return;
       hidden = h;
       nav.classList.toggle('__hide', h);
-      document.documentElement.classList.toggle('__bnavhide', h);
+      document.documentElement.classList.toggle('__uihide', h);
+      // Jangan tinggalkan dropdown menu menggantung saat tombolnya ikut tersembunyi.
+      if (h) {
+        var drop = document.getElementById('__menuDrop');
+        if (drop) drop.classList.remove('open');
+      }
     }
 
     function update() {
