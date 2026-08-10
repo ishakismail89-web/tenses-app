@@ -56,7 +56,10 @@
         // yang memang selalu terlihat, jadi tak perlu disembunyikan.
         'html.__barhide #__bar:not(.__inline){transform:translateY(-150%);opacity:0;pointer-events:none;}' +
         '@media (prefers-reduced-motion: reduce){#__bar{transition:none;}}' +
-        '#__menuBtn{font:600 12px/1 -apple-system,sans-serif;background:#1A2540;border:1px solid #26324d;padding:10px 15px;border-radius:20px;color:#2DD4BF;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}' +
+        // Warnanya ikut aksen halaman (--teal di-redefinisi tiap kelompok tense:
+        // teal, biru, ungu, pink) supaya sewarna dengan badge di sebelahnya.
+        // Nilai mati hanya cadangan untuk halaman yang tak mendefinisikannya.
+        '#__menuBtn{font:600 12px/1 -apple-system,sans-serif;background:#1A2540;border:1px solid #26324d;padding:10px 15px;border-radius:20px;color:var(--teal,#2DD4BF);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}' +
         '#__menuBtn:hover{filter:brightness(1.12);}' +
         // Mode menyatu: tombolnya duduk di dalam header card, tanpa latar sendiri
         // (latarnya ikut header) dan hurufnya sedikit lebih besar.

@@ -31,8 +31,10 @@
     'html[data-theme="light"] .nav-badge{ color:#FFFFFF !important; }' +
     // tombol Menu + dropdown dari guard.js (inline style gelap) -> mode terang
     'html[data-theme="light"] #__bar:not(.__inline) #__menuBtn{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; box-shadow:0 2px 10px rgba(15,23,41,.10); }' +
-    // Mode menyatu: latarnya ikut header, jadi cukup warnanya yang disesuaikan.
-    'html[data-theme="light"] #__menuBtn{ color:#0D9488 !important; }' +
+    // Warna tombol Menu tak perlu diatur di sini: guard.js memakai var(--teal),
+    // dan blok di atas sudah menukar --teal jadi --teal-light saat mode terang.
+    // Dulu di sini ada #0D9488 !important yang memaksa teal di semua halaman —
+    // itu menimpa aksen biru/ungu/pink kelompok tense lain.
     'html[data-theme="light"] #__menuDrop{ background:#FFFFFF !important; border-color:rgba(15,23,41,0.12) !important; box-shadow:0 14px 36px rgba(15,23,41,.16) !important; }' +
     'html[data-theme="light"] #__menuDrop a,html[data-theme="light"] #__menuDrop button{ color:#15233D !important; }' +
     'html[data-theme="light"] #__menuDrop a:hover,html[data-theme="light"] #__menuDrop button:hover{ background:#EEF2F9 !important; }' +
